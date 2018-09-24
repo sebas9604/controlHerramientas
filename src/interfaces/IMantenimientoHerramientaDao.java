@@ -12,7 +12,7 @@ import modelo.MantenimientoHerramienta;
  *
  * @author tolis
  */
-public interface IMantenimientoHerramientaDAO {
+public interface IMantenimientoHerramientaDao {
         public boolean registrarNuevoMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta);
 	public List<MantenimientoHerramienta> obtenerMantenimientoHerramienta();
 	public boolean actualizarMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta);

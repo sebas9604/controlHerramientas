@@ -6,7 +6,6 @@
 package implementacion;
 
 import conexion.ConexionBD;
-import interfaces.IEmpleadosDAO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,12 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.Empleados;
+import interfaces.IEmpleadosDao;
 
 /**
  *
  * @author tolis
  */
-public class EmpleadosDAOImpl implements IEmpleadosDAO {
+public class EmpleadosDaoImpl implements IEmpleadosDao {
 
     @Override
     public boolean registrarNuevoEmpleado(Empleados empleado) {
@@ -104,7 +104,8 @@ return listaEmpleados;
 			System.out.println("Error: Clase ClienteDaoImple, método actualizar");
 			e.printStackTrace();
 		}		
-		return actualizar;    }
+		return actualizar;    
+    }
 
     @Override
     public boolean eliminarEmpleado(Empleados empleado) {

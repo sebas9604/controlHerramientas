@@ -5,12 +5,12 @@
  */
 package controladores;
 
-import implementacion.EmpleadosDAOImpl;
-import interfaces.IEmpleadosDAO;
+import implementacion.EmpleadosDaoImpl;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Empleados;
 import vistaPk.vistaEmpleado;
+import interfaces.IEmpleadosDao;
 
 /**
  *
@@ -22,26 +22,26 @@ public class controllerEmpleados {
     
     	//llama al DAO para guardar un empleado
 	public void registrar(Empleados empleado ) {
-		IEmpleadosDAO dao= new  EmpleadosDAOImpl();
+		IEmpleadosDao dao= new  EmpleadosDaoImpl();
 		dao.registrarNuevoEmpleado(empleado);
 	}
 	
 	//llama al DAO para actualizar un empleado
 	public void actualizar(Empleados empleado) {
-		IEmpleadosDAO dao= new  EmpleadosDAOImpl();
+		IEmpleadosDao dao= new  EmpleadosDaoImpl();
 		dao.actualizarEmpleado(empleado);
 	}
 	
 	//llama al DAO para eliminar un empleado
 	public void eliminar(Empleados empleado) {
-		IEmpleadosDAO dao= new  EmpleadosDAOImpl();
+		IEmpleadosDao dao= new  EmpleadosDaoImpl();
 		dao.eliminarEmpleado(empleado);
 	}
 	
 	//llama al DAO para obtener todos los empleados y luego los muestra en la vista
 	public void verEmpleados(){
 		List<Empleados> empleados = new ArrayList<Empleados>();
-		IEmpleadosDAO dao= new  EmpleadosDAOImpl();
+		IEmpleadosDao dao= new  EmpleadosDaoImpl();
 		empleados=dao.obtenerEmpleados();
                 vista.verEmpleados(empleados);
 	}

@@ -12,7 +12,7 @@ import modelo.Obra;
  *
  * @author tolis
  */
-public interface IObraDAO {
+public interface IObraDao {
         public boolean registrarNuevaObra(Obra obra);
 	public List<Obra> obtenerObra();
 	public boolean actualizarObra(Obra obra);

@@ -12,7 +12,7 @@ import modelo.Herramientas;
  *
  * @author tolis
  */
-public interface IHerramientasDAO {
+public interface IHerramientasDao {
         public boolean registrarNuevaHerramienta(Herramientas herramienta);
 	public List<Herramientas> obtenerHerramientas();
 	public boolean actualizarHerramienta(Herramientas herramienta);

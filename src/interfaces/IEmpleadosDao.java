@@ -13,7 +13,7 @@ import modelo.Empleados;
  *
  * @author tolis
  */
-public interface IEmpleadosDAO {
+public interface IEmpleadosDao {
     	public boolean registrarNuevoEmpleado(Empleados empleado);
 	public List<Empleados> obtenerEmpleados();
 	public boolean actualizarEmpleado(Empleados empleado);
