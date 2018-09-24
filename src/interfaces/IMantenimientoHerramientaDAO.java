@@ -1,0 +1,20 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package interfaces;
+
+import java.util.List;
+import modelo.MantenimientoHerramienta;
+
+/**
+ *
+ * @author tolis
+ */
+public interface IMantenimientoHerramientaDAO {
+        public boolean registrarNuevoMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta);
+	public List<MantenimientoHerramienta> obtenerMantenimientoHerramienta();
+	public boolean actualizarMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta);
+	public boolean eliminarMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta);
+}
