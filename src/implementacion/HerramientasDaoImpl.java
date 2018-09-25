@@ -33,7 +33,7 @@ public class HerramientasDaoImpl implements IHerramientasDao{
         try {
             File archivoImg = new File(herramienta.getEstadoHerramienta());
             String sql = "INSERT INTO herramientas (idHerramienta, nombreHerramienta, lugarCompraHerramienta, "
-                    + "idObra, precioCompraHerramienta, idHerramienta, estadoHerramienta)" + "VALUES (?,?,?,?,?,?,?);";
+                    + "idObra, precioCompraHerramienta, idEmpleado, estadoHerramienta)" + "VALUES (?,?,?,?,?,?,?);";
             con = ConexionBD.connect();
             FileInputStream convertir_imagen = new FileInputStream(archivoImg);
             PreparedStatement psql = con.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class HerramientasDaoImpl implements IHerramientasDao{
             psql.setString(3, herramienta.getLugarCompraHerramienta());
             psql.setInt(4, herramienta.getIdObra());
             psql.setInt(5, herramienta.getPrecioCompraHerramienta());
-            psql.setString(5, herramienta.getIdHerramienta());
+            psql.setInt(5, herramienta.getIdEmpleado());
             psql.setBlob(6, convertir_imagen, archivoImg.length());
             psql.executeUpdate();
             registrar = true;
@@ -100,9 +100,9 @@ return listaHerramientas;
 		boolean actualizar=false;
 				
 		String sql="UPDATE herramientas SET idHerramienta='"+herramienta.getIdHerramienta()+"', nombreHerramienta='"+herramienta.getNombreHerramienta()
-                        +"', lugarCompraHerramienta='"+herramienta.getLugarCompraHerramienta()+"', precioCompraHerramienta='"+herramienta.getPrecioCompraHerramienta()
-                        +"', idObra='"+herramienta.getIdObra()+"', fechaEntradaObraHerramienta='"+herramienta.getFechaEntradaObraHerramienta()+"', fechaSalidaObraHerramienta='"+herramienta.getFechaSalidaObraHerramienta()
-                        +"', idHerramienta='"+herramienta.getIdHerramienta()+"', estadoHerramienta='"+herramienta.getEstadoHerramienta()
+                        +"', lugarCompraHerramienta='"+herramienta.getLugarCompraHerramienta()+"', precioCompraHerramienta="+herramienta.getPrecioCompraHerramienta()
+                        +", idObra="+herramienta.getIdObra()+", fechaEntradaObraHerramienta='"+herramienta.getFechaEntradaObraHerramienta()+"', fechaSalidaObraHerramienta='"+herramienta.getFechaSalidaObraHerramienta()
+                        +"', idHerramienta="+herramienta.getIdHerramienta()+", estadoHerramienta='"+herramienta.getEstadoHerramienta()
                         +"' WHERE idHerramienta="+herramienta.getIdHerramienta();
 		try {
 			connect=ConexionBD.connect();

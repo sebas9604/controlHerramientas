@@ -130,7 +130,7 @@ return listaHerramientas;
 		
 		boolean eliminar=false;
 				
-		String sql="DELETE FROM mantenimientoHerramienta WHERE idHerramienta="
+		String sql="DELETE FROM mantenimientoHerramienta WHERE idFacturaMantenimiento="
                         +mantenimientoHerramienta.getIdFacturaMantenimiento();
 		try {
 			connect=ConexionBD.connect();

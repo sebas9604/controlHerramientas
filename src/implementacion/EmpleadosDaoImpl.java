@@ -32,7 +32,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
             Connection con;
         try {
             File archivoImg = new File(empleado.getFotoEmpleado());
-            String sql = "INSERT INTO empleados (id_documento, nombres, apellidos, cargo, foto)" + "VALUES (?,?,?,?,?);";
+            String sql = "INSERT INTO empleados (idEmpleado, nombresEmpleado, apellidosEmpleado, cargoEmpleado, fotoEmpleado)" + "VALUES (?,?,?,?,?);";
             con = ConexionBD.connect();
             FileInputStream convertir_imagen = new FileInputStream(archivoImg);
             PreparedStatement psql = con.prepareStatement(sql);
@@ -92,7 +92,7 @@ return listaEmpleados;
 		
 		boolean actualizar=false;
 				
-		String sql="UPDATE empleados SET idEmpleado='"+empleado.getIdEmpleado()+"', nombresEmpleado='"+empleado.getNombresEmpleado()
+		String sql="UPDATE empleados SET idEmpleado="+empleado.getIdEmpleado()+", nombresEmpleado='"+empleado.getNombresEmpleado()
                         +"', apellidosEmpleado='"+empleado.getApellidosEmpleado()+"', cargoEmpleado='"+empleado.getCargoEmpleado()
                         +"', fotoEmpleado='"+empleado.getFotoEmpleado()+"' WHERE idEmpleado="+empleado.getIdEmpleado();
 		try {
