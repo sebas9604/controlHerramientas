@@ -16,7 +16,7 @@ import interfaces.IEmpleadosDao;
  *
  * @author tolis
  */
-public class controllerEmpleados {
+public class ControllerEmpleados {
     
     private vistaEmpleado vista = new vistaEmpleado();
     
