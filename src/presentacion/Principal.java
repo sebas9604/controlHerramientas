@@ -265,12 +265,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void menuObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuObraMenuSelected
         ventanaObra.setVisible(true);
-        camposObra();        
+        inhabilitarCamposObra();        
     }//GEN-LAST:event_menuObraMenuSelected
 
     private void consultarObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarObraActionPerformed
         inhabilitarBanderasObra();
-        camposObra();
+        inhabilitarCamposObra();
         consultarObraFlag = true;
         tfIdObra.setEnabled(true);
         tfIdObra.setBackground(Color.white);
@@ -281,7 +281,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void opcionCrearObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionCrearObraMenuSelected
         inhabilitarBanderasObra();
-        camposObra();
+        inhabilitarCamposObra();
         crearObraFlag = true;
         tfIdObra.setEnabled(true);
         tfIdObra.setBackground(Color.white);
@@ -296,7 +296,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void opcionModificarObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarObraMenuSelected
         inhabilitarBanderasObra();
-        camposObra();
+        inhabilitarCamposObra();
         modificarObraFlag = true;
         tfIdObra.setEnabled(true);
         tfIdObra.setBackground(Color.white);
@@ -309,7 +309,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void opcionEliminarObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarObraMenuSelected
         inhabilitarBanderasObra();
-        camposObra();
+        inhabilitarCamposObra();
         eliminarObraFlag = true;
         tfIdObra.setEnabled(true);
         tfIdObra.setBackground(Color.white);
@@ -318,7 +318,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void consultarObrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarObrasActionPerformed
         inhabilitarBanderasObra();
-        camposObra();
+        inhabilitarCamposObra();
         consultarObrasFlag = true;
         btEjecutarConsulta.setEnabled(true);   
         
@@ -326,21 +326,57 @@ public class Principal extends javax.swing.JFrame {
 
     private void btEjecutarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarConsultaActionPerformed
         if(consultarObrasFlag){
-        Obra obra = new Obra();
         ControllerObra  obraCt = new ControllerObra();
         obraCt.verObras(tablaObras);
+        inhabilitarCamposObra();
+        }else if(crearObraFlag){
+        Obra obra = new Obra();
+        ControllerObra obraCt = new ControllerObra();
+        obra.setIdObra(Integer.parseInt(tfIdObra.getText()));
+        obra.setNombreObra(tfNombreObra.getText());
+        obra.setDireccionObra(tfUbicacionObra.getText());
+        obraCt.registrar(obra);
+        inhabilitarCamposObra();
+        }else if(modificarObraFlag){
+        Obra obra = new Obra();
+        ControllerObra obraCt = new ControllerObra();
+        obra.setIdObra(Integer.parseInt(tfIdObra.getText()));
+        obra.setNombreObra(tfNombreObra.getText());
+        obra.setDireccionObra(tfUbicacionObra.getText());
+        obraCt.actualizar(obra);
+        inhabilitarCamposObra();            
+        }else if(eliminarObraFlag){
+        Obra obra = new Obra();
+        ControllerObra obraCt = new ControllerObra();
+        obra.setIdObra(Integer.parseInt(tfIdObra.getText()));
+        obra.setNombreObra(tfNombreObra.getText());
+        obra.setDireccionObra(tfUbicacionObra.getText());
+        obraCt.eliminar(obra);
+        inhabilitarCamposObra();            
+        }else if(consultarObraFlag){
+        Obra obra = new Obra();
+        ControllerObra obraCt = new ControllerObra();
+        obra.setIdObra(Integer.parseInt(tfIdObra.getText()));
+        obra.setNombreObra(tfNombreObra.getText());
+        obra.setDireccionObra(tfUbicacionObra.getText());
+        obraCt.verObra(tablaObras, obra);
+        inhabilitarCamposObra();            
         }
     }//GEN-LAST:event_btEjecutarConsultaActionPerformed
 
-    private void camposObra() {
+    private void inhabilitarCamposObra() {
         tfIdObra.setEnabled(false);
         tfIdObra.setBackground(Color.gray);
+        tfIdObra.setText("");
         tfNombreObra.setEnabled(false);
         tfNombreObra.setBackground(Color.gray);
+        tfNombreObra.setText("");
         tfUbicacionObra.setEnabled(false);
         tfUbicacionObra.setBackground(Color.gray);
+        tfUbicacionObra.setText("");
         btEjecutarConsulta.setEnabled(false);
     }
+
 
     /**
      * @param args the command line arguments

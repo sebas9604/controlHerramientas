@@ -18,23 +18,46 @@ import static presentacion.Principal.getTabla;
  */
 public class vistaObra {
 
-    public void verObra(Obra obra) {
-        System.out.println("Datos de la Obra: " + obra);
-    }
-
-    public JTable verObras(JTable tabla) {
+    public void verObra(ResultSet obras, JTable tabla) {
         DefaultTableModel modelo = new DefaultTableModel();
-        ResultSet rs = getTabla("SELECT idObra, nombreObra, direccionObra "
-                + "FROM obra");
         modelo.setColumnIdentifiers(new Object[]{"Identificación", "Nombre", "Dirección"});
+
         try {
-            while (rs.next()) {
-                modelo.addRow(new Object[]{rs.getInt("idObra"), rs.getString("nombreObra"), rs.getString("direccionObra")});
+
+            while (obras.next()) {
+                modelo.addRow(new Object[]{obras.getInt("idObra"), obras.getString("nombreObra"), obras.getString("direccionObra")});
             }
             tabla.setModel(modelo);
+
         } catch (Exception ex) {
         }
-        return tabla;
+    }
+
+//    public void verObras(JTable tabla) {
+//        DefaultTableModel modelo = new DefaultTableModel();
+//        ResultSet rs = getTabla("SELECT idObra, nombreObra, direccionObra "
+//                + "FROM obra ORDER BY idObra");
+//        modelo.setColumnIdentifiers(new Object[]{"Identificación", "Nombre", "Dirección"});
+//        try {
+//            while (rs.next()) {
+//                modelo.addRow(new Object[]{rs.getInt("idObra"), rs.getString("nombreObra"), rs.getString("direccionObra")});
+//            }
+//            tabla.setModel(modelo);
+//        } catch (Exception ex) {
+//        }
+//    }
+    public void verObras(ResultSet obras, JTable tabla) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Identificación", "Nombre", "Dirección"});
+
+        try {
+            while (obras.next()) {
+                modelo.addRow(new Object[]{obras.getInt("idObra"), obras.getString("nombreObra"), obras.getString("direccionObra")});
+            }
+            tabla.setModel(modelo);
+
+        } catch (Exception ex) {
+        }
     }
 
 }

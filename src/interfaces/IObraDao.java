@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import java.sql.ResultSet;
 import java.util.List;
 import modelo.Obra;
 
@@ -13,8 +14,14 @@ import modelo.Obra;
  * @author tolis
  */
 public interface IObraDao {
-        public boolean registrarNuevaObra(Obra obra);
-	public List<Obra> obtenerObra();
-	public boolean actualizarObra(Obra obra);
-	public boolean eliminarObra(Obra obra);
+
+    public boolean registrarNuevaObra(Obra obra);
+
+    public ResultSet obtenerObra(Obra obra);
+
+    public ResultSet obtenerObras();
+
+    public boolean actualizarObra(Obra obra);
+
+    public boolean eliminarObra(Obra obra);
 }

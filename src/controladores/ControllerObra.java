@@ -7,6 +7,7 @@ package controladores;
 
 import implementacion.ObraDaoImpl;
 import interfaces.IObraDao;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
@@ -21,26 +22,41 @@ public class ControllerObra {
         private vistaPk.vistaObra vista = new vistaObra();
     
     	//llama al DAO para guardar un empleado
-	public void registrar(Obra empleado ) {
+	public void registrar(Obra obra ) {
 		IObraDao dao= new  ObraDaoImpl();
-		dao.registrarNuevaObra(empleado);
+		dao.registrarNuevaObra(obra);
 	}
 	
 	//llama al DAO para actualizar un empleado
-	public void actualizar(Obra empleado) {
+	public void actualizar(Obra obra) {
 		IObraDao dao= new  ObraDaoImpl();
-		dao.actualizarObra(empleado);
+		dao.actualizarObra(obra);
 	}
 	
 	//llama al DAO para eliminar un empleado
-	public void eliminar(Obra empleado) {
+	public void eliminar(Obra obra) {
 		IObraDao dao= new  ObraDaoImpl();
-		dao.eliminarObra(empleado);
+		dao.eliminarObra(obra);
 	}
 	
-	//llama al DAO para obtener todos los empleados y luego los muestra en la vista
-	public void verObras(JTable tablaObras){
-		
-                vista.verObras(tablaObras);
+	//llama al DAO para obtener todos los obras y luego los muestra en la vista
+//	public void verObras(JTable tablaObras){
+//		
+//                vista.verObras(tablaObras);
+//	}
+        
+        	//llama al DAO para obtener todos los obras y luego los muestra en la vista
+	public void verObras(JTable tabla){
+		ResultSet obras = null;
+		IObraDao dao= new  ObraDaoImpl();
+		obras=dao.obtenerObras();
+                vista.verObras(obras, tabla);
+	}
+        
+        public void verObra(JTable tabla, Obra obra){
+		ResultSet obras = null;
+		IObraDao dao= new ObraDaoImpl();
+		obras=dao.obtenerObra(obra);
+                vista.verObra(obras, tabla);
 	}
 }
