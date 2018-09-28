@@ -30,6 +30,9 @@ public class ObraDaoImpl implements IObraDao {
         Connection con;
         try {
 
+            ResultSet rs;
+            rs = obtenerObra(obra);
+            if(!rs.next()){
             String sql = "INSERT INTO obra (idObra, nombreObra, direccionObra) " + "VALUES (?,?,?);";
             con = ConexionBD.connect();
             PreparedStatement psql = con.prepareStatement(sql);
@@ -41,7 +44,9 @@ public class ObraDaoImpl implements IObraDao {
             psql.close();
             con.close();
             JOptionPane.showMessageDialog(null, "Operación Exitosa");
-
+            }else{
+            JOptionPane.showMessageDialog(null, "Ya existe un registro con la identificación: " + obra.getIdObra());
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error insertando al obra" + ex);
         }
@@ -74,20 +79,25 @@ public class ObraDaoImpl implements IObraDao {
     public boolean actualizarObra(Obra obra) {
         Connection connect = null;
         Statement stm = null;
-
         boolean actualizar = false;
-
+  try {
+      ResultSet rs;
+      rs = obtenerObra(obra);
+      
+      if(rs.next()){
         String sql = "UPDATE obra SET idObra='" + obra.getIdObra()
                 + "', nombreObra='" + obra.getNombreObra()
                 + "', direccionObra='" + obra.getDireccionObra()
                 + "' WHERE idObra=" + obra.getIdObra();
-        try {
+      
             connect = ConexionBD.connect();
             stm = connect.createStatement();
             stm.execute(sql);
             actualizar = true;
             JOptionPane.showMessageDialog(null, "Operación Exitosa");
-
+      }else{
+                  JOptionPane.showMessageDialog(null, "El registro no existe");
+      }
         } catch (SQLException e) {
             System.out.println("Error: Clase ClienteDaoImple, método actualizar");
             e.printStackTrace();
@@ -99,17 +109,24 @@ public class ObraDaoImpl implements IObraDao {
     public boolean eliminarObra(Obra obra) {
         Connection connect = null;
         Statement stm = null;
-
         boolean eliminar = false;
 
-        String sql = "DELETE FROM obra WHERE idObra = "
-                + obra.getIdObra() + ";";
         try {
-            connect = ConexionBD.connect();
-            stm = connect.createStatement();
-            stm.execute(sql);
-            eliminar = true;
-            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+            ResultSet rs = obtenerObra(obra);
+            if (rs.next()) {
+
+                String sql = "DELETE FROM obra WHERE idObra = "
+                        + obra.getIdObra() + ";";
+
+                connect = ConexionBD.connect();
+                stm = connect.createStatement();
+                stm.execute(sql);
+                eliminar = true;
+                JOptionPane.showMessageDialog(null, "Operación Exitosa");
+            } else {
+                JOptionPane.showMessageDialog(null, "El registro no existe");
+
+            }
         } catch (SQLException e) {
             System.out.println("Error: Clase ClienteDaoImple, método eliminar");
             e.printStackTrace();

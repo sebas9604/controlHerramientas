@@ -99,25 +99,25 @@
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="labelTituloObra" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="labelIdObra" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labelDireccionObra" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="tfUbicacionObra" pref="250" max="32767" attributes="0"/>
-                                      <Component id="tfIdObra" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelNombreObra" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="75" max="32767" attributes="0"/>
                                   <Component id="tfNombreObra" min="-2" pref="250" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="labelIdObra" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labelDireccionObra" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labelTituloObra" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="labelOperacion" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tfUbicacionObra" pref="250" max="32767" attributes="0"/>
+                                          <Component id="tfIdObra" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
@@ -138,7 +138,10 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="labelTituloObra" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="labelTituloObra" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelOperacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="labelIdObra" min="-2" max="-2" attributes="0"/>
@@ -219,6 +222,8 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JLabel" name="labelOperacion">
+        </Component>
         <Menu class="javax.swing.JMenuBar" name="menuOpcionesObra">
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="opcionConsultarObra">

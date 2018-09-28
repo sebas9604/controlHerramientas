@@ -53,6 +53,7 @@ public class Principal extends javax.swing.JFrame {
         btEjecutarConsulta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaObras = new javax.swing.JTable();
+        labelOperacion = new javax.swing.JLabel();
         menuOpcionesObra = new javax.swing.JMenuBar();
         opcionConsultarObra = new javax.swing.JMenu();
         consultarObras = new javax.swing.JMenuItem();
@@ -171,20 +172,20 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(ventanaObraLayout.createSequentialGroup()
                         .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ventanaObraLayout.createSequentialGroup()
-                                .addComponent(labelTituloObra)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(ventanaObraLayout.createSequentialGroup()
-                                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelIdObra)
-                                    .addComponent(labelDireccionObra))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfUbicacionObra, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                    .addComponent(tfIdObra)))
-                            .addGroup(ventanaObraLayout.createSequentialGroup()
                                 .addComponent(labelNombreObra)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                                .addComponent(tfNombreObra, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(tfNombreObra, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanaObraLayout.createSequentialGroup()
+                                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelIdObra)
+                                    .addComponent(labelDireccionObra)
+                                    .addComponent(labelTituloObra))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelOperacion)
+                                    .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfUbicacionObra, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                        .addComponent(tfIdObra)))))
                         .addGap(48, 48, 48)
                         .addComponent(btEjecutarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(47, 47, 47))
@@ -198,7 +199,9 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(btEjecutarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ventanaObraLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(labelTituloObra)
+                        .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelTituloObra)
+                            .addComponent(labelOperacion))
                         .addGap(26, 26, 26)
                         .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(labelIdObra)
@@ -271,6 +274,7 @@ public class Principal extends javax.swing.JFrame {
     private void consultarObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarObraActionPerformed
         inhabilitarBanderasObra();
         inhabilitarCamposObra();
+        labelOperacion.setText("CONSULTAR");
         consultarObraFlag = true;
         tfIdObra.setEnabled(true);
         tfIdObra.setBackground(Color.white);
@@ -282,6 +286,7 @@ public class Principal extends javax.swing.JFrame {
     private void opcionCrearObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionCrearObraMenuSelected
         inhabilitarBanderasObra();
         inhabilitarCamposObra();
+        labelOperacion.setText("CREAR");
         crearObraFlag = true;
         tfIdObra.setEnabled(true);
         tfIdObra.setBackground(Color.white);
@@ -297,6 +302,7 @@ public class Principal extends javax.swing.JFrame {
     private void opcionModificarObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarObraMenuSelected
         inhabilitarBanderasObra();
         inhabilitarCamposObra();
+        labelOperacion.setText("MODIFICAR");
         modificarObraFlag = true;
         tfIdObra.setEnabled(true);
         tfIdObra.setBackground(Color.white);
@@ -310,6 +316,7 @@ public class Principal extends javax.swing.JFrame {
     private void opcionEliminarObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarObraMenuSelected
         inhabilitarBanderasObra();
         inhabilitarCamposObra();
+        labelOperacion.setText("ELIMINAR");
         eliminarObraFlag = true;
         tfIdObra.setEnabled(true);
         tfIdObra.setBackground(Color.white);
@@ -319,6 +326,7 @@ public class Principal extends javax.swing.JFrame {
     private void consultarObrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarObrasActionPerformed
         inhabilitarBanderasObra();
         inhabilitarCamposObra();
+        labelOperacion.setText("CONSULTAR TODO");
         consultarObrasFlag = true;
         btEjecutarConsulta.setEnabled(true);   
         
@@ -375,6 +383,7 @@ public class Principal extends javax.swing.JFrame {
         tfUbicacionObra.setBackground(Color.gray);
         tfUbicacionObra.setText("");
         btEjecutarConsulta.setEnabled(false);
+        labelOperacion.setText("");
     }
 
 
@@ -422,6 +431,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelDireccionObra;
     private javax.swing.JLabel labelIdObra;
     private javax.swing.JLabel labelNombreObra;
+    private javax.swing.JLabel labelOperacion;
     private javax.swing.JLabel labelTituloObra;
     private javax.swing.JMenuBar menuElementos;
     private javax.swing.JMenu menuEmpleado;
