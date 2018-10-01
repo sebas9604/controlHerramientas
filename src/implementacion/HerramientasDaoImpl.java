@@ -24,12 +24,12 @@ import javax.swing.JOptionPane;
  *
  * @author jlinares
  */
-public class HerramientasDaoImpl implements IHerramientasDao{
+public class HerramientasDaoImpl implements IHerramientasDao {
 
     @Override
     public boolean registrarNuevaHerramienta(Herramientas herramienta) {
-             boolean registrar = false;
-            Connection con;
+        boolean registrar = false;
+        Connection con;
         try {
             File archivoImg = new File(herramienta.getEstadoHerramienta());
             String sql = "INSERT INTO herramientas (idHerramienta, nombreHerramienta, lugarCompraHerramienta, "
@@ -54,86 +54,95 @@ public class HerramientasDaoImpl implements IHerramientasDao{
             JOptionPane.showMessageDialog(null, "Error insertando al herramienta" + ex);
         }
 
-        return registrar;   
+        return registrar;
     }
 
     @Override
-    public List<Herramientas> obtenerHerramientas() {
-Connection con = null;
-Statement stm = null;
-ResultSet rs = null;
+    public ResultSet obtenerHerramientas() {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
 
-String sql = "SELECT * FROM herramientas ORDER BY idHerramienta";
-List<Herramientas> listaHerramientas = new ArrayList<Herramientas>();
-
+        String sql = "SELECT idHerramienta, nombreHerramienta, lugarCompraHerramienta, precioCompraHerramienta,"
+                + " idObra, fechaEntradaObraHerramienta, fechaSalidaObraHerramienta, idEmpleado, estadoHerramienta"
+                + "FROM empleados ORDER BY idEmpleado";
         try {
             con = ConexionBD.connect();
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                Herramientas e = new Herramientas();
-                e.setIdHerramienta(rs.getString(1));
-                e.setNombreHerramienta(rs.getString(2));
-                e.setLugarCompraHerramienta(rs.getString(3));
-                e.setPrecioCompraHerramienta(rs.getInt(4));
-                e.setIdObra(rs.getInt(5));
-                e.setFechaEntradaObraHerramienta(rs.getDate(6));
-                e.setFechaSalidaObraHerramienta(rs.getDate(7));
-                e.setIdHerramienta(rs.getString(8));
-                e.setEstadoHerramienta(rs.getString(9));
-                listaHerramientas.add(e);
-            }
-            stm.close();
-            rs.close();
-            con.close();
+//            stm.close();
+//            rs.close();
+//            con.close();
         } catch (Exception e) {
         }
 
-return listaHerramientas;
+        return rs;
     }
 
     @Override
     public boolean actualizarHerramienta(Herramientas herramienta) {
-		Connection connect= null;
-		Statement stm= null;
-		
-		boolean actualizar=false;
-				
-		String sql="UPDATE herramientas SET idHerramienta='"+herramienta.getIdHerramienta()+"', nombreHerramienta='"+herramienta.getNombreHerramienta()
-                        +"', lugarCompraHerramienta='"+herramienta.getLugarCompraHerramienta()+"', precioCompraHerramienta="+herramienta.getPrecioCompraHerramienta()
-                        +", idObra="+herramienta.getIdObra()+", fechaEntradaObraHerramienta='"+herramienta.getFechaEntradaObraHerramienta()+"', fechaSalidaObraHerramienta='"+herramienta.getFechaSalidaObraHerramienta()
-                        +"', idHerramienta="+herramienta.getIdHerramienta()+", estadoHerramienta='"+herramienta.getEstadoHerramienta()
-                        +"' WHERE idHerramienta="+herramienta.getIdHerramienta();
-		try {
-			connect=ConexionBD.connect();
-			stm=connect.createStatement();
-			stm.execute(sql);
-			actualizar=true;
-		} catch (SQLException e) {
-			System.out.println("Error: Clase ClienteDaoImple, método actualizar");
-			e.printStackTrace();
-		}		
-		return actualizar;  
+        Connection connect = null;
+        Statement stm = null;
+
+        boolean actualizar = false;
+
+        String sql = "UPDATE herramientas SET idHerramienta='" + herramienta.getIdHerramienta() + "', nombreHerramienta='" + herramienta.getNombreHerramienta()
+                + "', lugarCompraHerramienta='" + herramienta.getLugarCompraHerramienta() + "', precioCompraHerramienta=" + herramienta.getPrecioCompraHerramienta()
+                + ", idObra=" + herramienta.getIdObra() + ", fechaEntradaObraHerramienta='" + herramienta.getFechaEntradaObraHerramienta() + "', fechaSalidaObraHerramienta='" + herramienta.getFechaSalidaObraHerramienta()
+                + "', idHerramienta=" + herramienta.getIdHerramienta() + ", estadoHerramienta='" + herramienta.getEstadoHerramienta()
+                + "' WHERE idHerramienta=" + herramienta.getIdHerramienta();
+        try {
+            connect = ConexionBD.connect();
+            stm = connect.createStatement();
+            stm.execute(sql);
+            actualizar = true;
+        } catch (SQLException e) {
+            System.out.println("Error: Clase ClienteDaoImple, método actualizar");
+            e.printStackTrace();
+        }
+        return actualizar;
     }
 
     @Override
     public boolean eliminarHerramienta(Herramientas herramienta) {
-		Connection connect= null;
-		Statement stm= null;
-		
-		boolean eliminar=false;
-				
-		String sql="DELETE FROM herramientas WHERE idHerramienta="+herramienta.getIdEmpleado();
-		try {
-			connect=ConexionBD.connect();
-			stm=connect.createStatement();
-			stm.execute(sql);
-			eliminar=true;
-		} catch (SQLException e) {
-			System.out.println("Error: Clase ClienteDaoImple, método eliminar");
-			e.printStackTrace();
-		}		
-		return eliminar;
+        Connection connect = null;
+        Statement stm = null;
+
+        boolean eliminar = false;
+
+        String sql = "DELETE FROM herramientas WHERE idHerramienta=" + herramienta.getIdEmpleado();
+        try {
+            connect = ConexionBD.connect();
+            stm = connect.createStatement();
+            stm.execute(sql);
+            eliminar = true;
+        } catch (SQLException e) {
+            System.out.println("Error: Clase ClienteDaoImple, método eliminar");
+            e.printStackTrace();
+        }
+        return eliminar;
     }
-    
+
+    @Override
+    public ResultSet obtenerHerramienta(Herramientas herramienta) {
+         Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT idHerramienta, nombreHerramienta, lugarCompraHerramienta, precioCompraHerramienta,"
+                + " idObra, fechaEntradaObraHerramienta, fechaSalidaObraHerramienta, idEmpleado, estadoHerramienta"
+                + "FROM herramientas WHERE idHerramienta = " +  herramienta.getIdHerramienta();
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+//            stm.close();
+//            rs.close();
+//            con.close();
+        } catch (Exception e) {
+        }
+
+        return rs;
+    }
+
 }

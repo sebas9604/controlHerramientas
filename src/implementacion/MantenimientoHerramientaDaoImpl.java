@@ -62,37 +62,25 @@ public class MantenimientoHerramientaDaoImpl implements IMantenimientoHerramient
     }
 
     @Override
-    public List<MantenimientoHerramienta> obtenerMantenimientoHerramienta() {
-Connection con = null;
-Statement stm = null;
-ResultSet rs = null;
+    public ResultSet obtenerMantenimientoHerramientas() {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
 
-String sql = "SELECT * FROM herramientas ORDER BY idHerramienta";
-List<MantenimientoHerramienta> listaHerramientas = new ArrayList<MantenimientoHerramienta>();
-
+        String sql = "SELECT idHerramienta, nombreHerramienta, lugarCompraHerramienta, precioCompraHerramienta,"
+                + " idObra, fechaEntradaObraHerramienta, fechaSalidaObraHerramienta, idEmpleado, estadoHerramienta"
+                + "FROM empleados ORDER BY idEmpleado";
         try {
             con = ConexionBD.connect();
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                MantenimientoHerramienta e = new MantenimientoHerramienta();
-                e.setIdFacturaMantenimiento(rs.getInt(1));
-                e.setIdHerramienta(rs.getString(2));
-                e.setLugarMantenimiento(rs.getString(3));
-                e.setFechaEntradaMantenimiento(rs.getDate(4));
-                e.setFechaSalidaMantenimiento(rs.getDate(5));
-                e.setDescripcionMantenimiento(rs.getString(6));
-                e.setFotoAntesMantenimiento(rs.getString(7));
-                e.setFotoDespuesMantenimiento(rs.getString(8));
-                listaHerramientas.add(e);
-            }
-            stm.close();
-            rs.close();
-            con.close();
+//            stm.close();
+//            rs.close();
+//            con.close();
         } catch (Exception e) {
         }
 
-return listaHerramientas;
+        return rs;
     }
 
     @Override
@@ -143,6 +131,30 @@ return listaHerramientas;
 		}		
 		return eliminar;
     
+    }
+
+    @Override
+    public ResultSet obtenerMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta) {
+{
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT idFacturaMantenimiento, idHerramienta, lugarMantenimiento, fechaEntradaMantenimiento,"
+                + " fechaSalidaMantenimiento, descripcionMantenimiento, fotoAntesMantenimiento, fotoDespuesMantenimiento"
+                + "FROM empleados WHERE idHerramienta = " + mantenimientoHerramienta.getIdFacturaMantenimiento();
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+//            stm.close();
+//            rs.close();
+//            con.close();
+        } catch (Exception e) {
+        }
+
+        return rs;
+    }
     }
     
 }

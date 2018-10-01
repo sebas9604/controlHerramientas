@@ -11,6 +11,8 @@ import java.util.List;
 import modelo.Empleados;
 import vistaPk.VistaEmpleado;
 import interfaces.IEmpleadosDao;
+import java.sql.ResultSet;
+import javax.swing.JTable;
 
 /**
  *
@@ -39,10 +41,7 @@ public class ControllerEmpleados {
 	}
 	
 	//llama al DAO para obtener todos los empleados y luego los muestra en la vista
-	public void verEmpleados(){
-		List<Empleados> empleados = new ArrayList<Empleados>();
-		IEmpleadosDao dao= new  EmpleadosDaoImpl();
-		empleados=dao.obtenerEmpleados();
-                vista.verEmpleados(empleados);
+	public void verEmpleados(JTable tabla, Empleados empleado){
+
 	}
 }

@@ -55,34 +55,24 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
     }
 
     @Override
-    public List<Empleados> obtenerEmpleados() {
-Connection con = null;
-Statement stm = null;
-ResultSet rs = null;
+    public ResultSet obtenerEmpleados() {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
 
-String sql = "SELECT * FROM empleados ORDER BY idEmpleado";
-List<Empleados> listaEmpleados = new ArrayList<Empleados>();
-
+        String sql = "SELECT idEmpleado, nombresEmpleado, apellidosEmpleado, cargoEmpleado, fotoEmpleado "
+                + "FROM empleados ORDER BY idEmpleado";
         try {
             con = ConexionBD.connect();
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                Empleados e = new Empleados();
-                e.setIdEmpleado(rs.getInt(1));
-                e.setNombresEmpleado(rs.getString(2));
-                e.setApellidosEmpleado(rs.getString(3));
-                e.setCargoEmpleado(rs.getString(4));
-                e.setFotoEmpleado(rs.getString(5));
-                listaEmpleados.add(e);
-            }
-            stm.close();
-            rs.close();
-            con.close();
+//            stm.close();
+//            rs.close();
+//            con.close();
         } catch (Exception e) {
         }
 
-return listaEmpleados;
+        return rs;
     }
 
     @Override
@@ -125,6 +115,28 @@ return listaEmpleados;
 			e.printStackTrace();
 		}		
 		return eliminar;
+    }
+
+    @Override
+    public ResultSet obtenerEmpleado(Empleados empleado) {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT idEmpleado, nombresEmpleado, apellidosEmpleado, cargoEmpleado, fotoEmpleado "
+                + "FROM empleados WHERE idEmpleado = " + empleado.getIdEmpleado()+ ";";
+        System.out.println(sql);
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+//            stm.close();
+//            rs.close();
+//            con.close();
+        } catch (Exception e) {
+        }
+
+        return rs;
     }
 
 }

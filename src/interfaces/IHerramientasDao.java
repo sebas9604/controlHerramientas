@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import java.sql.ResultSet;
 import java.util.List;
 import modelo.Herramientas;
 
@@ -14,7 +15,9 @@ import modelo.Herramientas;
  */
 public interface IHerramientasDao {
         public boolean registrarNuevaHerramienta(Herramientas herramienta);
-	public List<Herramientas> obtenerHerramientas();
+	public ResultSet obtenerHerramientas();
 	public boolean actualizarHerramienta(Herramientas herramienta);
 	public boolean eliminarHerramienta(Herramientas herramienta);
+        public ResultSet obtenerHerramienta(Herramientas herramienta);
+
 }

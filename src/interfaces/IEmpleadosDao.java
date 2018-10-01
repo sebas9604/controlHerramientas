@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.sql.ResultSet;
 import java.util.List;
 import modelo.Empleados;
 
@@ -15,7 +16,8 @@ import modelo.Empleados;
  */
 public interface IEmpleadosDao {
     	public boolean registrarNuevoEmpleado(Empleados empleado);
-	public List<Empleados> obtenerEmpleados();
+	public ResultSet obtenerEmpleados();
 	public boolean actualizarEmpleado(Empleados empleado);
 	public boolean eliminarEmpleado(Empleados empleado);
+        public ResultSet obtenerEmpleado(Empleados empleado);
 }
