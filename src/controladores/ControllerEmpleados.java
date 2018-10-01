@@ -9,7 +9,7 @@ import implementacion.EmpleadosDaoImpl;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Empleados;
-import vistaPk.vistaEmpleado;
+import vistaPk.VistaEmpleado;
 import interfaces.IEmpleadosDao;
 
 /**
@@ -18,7 +18,7 @@ import interfaces.IEmpleadosDao;
  */
 public class ControllerEmpleados {
     
-    private vistaEmpleado vista = new vistaEmpleado();
+    private VistaEmpleado vista = new VistaEmpleado();
     
     	//llama al DAO para guardar un empleado
 	public void registrar(Empleados empleado ) {

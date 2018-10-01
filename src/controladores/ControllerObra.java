@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 import modelo.Obra;
-import vistaPk.vistaObra;
+import vistaPk.VistaObra;
 
 /**
  *
  * @author tolis
  */
 public class ControllerObra {
-        private vistaPk.vistaObra vista = new vistaObra();
+        private vistaPk.VistaObra vista = new VistaObra();
     
     	//llama al DAO para guardar un empleado
 	public void registrar(Obra obra ) {

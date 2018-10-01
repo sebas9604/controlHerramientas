@@ -16,7 +16,7 @@ import static presentacion.Principal.getTabla;
  *
  * @author tolis
  */
-public class vistaObra {
+public class VistaObra {
 
     public void verObra(ResultSet obras, JTable tabla) {
         DefaultTableModel modelo = new DefaultTableModel();
