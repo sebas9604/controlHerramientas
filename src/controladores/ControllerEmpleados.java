@@ -19,29 +19,39 @@ import javax.swing.JTable;
  * @author tolis
  */
 public class ControllerEmpleados {
-    
-    private VistaEmpleado vista = new VistaEmpleado();
-    
-    	//llama al DAO para guardar un empleado
-	public void registrar(Empleados empleado ) {
-		IEmpleadosDao dao= new  EmpleadosDaoImpl();
-		dao.registrarNuevoEmpleado(empleado);
-	}
-	
-	//llama al DAO para actualizar un empleado
-	public void actualizar(Empleados empleado) {
-		IEmpleadosDao dao= new  EmpleadosDaoImpl();
-		dao.actualizarEmpleado(empleado);
-	}
-	
-	//llama al DAO para eliminar un empleado
-	public void eliminar(Empleados empleado) {
-		IEmpleadosDao dao= new  EmpleadosDaoImpl();
-		dao.eliminarEmpleado(empleado);
-	}
-	
-	//llama al DAO para obtener todos los empleados y luego los muestra en la vista
-	public void verEmpleados(JTable tabla, Empleados empleado){
 
-	}
+    private VistaEmpleado vista = new VistaEmpleado();
+
+    //llama al DAO para guardar un empleado
+    public void registrar(Empleados empleado) {
+        IEmpleadosDao dao = new EmpleadosDaoImpl();
+        dao.registrarNuevoEmpleado(empleado);
+    }
+
+    //llama al DAO para actualizar un empleado
+    public void actualizar(Empleados empleado) {
+        IEmpleadosDao dao = new EmpleadosDaoImpl();
+        dao.actualizarEmpleado(empleado);
+    }
+
+    //llama al DAO para eliminar un empleado
+    public void eliminar(Empleados empleado) {
+        IEmpleadosDao dao = new EmpleadosDaoImpl();
+        dao.eliminarEmpleado(empleado);
+    }
+
+    //llama al DAO para obtener todos los empleados y luego los muestra en la vista
+    public void verEmpleados(JTable tabla) {
+        ResultSet empleados = null;
+        IEmpleadosDao dao = new EmpleadosDaoImpl();
+        empleados = dao.obtenerEmpleados();
+        vista.verEmpleados(empleados, tabla);
+    }
+
+    public void verEmpleado(JTable tabla, Empleados empleado) {
+        ResultSet empleados = null;
+        IEmpleadosDao dao = new EmpleadosDaoImpl();
+        empleados = dao.obtenerEmpleado(empleado);
+        vista.verEmpleado(empleados, tabla);
+    }
 }

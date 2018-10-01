@@ -19,5 +19,4 @@ public interface IMantenimientoHerramientaDao {
 	public boolean actualizarMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta);
 	public boolean eliminarMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta);
         public ResultSet obtenerMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta);
-
 }

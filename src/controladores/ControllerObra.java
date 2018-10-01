@@ -21,19 +21,19 @@ import vistaPk.VistaObra;
 public class ControllerObra {
         private vistaPk.VistaObra vista = new VistaObra();
     
-    	//llama al DAO para guardar un empleado
+    	//llama al DAO para guardar un obra
 	public void registrar(Obra obra ) {
 		IObraDao dao= new  ObraDaoImpl();
 		dao.registrarNuevaObra(obra);
 	}
 	
-	//llama al DAO para actualizar un empleado
+	//llama al DAO para actualizar un obra
 	public void actualizar(Obra obra) {
 		IObraDao dao= new  ObraDaoImpl();
 		dao.actualizarObra(obra);
 	}
 	
-	//llama al DAO para eliminar un empleado
+	//llama al DAO para eliminar un obra
 	public void eliminar(Obra obra) {
 		IObraDao dao= new  ObraDaoImpl();
 		dao.eliminarObra(obra);
