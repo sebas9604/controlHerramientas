@@ -36,7 +36,7 @@ public class ObraDaoImpl implements IObraDao {
             String sql = "INSERT INTO obra (idObra, nombreObra, direccionObra) " + "VALUES (?,?,?);";
             con = ConexionBD.connect();
             PreparedStatement psql = con.prepareStatement(sql);
-            psql.setInt(1, obra.getIdObra());
+            psql.setString(1, obra.getIdObra());
             psql.setString(2, obra.getNombreObra());
             psql.setString(3, obra.getDireccionObra());
             psql.executeUpdate();

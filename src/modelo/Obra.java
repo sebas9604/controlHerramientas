@@ -14,22 +14,22 @@ public class Obra {
     public Obra() {
     }
 
-    public Obra(int idObra, String nombreObra, String direccionObra) {
+    public Obra(String idObra, String nombreObra, String direccionObra) {
         this.idObra = idObra;
         this.nombreObra = nombreObra;
         this.direccionObra = direccionObra;
     }
     
     
-    private int idObra;
+    private String idObra;
     private String nombreObra;
     private String direccionObra;
 
-    public int getIdObra() {
+    public String getIdObra() {
         return idObra;
     }
 
-    public void setIdObra(int idObra) {
+    public void setIdObra(String idObra) {
         this.idObra = idObra;
     }
 

@@ -21,13 +21,14 @@ public class Principal extends javax.swing.JFrame {
         setResizable(false);
         ocultarVentanas();
     }
-    
+
     //OPCIONES OBRA   
     public boolean consultarObrasFlag;
     public boolean consultarObraFlag;
     public boolean crearObraFlag;
     public boolean modificarObraFlag;
     public boolean eliminarObraFlag;
+    public boolean repHerramientasEnObraFlag;
 
     public void inhabilitarBanderasObra() {
         consultarObrasFlag = false;
@@ -35,8 +36,8 @@ public class Principal extends javax.swing.JFrame {
         crearObraFlag = false;
         modificarObraFlag = false;
         eliminarObraFlag = false;
+        repHerramientasEnObraFlag = false;
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -61,6 +62,8 @@ public class Principal extends javax.swing.JFrame {
         opcionCrearObra = new javax.swing.JMenu();
         opcionModificarObra = new javax.swing.JMenu();
         opcionEliminarObra = new javax.swing.JMenu();
+        opcionReportes = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuElementos = new javax.swing.JMenuBar();
         menuObra = new javax.swing.JMenu();
         menuEmpleado = new javax.swing.JMenu();
@@ -159,64 +162,66 @@ public class Principal extends javax.swing.JFrame {
         });
         menuOpcionesObra.add(opcionEliminarObra);
 
+        opcionReportes.setText("Reportes");
+
+        jMenuItem1.setText("jMenuItem1");
+        opcionReportes.add(jMenuItem1);
+
+        menuOpcionesObra.add(opcionReportes);
+
         ventanaObra.setJMenuBar(menuOpcionesObra);
 
         javax.swing.GroupLayout ventanaObraLayout = new javax.swing.GroupLayout(ventanaObra.getContentPane());
         ventanaObra.getContentPane().setLayout(ventanaObraLayout);
         ventanaObraLayout.setHorizontalGroup(
             ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanaObraLayout.createSequentialGroup()
+            .addGroup(ventanaObraLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1207, Short.MAX_VALUE)
                     .addGroup(ventanaObraLayout.createSequentialGroup()
                         .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ventanaObraLayout.createSequentialGroup()
-                                .addComponent(labelNombreObra)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                                .addComponent(tfNombreObra, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanaObraLayout.createSequentialGroup()
-                                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelIdObra)
-                                    .addComponent(labelDireccionObra)
-                                    .addComponent(labelTituloObra))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelOperacion)
-                                    .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tfUbicacionObra, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                        .addComponent(tfIdObra)))))
-                        .addGap(48, 48, 48)
-                        .addComponent(btEjecutarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(47, 47, 47))
+                            .addComponent(labelNombreObra)
+                            .addComponent(labelIdObra)
+                            .addComponent(labelDireccionObra)
+                            .addComponent(labelTituloObra))
+                        .addGap(63, 63, 63)
+                        .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfNombreObra)
+                                .addComponent(tfUbicacionObra)
+                                .addComponent(tfIdObra)
+                                .addComponent(btEjecutarConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+                            .addComponent(labelOperacion))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         ventanaObraLayout.setVerticalGroup(
             ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ventanaObraLayout.createSequentialGroup()
-                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labelTituloObra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelOperacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ventanaObraLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(btEjecutarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ventanaObraLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelTituloObra)
-                            .addComponent(labelOperacion))
-                        .addGap(26, 26, 26)
-                        .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelIdObra)
-                            .addComponent(tfIdObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(5, 5, 5)
+                        .addComponent(labelIdObra)
+                        .addGap(21, 21, 21)
                         .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelNombreObra)
                             .addComponent(tfNombreObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(19, 19, 19)
                         .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelDireccionObra)
-                            .addComponent(tfUbicacionObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                            .addComponent(tfUbicacionObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(tfIdObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addComponent(btEjecutarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
 
         menuObra.setText("Obra");
@@ -262,13 +267,14 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(818, 647));
+        setSize(new java.awt.Dimension(1298, 847));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuObraMenuSelected
+        ocultarVentanas();
         ventanaObra.setVisible(true);
-        inhabilitarCamposObra();        
+        inhabilitarCamposObra();
     }//GEN-LAST:event_menuObraMenuSelected
 
     private void consultarObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarObraActionPerformed
@@ -328,47 +334,47 @@ public class Principal extends javax.swing.JFrame {
         inhabilitarCamposObra();
         labelOperacion.setText("CONSULTAR TODO");
         consultarObrasFlag = true;
-        btEjecutarConsulta.setEnabled(true);   
-        
+        btEjecutarConsulta.setEnabled(true);
+
     }//GEN-LAST:event_consultarObrasActionPerformed
 
     private void btEjecutarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarConsultaActionPerformed
-        if(consultarObrasFlag){
-        ControllerObra  obraCt = new ControllerObra();
-        obraCt.verObras(tablaObras);
-        inhabilitarCamposObra();
-        }else if(crearObraFlag){
-        Obra obra = new Obra();
-        ControllerObra obraCt = new ControllerObra();
-        obra.setIdObra(Integer.parseInt(tfIdObra.getText()));
-        obra.setNombreObra(tfNombreObra.getText());
-        obra.setDireccionObra(tfUbicacionObra.getText());
-        obraCt.registrar(obra);
-        inhabilitarCamposObra();
-        }else if(modificarObraFlag){
-        Obra obra = new Obra();
-        ControllerObra obraCt = new ControllerObra();
-        obra.setIdObra(Integer.parseInt(tfIdObra.getText()));
-        obra.setNombreObra(tfNombreObra.getText());
-        obra.setDireccionObra(tfUbicacionObra.getText());
-        obraCt.actualizar(obra);
-        inhabilitarCamposObra();            
-        }else if(eliminarObraFlag){
-        Obra obra = new Obra();
-        ControllerObra obraCt = new ControllerObra();
-        obra.setIdObra(Integer.parseInt(tfIdObra.getText()));
-        obra.setNombreObra(tfNombreObra.getText());
-        obra.setDireccionObra(tfUbicacionObra.getText());
-        obraCt.eliminar(obra);
-        inhabilitarCamposObra();            
-        }else if(consultarObraFlag){
-        Obra obra = new Obra();
-        ControllerObra obraCt = new ControllerObra();
-        obra.setIdObra(Integer.parseInt(tfIdObra.getText()));
-        obra.setNombreObra(tfNombreObra.getText());
-        obra.setDireccionObra(tfUbicacionObra.getText());
-        obraCt.verObra(tablaObras, obra);
-        inhabilitarCamposObra();            
+        if (consultarObrasFlag) {
+            ControllerObra obraCt = new ControllerObra();
+            obraCt.verObras(tablaObras);
+            inhabilitarCamposObra();
+        } else if (crearObraFlag) {
+            Obra obra = new Obra();
+            ControllerObra obraCt = new ControllerObra();
+            obra.setIdObra(tfIdObra.getText());
+            obra.setNombreObra(tfNombreObra.getText());
+            obra.setDireccionObra(tfUbicacionObra.getText());
+            obraCt.registrar(obra);
+            inhabilitarCamposObra();
+        } else if (modificarObraFlag) {
+            Obra obra = new Obra();
+            ControllerObra obraCt = new ControllerObra();
+            obra.setIdObra(tfIdObra.getText());
+            obra.setNombreObra(tfNombreObra.getText());
+            obra.setDireccionObra(tfUbicacionObra.getText());
+            obraCt.actualizar(obra);
+            inhabilitarCamposObra();
+        } else if (eliminarObraFlag) {
+            Obra obra = new Obra();
+            ControllerObra obraCt = new ControllerObra();
+            obra.setIdObra(tfIdObra.getText());
+            obra.setNombreObra(tfNombreObra.getText());
+            obra.setDireccionObra(tfUbicacionObra.getText());
+            obraCt.eliminar(obra);
+            inhabilitarCamposObra();
+        } else if (consultarObraFlag) {
+            Obra obra = new Obra();
+            ControllerObra obraCt = new ControllerObra();
+            obra.setIdObra(tfIdObra.getText());
+            obra.setNombreObra(tfNombreObra.getText());
+            obra.setDireccionObra(tfUbicacionObra.getText());
+            obraCt.verObra(tablaObras, obra);
+            inhabilitarCamposObra();
         }
     }//GEN-LAST:event_btEjecutarConsultaActionPerformed
 
@@ -385,7 +391,6 @@ public class Principal extends javax.swing.JFrame {
         btEjecutarConsulta.setEnabled(false);
         labelOperacion.setText("");
     }
-
 
     /**
      * @param args the command line arguments
@@ -427,6 +432,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btEjecutarConsulta;
     private javax.swing.JMenuItem consultarObra;
     private javax.swing.JMenuItem consultarObras;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelDireccionObra;
     private javax.swing.JLabel labelIdObra;
@@ -444,6 +450,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu opcionCrearObra;
     private javax.swing.JMenu opcionEliminarObra;
     private javax.swing.JMenu opcionModificarObra;
+    private javax.swing.JMenu opcionReportes;
     private javax.swing.JTable tablaObras;
     private javax.swing.JTextField tfIdObra;
     private javax.swing.JTextField tfNombreObra;
@@ -455,7 +462,7 @@ public class Principal extends javax.swing.JFrame {
         ventanaObra.dispose();
     }
 
-        public static ResultSet getTabla(String consulta) {
+    public static ResultSet getTabla(String consulta) {
         Connection con = ConexionBD.connect();
         Statement st;
         ResultSet datos = null;
@@ -463,7 +470,7 @@ public class Principal extends javax.swing.JFrame {
             st = con.createStatement();
             datos = st.executeQuery(consulta);
         } catch (SQLException ex) {
-            
+
         }
         return datos;
     }
