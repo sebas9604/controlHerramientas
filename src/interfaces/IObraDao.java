@@ -20,6 +20,8 @@ public interface IObraDao {
     public ResultSet obtenerObra(Obra obra);
 
     public ResultSet obtenerObras();
+    
+    public Obra consultarObra(Obra obra);
 
     public boolean actualizarObra(Obra obra);
 

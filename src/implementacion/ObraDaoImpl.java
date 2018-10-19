@@ -157,4 +157,34 @@ public class ObraDaoImpl implements IObraDao {
         return rs;
     }
 
+    @Override
+    public Obra consultarObra(Obra obra) {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null; 
+        
+        String sql = "SELECT idObra, nombreObra, direccionObra FROM obra WHERE idObra = " + obra.getIdObra() + ";";
+        Obra o =new Obra();
+     
+        	try {			
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+			if (rs.next()) {
+				o.setIdObra(rs.getString(1));
+				o.setNombreObra(rs.getString(2));
+				o.setDireccionObra(rs.getString(3));
+                                
+			}
+			stm.close();
+			rs.close();
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Error: Clase ObraDaoImple, método consultarObra");
+			e.printStackTrace();
+		}
+        return o;
+
+    }
+
 }

@@ -59,4 +59,11 @@ public class ControllerObra {
 		obras=dao.obtenerObra(obra);
                 vista.verObra(obras, tabla);
 	}
+        
+        public Obra consultarObra(Obra obra){
+        IObraDao dao = new ObraDaoImpl();
+        Obra o;
+        o = dao.consultarObra(obra);
+            return o;
+        }
 }
