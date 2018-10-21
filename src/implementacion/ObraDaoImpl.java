@@ -99,7 +99,7 @@ public class ObraDaoImpl implements IObraDao {
                   JOptionPane.showMessageDialog(null, "El registro no existe");
       }
         } catch (SQLException e) {
-            System.out.println("Error: Clase ClienteDaoImple, método actualizar");
+            System.out.println("Error: Clase ObraDaoImple, método actualizar");
             e.printStackTrace();
         }
         return actualizar;
@@ -128,7 +128,7 @@ public class ObraDaoImpl implements IObraDao {
 
             }
         } catch (SQLException e) {
-            System.out.println("Error: Clase ClienteDaoImple, método eliminar");
+            System.out.println("Error: Clase ObraDaoImple, método eliminar");
             e.printStackTrace();
         }
         return eliminar;

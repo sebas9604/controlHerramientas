@@ -1,13 +1,14 @@
 package presentacion;
 
 import conexion.ConexionBD;
+import controladores.ControllerCargo;
 import controladores.ControllerObra;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JFrame;
+import modelo.Cargo;
 import modelo.Obra;
 
 /**
@@ -30,7 +31,61 @@ public class Principal extends javax.swing.JFrame {
     public boolean eliminarObraFlag;
     public boolean repHerramientasEnObraFlag;
 
+    //OPCIONES CARGO   
+    public boolean consultarCargosFlag;
+    public boolean consultarCargoFlag;
+    public boolean crearCargoFlag;
+    public boolean modificarCargoFlag;
+    public boolean eliminarCargoFlag;
+    public boolean repHerramientasEnCargoFlag;
+
+    //OPCIONES HERRAMIENTA   
+    public boolean consultarHerramientasFlag;
+    public boolean consultarHerramientaFlag;
+    public boolean crearHerramientaFlag;
+    public boolean modificarHerramientaFlag;
+    public boolean eliminarHerramientaFlag;
+    public boolean repHerramientasEnHerramientaFlag;
+
+    //OPCIONES EMPLEADOS   
+    public boolean consultarEmpleadosFlag;
+    public boolean consultarEmpleadoFlag;
+    public boolean crearEmpleadoFlag;
+    public boolean modificarEmpleadoFlag;
+    public boolean eliminarEmpleadoFlag;
+    public boolean repHerramientasEnEmpleadoFlag;
+
+    
+    //INHABILITAR BANDERAS
+    
     public void inhabilitarBanderasObra() {
+        consultarObrasFlag = false;
+        consultarObraFlag = false;
+        crearObraFlag = false;
+        modificarObraFlag = false;
+        eliminarObraFlag = false;
+        repHerramientasEnObraFlag = false;
+    }
+
+    public void inhabilitarBanderasCargo() {
+        consultarCargosFlag = false;
+        consultarCargoFlag = false;
+        crearCargoFlag = false;
+        modificarCargoFlag = false;
+        eliminarCargoFlag = false;
+        repHerramientasEnCargoFlag = false;
+    }
+
+    public void inhabilitarBanderasHerramienta() {
+        consultarHerramientasFlag = false;
+        consultarHerramientaFlag = false;
+        crearHerramientaFlag = false;
+        modificarHerramientaFlag = false;
+        eliminarHerramientaFlag = false;
+        repHerramientasEnHerramientaFlag = false;
+    }
+
+    public void inhabilitarBanderasEmpleado() {
         consultarObrasFlag = false;
         consultarObraFlag = false;
         crearObraFlag = false;
@@ -51,11 +106,13 @@ public class Principal extends javax.swing.JFrame {
         btEjecutarCargo = new javax.swing.JButton();
         tfNombreCargo = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaCargos = new javax.swing.JTable();
+        labelIdCargo = new javax.swing.JLabel();
+        tfIdCargo = new javax.swing.JTextField();
         menuOpcionesCargo = new javax.swing.JMenuBar();
         opcionConsultarCargo = new javax.swing.JMenu();
-        consultarCargos = new javax.swing.JMenu();
-        consultarCargo = new javax.swing.JMenu();
+        consultarTodosLosCargos = new javax.swing.JMenuItem();
+        consultarCargo = new javax.swing.JMenuItem();
         opcionCrearCargo = new javax.swing.JMenu();
         opcionModificarCargo = new javax.swing.JMenu();
         opcionEliminarCargo = new javax.swing.JMenu();
@@ -71,13 +128,13 @@ public class Principal extends javax.swing.JFrame {
         labelCargoEmpleado = new javax.swing.JLabel();
         labelFotoEmpleado = new javax.swing.JLabel();
         tfIdEmpleado = new javax.swing.JTextField();
-        tfNombresEmpelado = new javax.swing.JTextField();
-        cbCargoEmpelado = new javax.swing.JComboBox<>();
+        tfNombresEmpleado = new javax.swing.JTextField();
+        cbCargoEmpleado = new javax.swing.JComboBox<>();
         tfApellidosEmpleado = new javax.swing.JTextField();
         labelImagenEmpleado = new javax.swing.JLabel();
         btEjecutarEmpleado = new javax.swing.JButton();
         btReporteHerramientasACargo = new javax.swing.JButton();
-        btTomarFotoEmpelado = new javax.swing.JButton();
+        btTomarFotoEmpleado = new javax.swing.JButton();
         menuOpcionEmpleado = new javax.swing.JMenuBar();
         opcionConsultarEmpleado = new javax.swing.JMenu();
         consultarEmpleados = new javax.swing.JMenuItem();
@@ -105,7 +162,7 @@ public class Principal extends javax.swing.JFrame {
         btRepoTiempoVida = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaHerramienta = new javax.swing.JTable();
-        btTomarFoto = new javax.swing.JButton();
+        btTomarFotoHerramienta = new javax.swing.JButton();
         btEjecutarHerramienta = new javax.swing.JButton();
         labelOperacionHerramienta = new javax.swing.JLabel();
         menuOpcionesHerramientas = new javax.swing.JMenuBar();
@@ -126,7 +183,7 @@ public class Principal extends javax.swing.JFrame {
         tfIdObra = new javax.swing.JTextField();
         tfNombreObra = new javax.swing.JTextField();
         tfUbicacionObra = new javax.swing.JTextField();
-        btEjecutarConsulta = new javax.swing.JButton();
+        btEjecutarConsultaObra = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaObras = new javax.swing.JTable();
         labelOperacionObra = new javax.swing.JLabel();
@@ -156,17 +213,18 @@ public class Principal extends javax.swing.JFrame {
         ventanaCargo.setPreferredSize(new java.awt.Dimension(700, 756));
         ventanaCargo.setVisible(true);
 
-        labelTituloCargo.setText("jLabel1");
+        labelTituloCargo.setText("CARGO");
 
-        labelOperacionCargo.setText("jLabel2");
+        labelNombreCargo.setText("Cargo");
 
-        labelNombreCargo.setText("jLabel4");
+        btEjecutarCargo.setText("EJECUTAR");
+        btEjecutarCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEjecutarCargoActionPerformed(evt);
+            }
+        });
 
-        btEjecutarCargo.setText("jButton1");
-
-        tfNombreCargo.setText("jTextField2");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCargos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -177,25 +235,64 @@ public class Principal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(tablaCargos);
 
-        opcionConsultarCargo.setText("File");
+        labelIdCargo.setText("Identificacion");
 
-        consultarCargos.setText("jMenu5");
-        opcionConsultarCargo.add(consultarCargos);
+        opcionConsultarCargo.setText("Consultar");
 
-        consultarCargo.setText("jMenu6");
+        consultarTodosLosCargos.setText("Todos los cargos");
+        consultarTodosLosCargos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarTodosLosCargosActionPerformed(evt);
+            }
+        });
+        opcionConsultarCargo.add(consultarTodosLosCargos);
+
+        consultarCargo.setText("Cargo");
+        consultarCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarCargoActionPerformed(evt);
+            }
+        });
         opcionConsultarCargo.add(consultarCargo);
 
         menuOpcionesCargo.add(opcionConsultarCargo);
 
-        opcionCrearCargo.setText("Edit");
+        opcionCrearCargo.setText("Crear");
+        opcionCrearCargo.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                opcionCrearCargoMenuSelected(evt);
+            }
+        });
         menuOpcionesCargo.add(opcionCrearCargo);
 
-        opcionModificarCargo.setText("jMenu3");
+        opcionModificarCargo.setText("Modificar");
+        opcionModificarCargo.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                opcionModificarCargoMenuSelected(evt);
+            }
+        });
         menuOpcionesCargo.add(opcionModificarCargo);
 
-        opcionEliminarCargo.setText("jMenu4");
+        opcionEliminarCargo.setText("Eliminar");
+        opcionEliminarCargo.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                opcionEliminarCargoMenuSelected(evt);
+            }
+        });
         menuOpcionesCargo.add(opcionEliminarCargo);
 
         ventanaCargo.setJMenuBar(menuOpcionesCargo);
@@ -204,27 +301,30 @@ public class Principal extends javax.swing.JFrame {
         ventanaCargo.getContentPane().setLayout(ventanaCargoLayout);
         ventanaCargoLayout.setHorizontalGroup(
             ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanaCargoLayout.createSequentialGroup()
-                .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(ventanaCargoLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btEjecutarCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(ventanaCargoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btEjecutarCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(891, 891, 891))
+            .addGroup(ventanaCargoLayout.createSequentialGroup()
+                .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ventanaCargoLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ventanaCargoLayout.createSequentialGroup()
                                 .addComponent(labelTituloCargo)
                                 .addGap(137, 137, 137)
-                                .addComponent(labelOperacionCargo)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(labelOperacionCargo))
                             .addGroup(ventanaCargoLayout.createSequentialGroup()
-                                .addComponent(labelNombreCargo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfNombreCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(891, 891, 891))
-            .addGroup(ventanaCargoLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelNombreCargo)
+                                    .addComponent(labelIdCargo))
+                                .addGap(60, 60, 60)
+                                .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfNombreCargo, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                                    .addComponent(tfIdCargo)))))
+                    .addGroup(ventanaCargoLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ventanaCargoLayout.setVerticalGroup(
@@ -234,7 +334,11 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTituloCargo)
                     .addComponent(labelOperacionCargo))
-                .addGap(74, 74, 74)
+                .addGap(37, 37, 37)
+                .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelIdCargo)
+                    .addComponent(tfIdCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNombreCargo)
                     .addComponent(tfNombreCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -242,7 +346,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btEjecutarCargo)
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         ventanaEmpleado.setPreferredSize(new java.awt.Dimension(1256, 756));
@@ -275,7 +379,7 @@ public class Principal extends javax.swing.JFrame {
 
         labelFotoEmpleado.setText("Foto");
 
-        cbCargoEmpelado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCargoEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         tfApellidosEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -289,7 +393,7 @@ public class Principal extends javax.swing.JFrame {
 
         btReporteHerramientasACargo.setText("HERRAMIENTAS A CARGO");
 
-        btTomarFotoEmpelado.setText("TOMAR FOTO");
+        btTomarFotoEmpleado.setText("TOMAR FOTO");
 
         opcionConsultarEmpleado.setText("Consultar");
 
@@ -334,8 +438,8 @@ public class Principal extends javax.swing.JFrame {
                                 .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btEjecutarEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                                     .addComponent(tfIdEmpleado)
-                                    .addComponent(tfNombresEmpelado)
-                                    .addComponent(cbCargoEmpelado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfNombresEmpleado)
+                                    .addComponent(cbCargoEmpleado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(tfApellidosEmpleado)))
                             .addGroup(ventanaEmpleadoLayout.createSequentialGroup()
                                 .addComponent(labelTituloEmpelado)
@@ -345,7 +449,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelFotoEmpleado)
                             .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btTomarFotoEmpelado, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btTomarFotoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(labelImagenEmpleado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(89, 89, 89)
                         .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,14 +480,14 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelNombresEmpleado)
-                            .addComponent(tfNombresEmpelado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfNombresEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(labelApellidosEmpleado)
                             .addComponent(tfApellidosEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbCargoEmpelado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbCargoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelCargoEmpleado)))
                     .addGroup(ventanaEmpleadoLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -393,7 +497,7 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(btReporteHerramientasACargo)))
                 .addGap(18, 18, 18)
                 .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btTomarFotoEmpelado)
+                    .addComponent(btTomarFotoEmpleado)
                     .addComponent(btEjecutarEmpleado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -448,7 +552,7 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablaHerramienta);
 
-        btTomarFoto.setText("TOMAR FOTO");
+        btTomarFotoHerramienta.setText("TOMAR FOTO");
 
         btEjecutarHerramienta.setText("EJECUTAR");
 
@@ -520,7 +624,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(labelEstadoHerramienta)
                             .addComponent(labelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btTomarFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))))
+                            .addComponent(btTomarFotoHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelReportesHerramienta)
@@ -577,7 +681,7 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(labelResponsable)
                                 .addComponent(cbResponsableerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btTomarFoto)))
+                            .addComponent(btTomarFotoHerramienta)))
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(btRepoTiempoVida)))
@@ -598,10 +702,10 @@ public class Principal extends javax.swing.JFrame {
 
         labelDireccionObra.setText("Direccion");
 
-        btEjecutarConsulta.setText("EJECUTAR");
-        btEjecutarConsulta.addActionListener(new java.awt.event.ActionListener() {
+        btEjecutarConsultaObra.setText("EJECUTAR");
+        btEjecutarConsultaObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEjecutarConsultaActionPerformed(evt);
+                btEjecutarConsultaObraActionPerformed(evt);
             }
         });
 
@@ -701,7 +805,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(tfNombreObra)
                                 .addComponent(tfUbicacionObra)
                                 .addComponent(tfIdObra)
-                                .addComponent(btEjecutarConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
+                                .addComponent(btEjecutarConsultaObra, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
                         .addGap(257, 257, 257)
                         .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelReportesObra)
@@ -736,8 +840,8 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(tfUbicacionObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(tfIdObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
-                .addComponent(btEjecutarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(btEjecutarConsultaObra, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
@@ -755,12 +859,39 @@ public class Principal extends javax.swing.JFrame {
         menuElementos.add(menuObra);
 
         menuEmpleado.setText("Empleado");
+        menuEmpleado.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuEmpleadoMenuSelected(evt);
+            }
+        });
         menuElementos.add(menuEmpleado);
 
         menuHerramienta.setText("Herramienta");
+        menuHerramienta.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuHerramientaMenuSelected(evt);
+            }
+        });
         menuElementos.add(menuHerramienta);
 
         menuCargo.setText("Cargo");
+        menuCargo.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuCargoMenuSelected(evt);
+            }
+        });
         menuElementos.add(menuCargo);
 
         setJMenuBar(menuElementos);
@@ -829,7 +960,7 @@ public class Principal extends javax.swing.JFrame {
         consultarObraFlag = true;
         tfIdObra.setEnabled(true);
         tfIdObra.setBackground(Color.white);
-        btEjecutarConsulta.setEnabled(true);
+        btEjecutarConsultaObra.setEnabled(true);
 
 
     }//GEN-LAST:event_consultarObraActionPerformed
@@ -845,9 +976,7 @@ public class Principal extends javax.swing.JFrame {
         tfNombreObra.setBackground(Color.white);
         tfUbicacionObra.setEnabled(true);
         tfUbicacionObra.setBackground(Color.white);
-        btEjecutarConsulta.setEnabled(true);
-
-// TODO add your handling code here:
+        btEjecutarConsultaObra.setEnabled(true);
     }//GEN-LAST:event_opcionCrearObraMenuSelected
 
     private void opcionModificarObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarObraMenuSelected
@@ -861,7 +990,7 @@ public class Principal extends javax.swing.JFrame {
         tfNombreObra.setBackground(Color.white);
         tfUbicacionObra.setEnabled(true);
         tfUbicacionObra.setBackground(Color.white);
-        btEjecutarConsulta.setEnabled(true);
+        btEjecutarConsultaObra.setEnabled(true);
     }//GEN-LAST:event_opcionModificarObraMenuSelected
 
     private void opcionEliminarObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarObraMenuSelected
@@ -871,7 +1000,7 @@ public class Principal extends javax.swing.JFrame {
         eliminarObraFlag = true;
         tfIdObra.setEnabled(true);
         tfIdObra.setBackground(Color.white);
-        btEjecutarConsulta.setEnabled(true);
+        btEjecutarConsultaObra.setEnabled(true);
     }//GEN-LAST:event_opcionEliminarObraMenuSelected
 
     private void consultarObrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarObrasActionPerformed
@@ -879,11 +1008,11 @@ public class Principal extends javax.swing.JFrame {
         inhabilitarCamposObra();
         labelOperacionObra.setText("CONSULTAR TODO");
         consultarObrasFlag = true;
-        btEjecutarConsulta.setEnabled(true);
+        btEjecutarConsultaObra.setEnabled(true);
 
     }//GEN-LAST:event_consultarObrasActionPerformed
 
-    private void btEjecutarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarConsultaActionPerformed
+    private void btEjecutarConsultaObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarConsultaObraActionPerformed
         if (consultarObrasFlag) {
             ControllerObra obraCt = new ControllerObra();
             obraCt.verObras(tablaObras);
@@ -924,15 +1053,127 @@ public class Principal extends javax.swing.JFrame {
             tfUbicacionObra.setText(obra.getDireccionObra());
 //            inhabilitarCamposObra();
         }
-    }//GEN-LAST:event_btEjecutarConsultaActionPerformed
+    }//GEN-LAST:event_btEjecutarConsultaObraActionPerformed
 
     private void tfLugarCompraHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLugarCompraHerramientaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_tfLugarCompraHerramientaActionPerformed
 
     private void tfApellidosEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfApellidosEmpleadoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_tfApellidosEmpleadoActionPerformed
+
+    private void menuEmpleadoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuEmpleadoMenuSelected
+         ocultarVentanas();
+        ventanaEmpleado.setVisible(true);
+        inhabilitarCamposEmpleado();       
+    }//GEN-LAST:event_menuEmpleadoMenuSelected
+
+    private void menuHerramientaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuHerramientaMenuSelected
+         ocultarVentanas();
+        ventanaHerramienta.setVisible(true);
+       inhabilitarCamposHerramienta();       
+    }//GEN-LAST:event_menuHerramientaMenuSelected
+
+    private void menuCargoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuCargoMenuSelected
+         ocultarVentanas();
+        ventanaCargo.setVisible(true);
+       inhabilitarCamposCargo();          
+    }//GEN-LAST:event_menuCargoMenuSelected
+
+    private void btEjecutarCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarCargoActionPerformed
+         if (consultarCargosFlag) {
+            ControllerCargo cargoCt = new ControllerCargo();
+            cargoCt.verCargos(tablaCargos);
+            inhabilitarCamposCargo();
+        } else if (crearCargoFlag) {
+            Cargo cargo = new Cargo();
+            ControllerCargo cargoCt = new ControllerCargo();
+            cargo.setIdCargo(Integer.parseInt(tfIdCargo.getText()));
+            cargo.setNombreCargo(tfNombreCargo.getText());
+            cargoCt.registrar(cargo);
+            inhabilitarCamposCargo();
+        } else if (modificarCargoFlag) {
+            Cargo obra = new Cargo();
+            ControllerCargo obraCt = new ControllerCargo();
+            obra.setIdCargo(Integer.parseInt(tfIdCargo.getText()));
+            obra.setNombreCargo(tfNombreCargo.getText());
+            obraCt.actualizar(obra);
+            inhabilitarCamposCargo();
+        } else if (eliminarCargoFlag) {
+            Cargo cargo = new Cargo();
+            ControllerCargo obraCt = new ControllerCargo();
+            cargo.setIdCargo(Integer.parseInt(tfIdCargo.getText()));
+//            obra.setNombreCargo(tfNombreCargo.getText());
+//            obra.setDireccionCargo(tfUbicacionCargo.getText());
+            obraCt.eliminar(cargo);
+            inhabilitarCamposCargo();
+        } else if (consultarCargoFlag) {
+            Cargo cargo = new Cargo();
+            ControllerCargo cargoCt = new ControllerCargo();
+            cargo.setIdCargo(Integer.parseInt(tfIdCargo.getText()));
+//            obra.setNombreCargo(tfNombreCargo.getText());
+//            obra.setDireccionCargo(tfUbicacionCargo.getText());
+//            obraCt.verCargo(tablaCargos, obra);
+            cargo = cargoCt.consultarCargo(cargo);
+            tfNombreCargo.setText(cargo.getNombreCargo());
+//            inhabilitarCamposCargo();
+        }       
+    }//GEN-LAST:event_btEjecutarCargoActionPerformed
+
+    private void opcionCrearCargoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionCrearCargoMenuSelected
+        inhabilitarBanderasCargo();
+        inhabilitarCamposCargo();
+        labelOperacionCargo.setText("CREAR");
+        crearCargoFlag = true;
+        tfIdCargo.setEnabled(true);
+        tfIdCargo.setBackground(Color.white);
+        tfNombreCargo.setEnabled(true);
+        tfNombreCargo.setBackground(Color.white);
+        btEjecutarCargo.setEnabled(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_opcionCrearCargoMenuSelected
+
+    private void opcionModificarCargoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarCargoMenuSelected
+        inhabilitarBanderasCargo();
+//        inhabilitarCamposCargo();
+        labelOperacionCargo.setText("MODIFICAR");
+        modificarCargoFlag = true;
+        tfIdCargo.setEnabled(true);
+        tfIdCargo.setBackground(Color.white);
+        tfNombreCargo.setEnabled(true);
+        tfNombreCargo.setBackground(Color.white);
+        btEjecutarCargo.setEnabled(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_opcionModificarCargoMenuSelected
+
+    private void opcionEliminarCargoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarCargoMenuSelected
+        inhabilitarBanderasCargo();
+//        inhabilitarCamposCargo();
+        labelOperacionCargo.setText("ELIMINAR");
+        eliminarCargoFlag = true;
+        tfIdCargo.setEnabled(true);
+        tfIdCargo.setBackground(Color.white);
+        btEjecutarCargo.setEnabled(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_opcionEliminarCargoMenuSelected
+
+    private void consultarTodosLosCargosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarTodosLosCargosActionPerformed
+        inhabilitarBanderasCargo();
+        inhabilitarCamposCargo();
+        labelOperacionCargo.setText("CONSULTAR TODO");
+        consultarCargosFlag = true;
+        btEjecutarCargo.setEnabled(true);
+          // TODO add your handling code here:
+    }//GEN-LAST:event_consultarTodosLosCargosActionPerformed
+
+    private void consultarCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarCargoActionPerformed
+        inhabilitarBanderasCargo();
+        inhabilitarCamposCargo();
+        labelOperacionCargo.setText("CONSULTAR");
+        consultarCargoFlag = true;
+        tfIdCargo.setEnabled(true);
+        tfIdCargo.setBackground(Color.white);
+        btEjecutarCargo.setEnabled(true);
+        // TODO add your handling code here:        // TODO add your handling code here:
+    }//GEN-LAST:event_consultarCargoActionPerformed
 
     private void inhabilitarCamposObra() {
         tfIdObra.setEnabled(false);
@@ -944,10 +1185,58 @@ public class Principal extends javax.swing.JFrame {
         tfUbicacionObra.setEnabled(false);
         tfUbicacionObra.setBackground(Color.gray);
         tfUbicacionObra.setText("");
-        btEjecutarConsulta.setEnabled(false);
+        btEjecutarConsultaObra.setEnabled(false);
         labelOperacionObra.setText("");
     }
+    
+    private void inhabilitarCamposCargo(){
+    tfIdCargo.setEnabled(false);
+    tfIdCargo.setBackground(Color.gray);
+    tfIdCargo.setText("");
+    tfNombreCargo.setEnabled(false);
+    tfNombreCargo.setBackground(Color.gray);
+    tfNombreCargo.setText("");
+    btEjecutarCargo.setEnabled(false);
+    labelOperacionCargo.setText("");
+    }
 
+    private void inhabilitarCamposEmpleado(){
+    tfIdEmpleado.setEnabled(false);
+    tfIdEmpleado.setBackground(Color.gray);
+    tfIdEmpleado.setText("");
+    tfNombresEmpleado.setEnabled(false);
+    tfNombresEmpleado.setBackground(Color.gray);
+    tfNombresEmpleado.setText("");
+    tfApellidosEmpleado.setEnabled(false);
+    tfApellidosEmpleado.setBackground(Color.gray);
+    tfApellidosEmpleado.setText("");
+    btEjecutarEmpleado.setEnabled(false);
+    btTomarFotoEmpleado.setEnabled(false);
+    labelOperacionEmpleado.setText("");
+    cbCargoEmpleado.setEnabled(false);    
+    }
+    
+    private void inhabilitarCamposHerramienta(){
+    tfIdHerramienta.setEnabled(false);
+    tfIdHerramienta.setBackground(Color.gray);
+    tfIdHerramienta.setText("");
+    tfNombreHerramienta.setEnabled(false);
+    tfNombreHerramienta.setBackground(Color.gray);
+    tfNombreHerramienta.setText("");
+    tfFechaCompraHerramienta.setEnabled(false);
+    tfFechaCompraHerramienta.setBackground(Color.gray);
+    tfFechaCompraHerramienta.setText("");
+    tfLugarCompraHerramienta.setEnabled(false);
+    tfLugarCompraHerramienta.setBackground(Color.gray);
+    tfLugarCompraHerramienta.setText("");
+    tfPrecioCompraHerramienta.setEnabled(false);
+    tfPrecioCompraHerramienta.setBackground(Color.gray);
+    tfPrecioCompraHerramienta.setText("");
+    btEjecutarHerramienta.setEnabled(false);
+    labelOperacionHerramienta.setText(""); 
+    cbResponsableerramienta.setEnabled(false);
+    btTomarFotoHerramienta.setEnabled(false);
+    }
     /**
      * @param args the command line arguments
      */
@@ -986,31 +1275,30 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEjecutarCargo;
-    private javax.swing.JButton btEjecutarConsulta;
+    private javax.swing.JButton btEjecutarConsultaObra;
     private javax.swing.JButton btEjecutarEmpleado;
     private javax.swing.JButton btEjecutarHerramienta;
     private javax.swing.JButton btRepHerramientasEnObra;
     private javax.swing.JButton btRepoTiempoVida;
     private javax.swing.JButton btReporteHerramientasACargo;
-    private javax.swing.JButton btTomarFoto;
-    private javax.swing.JButton btTomarFotoEmpelado;
-    private javax.swing.JComboBox<String> cbCargoEmpelado;
+    private javax.swing.JButton btTomarFotoEmpleado;
+    private javax.swing.JButton btTomarFotoHerramienta;
+    private javax.swing.JComboBox<String> cbCargoEmpleado;
     private javax.swing.JComboBox<String> cbResponsableerramienta;
-    private javax.swing.JMenu consultarCargo;
-    private javax.swing.JMenu consultarCargos;
+    private javax.swing.JMenuItem consultarCargo;
     private javax.swing.JMenuItem consultarEmpleado;
     private javax.swing.JMenuItem consultarEmpleados;
     private javax.swing.JMenu consultarHerramienta;
     private javax.swing.JMenu consultarHerramientas;
     private javax.swing.JMenuItem consultarObra;
     private javax.swing.JMenuItem consultarObras;
+    private javax.swing.JMenuItem consultarTodosLosCargos;
     private javax.swing.JMenu entradaObra;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelApellidosEmpleado;
     private javax.swing.JLabel labelCargoEmpleado;
     private javax.swing.JLabel labelDireccionObra;
@@ -1018,6 +1306,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelFechaCompra;
     private javax.swing.JLabel labelFoto;
     private javax.swing.JLabel labelFotoEmpleado;
+    private javax.swing.JLabel labelIdCargo;
     private javax.swing.JLabel labelIdEmpleado;
     private javax.swing.JLabel labelIdHerramienta;
     private javax.swing.JLabel labelIdObra;
@@ -1067,11 +1356,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu opcionModificarObra;
     private javax.swing.JMenu opcionMovimiento;
     private javax.swing.JMenu salidaObra;
+    private javax.swing.JTable tablaCargos;
     private javax.swing.JTable tablaHerramienta;
     private javax.swing.JTable tablaObras;
     private javax.swing.JTable tatablaEmpelado;
     private javax.swing.JTextField tfApellidosEmpleado;
     private javax.swing.JTextField tfFechaCompraHerramienta;
+    private javax.swing.JTextField tfIdCargo;
     private javax.swing.JTextField tfIdEmpleado;
     private javax.swing.JTextField tfIdHerramienta;
     private javax.swing.JTextField tfIdObra;
@@ -1079,7 +1370,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField tfNombreCargo;
     private javax.swing.JTextField tfNombreHerramienta;
     private javax.swing.JTextField tfNombreObra;
-    private javax.swing.JTextField tfNombresEmpelado;
+    private javax.swing.JTextField tfNombresEmpleado;
     private javax.swing.JTextField tfPrecioCompraHerramienta;
     private javax.swing.JTextField tfUbicacionObra;
     private javax.swing.JInternalFrame ventanaCargo;
@@ -1090,6 +1381,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void ocultarVentanas() {
         ventanaObra.dispose();
+        ventanaCargo.dispose();
+        ventanaEmpleado.dispose();
+        ventanaHerramienta.dispose();
     }
 
     public static ResultSet getTabla(String consulta) {

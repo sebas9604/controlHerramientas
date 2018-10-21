@@ -25,16 +25,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Empleado"/>
           </Properties>
+          <Events>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="menuEmpleadoMenuSelected"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuHerramienta">
           <Properties>
             <Property name="text" type="java.lang.String" value="Herramienta"/>
           </Properties>
+          <Events>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="menuHerramientaMenuSelected"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuCargo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cargo"/>
           </Properties>
+          <Events>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="menuCargoMenuSelected"/>
+          </Events>
         </Menu>
       </SubComponents>
     </Menu>
@@ -145,34 +154,39 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btEjecutarCargo" min="-2" pref="258" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btEjecutarCargo" min="-2" pref="258" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="891" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="labelTituloCargo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
                                   <Component id="labelOperacionCargo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="labelNombreCargo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="tfNombreCargo" min="-2" pref="179" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="labelNombreCargo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labelIdCargo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="tfNombreCargo" pref="179" max="32767" attributes="0"/>
+                                      <Component id="tfIdCargo" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="891" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -185,7 +199,12 @@
                       <Component id="labelTituloCargo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelOperacionCargo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="labelIdCargo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfIdCargo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labelNombreCargo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfNombreCargo" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -194,7 +213,7 @@
                   <Component id="btEjecutarCargo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                  <EmptySpace pref="34" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -202,28 +221,25 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="labelTituloCargo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel1"/>
+            <Property name="text" type="java.lang.String" value="CARGO"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelOperacionCargo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel2"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelNombreCargo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel4"/>
+            <Property name="text" type="java.lang.String" value="Cargo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btEjecutarCargo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton1"/>
+            <Property name="text" type="java.lang.String" value="EJECUTAR"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEjecutarCargoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tfNombreCargo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField2"/>
-          </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane4">
           <AuxValues>
@@ -232,7 +248,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable1">
+            <Component class="javax.swing.JTable" name="tablaCargos">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
@@ -246,39 +262,61 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JLabel" name="labelIdCargo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Identificacion"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfIdCargo">
+        </Component>
         <Menu class="javax.swing.JMenuBar" name="menuOpcionesCargo">
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="opcionConsultarCargo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="File"/>
+                <Property name="text" type="java.lang.String" value="Consultar"/>
               </Properties>
               <SubComponents>
-                <Menu class="javax.swing.JMenu" name="consultarCargos">
+                <MenuItem class="javax.swing.JMenuItem" name="consultarTodosLosCargos">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jMenu5"/>
+                    <Property name="text" type="java.lang.String" value="Todos los cargos"/>
                   </Properties>
-                </Menu>
-                <Menu class="javax.swing.JMenu" name="consultarCargo">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultarTodosLosCargosActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="consultarCargo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jMenu6"/>
+                    <Property name="text" type="java.lang.String" value="Cargo"/>
                   </Properties>
-                </Menu>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultarCargoActionPerformed"/>
+                  </Events>
+                </MenuItem>
               </SubComponents>
             </Menu>
             <Menu class="javax.swing.JMenu" name="opcionCrearCargo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Edit"/>
+                <Property name="text" type="java.lang.String" value="Crear"/>
               </Properties>
+              <Events>
+                <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="opcionCrearCargoMenuSelected"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="opcionModificarCargo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenu3"/>
+                <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
+              <Events>
+                <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="opcionModificarCargoMenuSelected"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="opcionEliminarCargo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenu4"/>
+                <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
+              <Events>
+                <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="opcionEliminarCargoMenuSelected"/>
+              </Events>
             </Menu>
           </SubComponents>
         </Menu>
@@ -315,8 +353,8 @@
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="btEjecutarEmpleado" pref="222" max="32767" attributes="0"/>
                                       <Component id="tfIdEmpleado" max="32767" attributes="0"/>
-                                      <Component id="tfNombresEmpelado" max="32767" attributes="0"/>
-                                      <Component id="cbCargoEmpelado" max="32767" attributes="0"/>
+                                      <Component id="tfNombresEmpleado" max="32767" attributes="0"/>
+                                      <Component id="cbCargoEmpleado" max="32767" attributes="0"/>
                                       <Component id="tfApellidosEmpleado" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -330,7 +368,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="labelFotoEmpleado" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                  <Component id="btTomarFotoEmpelado" min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Component id="btTomarFotoEmpleado" min="-2" pref="185" max="-2" attributes="0"/>
                                   <Component id="labelImagenEmpleado" alignment="1" min="-2" pref="185" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -374,7 +412,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="labelNombresEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfNombresEmpelado" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfNombresEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -383,7 +421,7 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cbCargoEmpelado" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbCargoEmpleado" min="-2" max="-2" attributes="0"/>
                               <Component id="labelCargoEmpleado" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -398,7 +436,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btTomarFotoEmpelado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btTomarFotoEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btEjecutarEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="61" max="32767" attributes="0"/>
@@ -469,9 +507,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="tfIdEmpleado">
         </Component>
-        <Component class="javax.swing.JTextField" name="tfNombresEmpelado">
+        <Component class="javax.swing.JTextField" name="tfNombresEmpleado">
         </Component>
-        <Component class="javax.swing.JComboBox" name="cbCargoEmpelado">
+        <Component class="javax.swing.JComboBox" name="cbCargoEmpleado">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -510,7 +548,7 @@
             <Property name="text" type="java.lang.String" value="HERRAMIENTAS A CARGO"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btTomarFotoEmpelado">
+        <Component class="javax.swing.JButton" name="btTomarFotoEmpleado">
           <Properties>
             <Property name="text" type="java.lang.String" value="TOMAR FOTO"/>
           </Properties>
@@ -605,7 +643,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="labelEstadoHerramienta" min="-2" max="-2" attributes="0"/>
                               <Component id="labelFoto" max="32767" attributes="0"/>
-                              <Component id="btTomarFoto" alignment="0" pref="214" max="32767" attributes="0"/>
+                              <Component id="btTomarFotoHerramienta" alignment="0" pref="214" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -680,7 +718,7 @@
                                   <Component id="labelResponsable" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="cbResponsableerramienta" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="btTomarFoto" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="btTomarFotoHerramienta" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -809,7 +847,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btTomarFoto">
+        <Component class="javax.swing.JButton" name="btTomarFotoHerramienta">
           <Properties>
             <Property name="text" type="java.lang.String" value="TOMAR FOTO"/>
           </Properties>
@@ -902,7 +940,7 @@
                                   <Component id="tfNombreObra" alignment="0" max="32767" attributes="0"/>
                                   <Component id="tfUbicacionObra" max="32767" attributes="0"/>
                                   <Component id="tfIdObra" max="32767" attributes="0"/>
-                                  <Component id="btEjecutarConsulta" alignment="0" pref="250" max="32767" attributes="0"/>
+                                  <Component id="btEjecutarConsultaObra" alignment="0" pref="250" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
@@ -952,8 +990,8 @@
                       <Component id="tfIdObra" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="btEjecutarConsulta" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace pref="47" max="32767" attributes="0"/>
+                  <Component id="btEjecutarConsultaObra" min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace pref="55" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="360" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
@@ -987,12 +1025,12 @@
         </Component>
         <Component class="javax.swing.JTextField" name="tfUbicacionObra">
         </Component>
-        <Component class="javax.swing.JButton" name="btEjecutarConsulta">
+        <Component class="javax.swing.JButton" name="btEjecutarConsultaObra">
           <Properties>
             <Property name="text" type="java.lang.String" value="EJECUTAR"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEjecutarConsultaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEjecutarConsultaObraActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">

@@ -6,8 +6,6 @@
 package controladores;
 
 import implementacion.EmpleadosDaoImpl;
-import java.util.ArrayList;
-import java.util.List;
 import modelo.Empleados;
 import vistaPk.VistaEmpleado;
 import interfaces.IEmpleadosDao;
