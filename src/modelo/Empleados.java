@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author tolis
@@ -28,6 +30,7 @@ public class Empleados {
     private String apellidosEmpleado;
     private String cargoEmpleado;
     private String fotoEmpleado;
+    private ImageIcon fotoEmp;
 
     public int getIdEmpleado() {
         return idEmpleado;
@@ -67,6 +70,14 @@ public class Empleados {
 
     public void setFotoEmpleado(String fotoEmpleado) {
         this.fotoEmpleado = fotoEmpleado;
+    }
+
+    public ImageIcon getFotoEmp() {
+        return fotoEmp;
+    }
+
+    public void setFotoEmp(ImageIcon fotoEmp) {
+        this.fotoEmp = fotoEmp;
     }
 
     @Override

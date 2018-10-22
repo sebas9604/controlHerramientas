@@ -2,13 +2,25 @@ package presentacion;
 
 import conexion.ConexionBD;
 import controladores.ControllerCargo;
+import controladores.ControllerEmpleados;
 import controladores.ControllerObra;
 import java.awt.Color;
+import java.awt.Image;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import modelo.Cargo;
+import modelo.Empleados;
 import modelo.Obra;
 
 /**
@@ -55,9 +67,7 @@ public class Principal extends javax.swing.JFrame {
     public boolean eliminarEmpleadoFlag;
     public boolean repHerramientasEnEmpleadoFlag;
 
-    
     //INHABILITAR BANDERAS
-    
     public void inhabilitarBanderasObra() {
         consultarObrasFlag = false;
         consultarObraFlag = false;
@@ -86,11 +96,11 @@ public class Principal extends javax.swing.JFrame {
     }
 
     public void inhabilitarBanderasEmpleado() {
-        consultarObrasFlag = false;
-        consultarObraFlag = false;
-        crearObraFlag = false;
-        modificarObraFlag = false;
-        eliminarObraFlag = false;
+        consultarEmpleadoFlag = false;
+        consultarEmpleadoFlag = false;
+        crearEmpleadoFlag = false;
+        modificarEmpleadoFlag = false;
+        eliminarEmpleadoFlag = false;
         repHerramientasEnObraFlag = false;
     }
 
@@ -118,10 +128,10 @@ public class Principal extends javax.swing.JFrame {
         opcionEliminarCargo = new javax.swing.JMenu();
         ventanaEmpleado = new javax.swing.JInternalFrame();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tatablaEmpelado = new javax.swing.JTable();
-        labelTituloEmpelado = new javax.swing.JLabel();
+        tablaEmpleados = new javax.swing.JTable();
+        labelTituloEmpleado = new javax.swing.JLabel();
         labelOperacionEmpleado = new javax.swing.JLabel();
-        labelReportesEmpelado = new javax.swing.JLabel();
+        labelReportesEmpleado = new javax.swing.JLabel();
         labelIdEmpleado = new javax.swing.JLabel();
         labelNombresEmpleado = new javax.swing.JLabel();
         labelApellidosEmpleado = new javax.swing.JLabel();
@@ -154,7 +164,7 @@ public class Principal extends javax.swing.JFrame {
         tfNombreHerramienta = new javax.swing.JTextField();
         tfLugarCompraHerramienta = new javax.swing.JTextField();
         tfPrecioCompraHerramienta = new javax.swing.JTextField();
-        cbResponsableerramienta = new javax.swing.JComboBox<>();
+        cbResponsableHerramienta = new javax.swing.JComboBox<>();
         labelEstadoHerramienta = new javax.swing.JLabel();
         labelFoto = new javax.swing.JLabel();
         labelFechaCompra = new javax.swing.JLabel();
@@ -183,7 +193,7 @@ public class Principal extends javax.swing.JFrame {
         tfIdObra = new javax.swing.JTextField();
         tfNombreObra = new javax.swing.JTextField();
         tfUbicacionObra = new javax.swing.JTextField();
-        btEjecutarConsultaObra = new javax.swing.JButton();
+        btEjecutarObra = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaObras = new javax.swing.JTable();
         labelOperacionObra = new javax.swing.JLabel();
@@ -352,7 +362,7 @@ public class Principal extends javax.swing.JFrame {
         ventanaEmpleado.setPreferredSize(new java.awt.Dimension(1256, 756));
         ventanaEmpleado.setVisible(true);
 
-        tatablaEmpelado.setModel(new javax.swing.table.DefaultTableModel(
+        tablaEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -363,11 +373,11 @@ public class Principal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(tatablaEmpelado);
+        jScrollPane3.setViewportView(tablaEmpleados);
 
-        labelTituloEmpelado.setText("EMPLEADOS");
+        labelTituloEmpleado.setText("EMPLEADOS");
 
-        labelReportesEmpelado.setText("REPORTES");
+        labelReportesEmpleado.setText("REPORTES");
 
         labelIdEmpleado.setText("Identificación");
 
@@ -388,30 +398,82 @@ public class Principal extends javax.swing.JFrame {
         });
 
         labelImagenEmpleado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelImagenEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelImagenEmpleadoMouseClicked(evt);
+            }
+        });
 
         btEjecutarEmpleado.setText("EJECUTAR");
+        btEjecutarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEjecutarEmpleadoActionPerformed(evt);
+            }
+        });
 
         btReporteHerramientasACargo.setText("HERRAMIENTAS A CARGO");
 
         btTomarFotoEmpleado.setText("TOMAR FOTO");
+        btTomarFotoEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTomarFotoEmpleadoActionPerformed(evt);
+            }
+        });
 
         opcionConsultarEmpleado.setText("Consultar");
 
         consultarEmpleados.setText("Todos los Empleados");
+        consultarEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarEmpleadosActionPerformed(evt);
+            }
+        });
         opcionConsultarEmpleado.add(consultarEmpleados);
 
         consultarEmpleado.setText("Empleado");
+        consultarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarEmpleadoActionPerformed(evt);
+            }
+        });
         opcionConsultarEmpleado.add(consultarEmpleado);
 
         menuOpcionEmpleado.add(opcionConsultarEmpleado);
 
         opcionCrearEmpleado.setText("Crear");
+        opcionCrearEmpleado.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                opcionCrearEmpleadoMenuSelected(evt);
+            }
+        });
         menuOpcionEmpleado.add(opcionCrearEmpleado);
 
         opcionModificarEmpelado.setText("Modificar");
+        opcionModificarEmpelado.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                opcionModificarEmpeladoMenuSelected(evt);
+            }
+        });
         menuOpcionEmpleado.add(opcionModificarEmpelado);
 
         opcionEliminarEmpleado.setText("Eliminar");
+        opcionEliminarEmpleado.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                opcionEliminarEmpleadoMenuSelected(evt);
+            }
+        });
         menuOpcionEmpleado.add(opcionEliminarEmpleado);
 
         ventanaEmpleado.setJMenuBar(menuOpcionEmpleado);
@@ -442,19 +504,18 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(cbCargoEmpleado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(tfApellidosEmpleado)))
                             .addGroup(ventanaEmpleadoLayout.createSequentialGroup()
-                                .addComponent(labelTituloEmpelado)
+                                .addComponent(labelTituloEmpleado)
                                 .addGap(102, 102, 102)
                                 .addComponent(labelOperacionEmpleado)))
                         .addGap(87, 87, 87)
-                        .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(labelFotoEmpleado)
-                            .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btTomarFotoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelImagenEmpleado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(89, 89, 89)
+                            .addComponent(btTomarFotoEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                            .addComponent(labelImagenEmpleado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(42, 42, 42)
                         .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btReporteHerramientasACargo, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelReportesEmpelado))))
+                            .addComponent(labelReportesEmpleado))))
                 .addContainerGap())
         );
         ventanaEmpleadoLayout.setVerticalGroup(
@@ -464,13 +525,13 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(ventanaEmpleadoLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelTituloEmpelado)
+                            .addComponent(labelTituloEmpleado)
                             .addComponent(labelOperacionEmpleado)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanaEmpleadoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelFotoEmpleado)
-                            .addComponent(labelReportesEmpelado))))
+                            .addComponent(labelReportesEmpleado))))
                 .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ventanaEmpleadoLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
@@ -490,16 +551,16 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(cbCargoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelCargoEmpleado)))
                     .addGroup(ventanaEmpleadoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelImagenEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ventanaEmpleadoLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(btReporteHerramientasACargo)))
+                        .addComponent(btReporteHerramientasACargo))
+                    .addGroup(ventanaEmpleadoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelImagenEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btTomarFotoEmpleado)
                     .addComponent(btEjecutarEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
@@ -527,7 +588,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        cbResponsableerramienta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbResponsableHerramienta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelEstadoHerramienta.setText("Estado");
 
@@ -553,8 +614,18 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tablaHerramienta);
 
         btTomarFotoHerramienta.setText("TOMAR FOTO");
+        btTomarFotoHerramienta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTomarFotoHerramientaActionPerformed(evt);
+            }
+        });
 
         btEjecutarHerramienta.setText("EJECUTAR");
+        btEjecutarHerramienta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEjecutarHerramientaActionPerformed(evt);
+            }
+        });
 
         opcionConsultarHerramienta.setText("Consultar");
 
@@ -608,7 +679,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(48, 48, 48)
                                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfPrecioCompraHerramienta)
-                                    .addComponent(cbResponsableerramienta, 0, 272, Short.MAX_VALUE)
+                                    .addComponent(cbResponsableHerramienta, 0, 272, Short.MAX_VALUE)
                                     .addComponent(tfLugarCompraHerramienta)))
                             .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -680,7 +751,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(labelResponsable)
-                                .addComponent(cbResponsableerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbResponsableHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btTomarFotoHerramienta)))
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
@@ -702,10 +773,10 @@ public class Principal extends javax.swing.JFrame {
 
         labelDireccionObra.setText("Direccion");
 
-        btEjecutarConsultaObra.setText("EJECUTAR");
-        btEjecutarConsultaObra.addActionListener(new java.awt.event.ActionListener() {
+        btEjecutarObra.setText("EJECUTAR");
+        btEjecutarObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEjecutarConsultaObraActionPerformed(evt);
+                btEjecutarObraActionPerformed(evt);
             }
         });
 
@@ -754,6 +825,11 @@ public class Principal extends javax.swing.JFrame {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
                 opcionCrearObraMenuSelected(evt);
+            }
+        });
+        opcionCrearObra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcionCrearObraActionPerformed(evt);
             }
         });
         menuOpcionesObra.add(opcionCrearObra);
@@ -805,7 +881,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(tfNombreObra)
                                 .addComponent(tfUbicacionObra)
                                 .addComponent(tfIdObra)
-                                .addComponent(btEjecutarConsultaObra, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
+                                .addComponent(btEjecutarObra, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
                         .addGap(257, 257, 257)
                         .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelReportesObra)
@@ -840,8 +916,8 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(tfUbicacionObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(tfIdObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
-                .addComponent(btEjecutarConsultaObra, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(btEjecutarObra, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
@@ -911,9 +987,9 @@ public class Principal extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 12, Short.MAX_VALUE)
                     .addComponent(ventanaEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 12, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -960,7 +1036,7 @@ public class Principal extends javax.swing.JFrame {
         consultarObraFlag = true;
         tfIdObra.setEnabled(true);
         tfIdObra.setBackground(Color.white);
-        btEjecutarConsultaObra.setEnabled(true);
+        btEjecutarObra.setEnabled(true);
 
 
     }//GEN-LAST:event_consultarObraActionPerformed
@@ -976,7 +1052,7 @@ public class Principal extends javax.swing.JFrame {
         tfNombreObra.setBackground(Color.white);
         tfUbicacionObra.setEnabled(true);
         tfUbicacionObra.setBackground(Color.white);
-        btEjecutarConsultaObra.setEnabled(true);
+        btEjecutarObra.setEnabled(true);
     }//GEN-LAST:event_opcionCrearObraMenuSelected
 
     private void opcionModificarObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarObraMenuSelected
@@ -990,7 +1066,7 @@ public class Principal extends javax.swing.JFrame {
         tfNombreObra.setBackground(Color.white);
         tfUbicacionObra.setEnabled(true);
         tfUbicacionObra.setBackground(Color.white);
-        btEjecutarConsultaObra.setEnabled(true);
+        btEjecutarObra.setEnabled(true);
     }//GEN-LAST:event_opcionModificarObraMenuSelected
 
     private void opcionEliminarObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarObraMenuSelected
@@ -1000,7 +1076,7 @@ public class Principal extends javax.swing.JFrame {
         eliminarObraFlag = true;
         tfIdObra.setEnabled(true);
         tfIdObra.setBackground(Color.white);
-        btEjecutarConsultaObra.setEnabled(true);
+        btEjecutarObra.setEnabled(true);
     }//GEN-LAST:event_opcionEliminarObraMenuSelected
 
     private void consultarObrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarObrasActionPerformed
@@ -1008,11 +1084,11 @@ public class Principal extends javax.swing.JFrame {
         inhabilitarCamposObra();
         labelOperacionObra.setText("CONSULTAR TODO");
         consultarObrasFlag = true;
-        btEjecutarConsultaObra.setEnabled(true);
+        btEjecutarObra.setEnabled(true);
 
     }//GEN-LAST:event_consultarObrasActionPerformed
 
-    private void btEjecutarConsultaObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarConsultaObraActionPerformed
+    private void btEjecutarObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarObraActionPerformed
         if (consultarObrasFlag) {
             ControllerObra obraCt = new ControllerObra();
             obraCt.verObras(tablaObras);
@@ -1053,36 +1129,36 @@ public class Principal extends javax.swing.JFrame {
             tfUbicacionObra.setText(obra.getDireccionObra());
 //            inhabilitarCamposObra();
         }
-    }//GEN-LAST:event_btEjecutarConsultaObraActionPerformed
+    }//GEN-LAST:event_btEjecutarObraActionPerformed
 
     private void tfLugarCompraHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLugarCompraHerramientaActionPerformed
-        
+
     }//GEN-LAST:event_tfLugarCompraHerramientaActionPerformed
 
     private void tfApellidosEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfApellidosEmpleadoActionPerformed
-        
+
     }//GEN-LAST:event_tfApellidosEmpleadoActionPerformed
 
     private void menuEmpleadoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuEmpleadoMenuSelected
-         ocultarVentanas();
+        ocultarVentanas();
         ventanaEmpleado.setVisible(true);
-        inhabilitarCamposEmpleado();       
+        inhabilitarCamposEmpleado();
     }//GEN-LAST:event_menuEmpleadoMenuSelected
 
     private void menuHerramientaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuHerramientaMenuSelected
-         ocultarVentanas();
+        ocultarVentanas();
         ventanaHerramienta.setVisible(true);
-       inhabilitarCamposHerramienta();       
+        inhabilitarCamposHerramienta();
     }//GEN-LAST:event_menuHerramientaMenuSelected
 
     private void menuCargoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuCargoMenuSelected
-         ocultarVentanas();
+        ocultarVentanas();
         ventanaCargo.setVisible(true);
-       inhabilitarCamposCargo();          
+        inhabilitarCamposCargo();
     }//GEN-LAST:event_menuCargoMenuSelected
 
     private void btEjecutarCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarCargoActionPerformed
-         if (consultarCargosFlag) {
+        if (consultarCargosFlag) {
             ControllerCargo cargoCt = new ControllerCargo();
             cargoCt.verCargos(tablaCargos);
             inhabilitarCamposCargo();
@@ -1118,7 +1194,7 @@ public class Principal extends javax.swing.JFrame {
             cargo = cargoCt.consultarCargo(cargo);
             tfNombreCargo.setText(cargo.getNombreCargo());
 //            inhabilitarCamposCargo();
-        }       
+        }
     }//GEN-LAST:event_btEjecutarCargoActionPerformed
 
     private void opcionCrearCargoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionCrearCargoMenuSelected
@@ -1161,7 +1237,7 @@ public class Principal extends javax.swing.JFrame {
         labelOperacionCargo.setText("CONSULTAR TODO");
         consultarCargosFlag = true;
         btEjecutarCargo.setEnabled(true);
-          // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_consultarTodosLosCargosActionPerformed
 
     private void consultarCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarCargoActionPerformed
@@ -1175,6 +1251,164 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:        // TODO add your handling code here:
     }//GEN-LAST:event_consultarCargoActionPerformed
 
+    private void consultarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarEmpleadosActionPerformed
+        inhabilitarBanderasEmpleado();
+        inhabilitarCamposEmpleado();
+        labelOperacionEmpleado.setText("CONSULTAR TODO");
+        consultarEmpleadosFlag = true;
+        btEjecutarEmpleado.setEnabled(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultarEmpleadosActionPerformed
+
+    private void consultarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarEmpleadoActionPerformed
+        inhabilitarBanderasEmpleado();
+        inhabilitarCamposEmpleado();
+        labelOperacionEmpleado.setText("CONSULTAR");
+        consultarEmpleadoFlag = true;
+        tfIdEmpleado.setEnabled(true);
+        tfIdEmpleado.setBackground(Color.white);
+        btEjecutarEmpleado.setEnabled(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultarEmpleadoActionPerformed
+
+    private void opcionCrearObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionCrearObraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opcionCrearObraActionPerformed
+
+    private void opcionCrearEmpleadoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionCrearEmpleadoMenuSelected
+        inhabilitarBanderasEmpleado();
+        inhabilitarCamposEmpleado();
+        labelOperacionEmpleado.setText("CREAR");
+        crearEmpleadoFlag = true;
+        tfIdEmpleado.setEnabled(true);
+        tfIdEmpleado.setBackground(Color.white);
+        tfNombresEmpleado.setEnabled(true);
+        tfNombresEmpleado.setBackground(Color.white);
+        tfApellidosEmpleado.setEnabled(true);
+        tfApellidosEmpleado.setBackground(Color.white);
+        cbCargoEmpleado.setEnabled(true);
+        btTomarFotoEmpleado.setEnabled(true);
+        btEjecutarEmpleado.setEnabled(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_opcionCrearEmpleadoMenuSelected
+
+    private void opcionModificarEmpeladoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarEmpeladoMenuSelected
+        inhabilitarBanderasEmpleado();
+//        inhabilitarCamposEmpleado();
+        labelOperacionEmpleado.setText("MODIFICAR");
+        modificarEmpleadoFlag = true;
+        tfIdEmpleado.setEnabled(true);
+        tfIdEmpleado.setBackground(Color.white);
+        tfNombresEmpleado.setEnabled(true);
+        tfNombresEmpleado.setBackground(Color.white);
+        tfApellidosEmpleado.setEnabled(true);
+        tfApellidosEmpleado.setBackground(Color.white);
+        cbCargoEmpleado.setEnabled(true);
+        btTomarFotoEmpleado.setEnabled(true);
+        btEjecutarEmpleado.setEnabled(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opcionModificarEmpeladoMenuSelected
+
+    private void opcionEliminarEmpleadoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarEmpleadoMenuSelected
+        inhabilitarBanderasEmpleado();
+        inhabilitarCamposEmpleado();
+        labelOperacionEmpleado.setText("ELIMINAR");
+        eliminarEmpleadoFlag = true;
+        tfIdEmpleado.setEnabled(true);
+        tfIdEmpleado.setBackground(Color.white);
+        btEjecutarEmpleado.setEnabled(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opcionEliminarEmpleadoMenuSelected
+
+    private void btEjecutarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarEmpleadoActionPerformed
+        if (consultarEmpleadosFlag) {
+            ControllerEmpleados empleadoCt = new ControllerEmpleados();
+            empleadoCt.verEmpleados(tablaEmpleados);
+            inhabilitarCamposEmpleado();
+        } else if (crearEmpleadoFlag) {
+            Empleados empleado = new Empleados();
+            ControllerEmpleados empleadoCt = new ControllerEmpleados();
+            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+            empleado.setNombresEmpleado(tfNombresEmpleado.getText());
+            empleado.setApellidosEmpleado(tfApellidosEmpleado.getText());
+            empleado.setCargoEmpleado(cbCargoEmpleado.getSelectedItem().toString());
+            empleado.setFotoEmpleado("test.jpg");
+            empleadoCt.registrar(empleado);
+            inhabilitarCamposEmpleado();
+        } else if (modificarEmpleadoFlag) {
+            Empleados empleado = new Empleados();
+            ControllerEmpleados empleadoCt = new ControllerEmpleados();
+            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+            empleado.setNombresEmpleado(tfNombresEmpleado.getText());
+            empleado.setApellidosEmpleado(tfApellidosEmpleado.getText());
+            empleado.setCargoEmpleado(cbCargoEmpleado.getSelectedItem().toString());
+            empleado.setFotoEmpleado("test.jpg");
+            empleadoCt.actualizar(empleado);
+            inhabilitarCamposEmpleado();
+        } else if (eliminarEmpleadoFlag) {
+            Empleados empleado = new Empleados();
+            ControllerEmpleados empleadoCt = new ControllerEmpleados();
+            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+//            obra.setNombreEmpleado(tfNombreEmpleado.getText());
+//            obra.setDireccionEmpleado(tfUbicacionEmpleado.getText());
+            empleadoCt.eliminar(empleado);
+            inhabilitarCamposEmpleado();
+        } else if (consultarEmpleadoFlag) {
+            Empleados empleado = new Empleados();
+            ControllerEmpleados empleadoCt = new ControllerEmpleados();
+            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+//            obra.setNombreEmpleado(tfNombreEmpleado.getText());
+//            obra.setDireccionEmpleado(tfUbicacionEmpleado.getText());
+//            obraCt.verEmpleado(tablaEmpleados, obra);
+            empleado = empleadoCt.consultarEmpleado(empleado);
+            tfNombresEmpleado.setText(empleado.getNombresEmpleado());
+            tfApellidosEmpleado.setText(empleado.getApellidosEmpleado());
+            cbCargoEmpleado.setToolTipText(empleado.getCargoEmpleado());
+            ImageIcon imagen = empleado.getFotoEmp();
+            Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(labelImagenEmpleado.getWidth(), labelImagenEmpleado.getHeight(), Image.SCALE_DEFAULT));
+            labelImagenEmpleado.setIcon(icono);
+
+//            inhabilitarCamposEmpleado();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btEjecutarEmpleadoActionPerformed
+
+    private void btTomarFotoHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTomarFotoHerramientaActionPerformed
+        WebCamFoto webcam = new WebCamFoto();
+        webcam.run();
+    }//GEN-LAST:event_btTomarFotoHerramientaActionPerformed
+
+    private void btTomarFotoEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTomarFotoEmpleadoActionPerformed
+        WebCamFoto webcam = new WebCamFoto();
+        webcam.run();
+    }//GEN-LAST:event_btTomarFotoEmpleadoActionPerformed
+
+    private void labelImagenEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelImagenEmpleadoMouseClicked
+        JFileChooser se = new JFileChooser();
+        FileInputStream fis = null;
+        int longitudBytes = 0;
+        se.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int estado = se.showOpenDialog(null);
+        if (estado == JFileChooser.APPROVE_OPTION) {
+            try {
+                fis = new FileInputStream(se.getSelectedFile());
+                longitudBytes = (int) se.getSelectedFile().length();
+
+                Image icono = ImageIO.read(se.getSelectedFile()).getScaledInstance(labelImagenEmpleado.getWidth(), labelImagenEmpleado.getHeight(), Image.SCALE_DEFAULT);
+                labelImagenEmpleado.setIcon(new ImageIcon(icono));
+                labelImagenEmpleado.updateUI();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_labelImagenEmpleadoMouseClicked
+
+    private void btEjecutarHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarHerramientaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btEjecutarHerramientaActionPerformed
+
     private void inhabilitarCamposObra() {
         tfIdObra.setEnabled(false);
         tfIdObra.setBackground(Color.gray);
@@ -1185,58 +1419,60 @@ public class Principal extends javax.swing.JFrame {
         tfUbicacionObra.setEnabled(false);
         tfUbicacionObra.setBackground(Color.gray);
         tfUbicacionObra.setText("");
-        btEjecutarConsultaObra.setEnabled(false);
+        btEjecutarObra.setEnabled(false);
         labelOperacionObra.setText("");
     }
-    
-    private void inhabilitarCamposCargo(){
-    tfIdCargo.setEnabled(false);
-    tfIdCargo.setBackground(Color.gray);
-    tfIdCargo.setText("");
-    tfNombreCargo.setEnabled(false);
-    tfNombreCargo.setBackground(Color.gray);
-    tfNombreCargo.setText("");
-    btEjecutarCargo.setEnabled(false);
-    labelOperacionCargo.setText("");
+
+    private void inhabilitarCamposCargo() {
+        tfIdCargo.setEnabled(false);
+        tfIdCargo.setBackground(Color.gray);
+        tfIdCargo.setText("");
+        tfNombreCargo.setEnabled(false);
+        tfNombreCargo.setBackground(Color.gray);
+        tfNombreCargo.setText("");
+        btEjecutarCargo.setEnabled(false);
+        labelOperacionCargo.setText("");
     }
 
-    private void inhabilitarCamposEmpleado(){
-    tfIdEmpleado.setEnabled(false);
-    tfIdEmpleado.setBackground(Color.gray);
-    tfIdEmpleado.setText("");
-    tfNombresEmpleado.setEnabled(false);
-    tfNombresEmpleado.setBackground(Color.gray);
-    tfNombresEmpleado.setText("");
-    tfApellidosEmpleado.setEnabled(false);
-    tfApellidosEmpleado.setBackground(Color.gray);
-    tfApellidosEmpleado.setText("");
-    btEjecutarEmpleado.setEnabled(false);
-    btTomarFotoEmpleado.setEnabled(false);
-    labelOperacionEmpleado.setText("");
-    cbCargoEmpleado.setEnabled(false);    
+    private void inhabilitarCamposEmpleado() {
+        tfIdEmpleado.setEnabled(false);
+        tfIdEmpleado.setBackground(Color.gray);
+        tfIdEmpleado.setText("");
+        tfNombresEmpleado.setEnabled(false);
+        tfNombresEmpleado.setBackground(Color.gray);
+        tfNombresEmpleado.setText("");
+        tfApellidosEmpleado.setEnabled(false);
+        tfApellidosEmpleado.setBackground(Color.gray);
+        tfApellidosEmpleado.setText("");
+        btEjecutarEmpleado.setEnabled(false);
+        btTomarFotoEmpleado.setEnabled(false);
+        labelOperacionEmpleado.setText("");
+        cbCargoEmpleado.setEnabled(false);
+        labelImagenEmpleado.setIcon(null);
     }
-    
-    private void inhabilitarCamposHerramienta(){
-    tfIdHerramienta.setEnabled(false);
-    tfIdHerramienta.setBackground(Color.gray);
-    tfIdHerramienta.setText("");
-    tfNombreHerramienta.setEnabled(false);
-    tfNombreHerramienta.setBackground(Color.gray);
-    tfNombreHerramienta.setText("");
-    tfFechaCompraHerramienta.setEnabled(false);
-    tfFechaCompraHerramienta.setBackground(Color.gray);
-    tfFechaCompraHerramienta.setText("");
-    tfLugarCompraHerramienta.setEnabled(false);
-    tfLugarCompraHerramienta.setBackground(Color.gray);
-    tfLugarCompraHerramienta.setText("");
-    tfPrecioCompraHerramienta.setEnabled(false);
-    tfPrecioCompraHerramienta.setBackground(Color.gray);
-    tfPrecioCompraHerramienta.setText("");
-    btEjecutarHerramienta.setEnabled(false);
-    labelOperacionHerramienta.setText(""); 
-    cbResponsableerramienta.setEnabled(false);
-    btTomarFotoHerramienta.setEnabled(false);
+
+    private void inhabilitarCamposHerramienta() {
+        tfIdHerramienta.setEnabled(false);
+        tfIdHerramienta.setBackground(Color.gray);
+        tfIdHerramienta.setText("");
+        tfNombreHerramienta.setEnabled(false);
+        tfNombreHerramienta.setBackground(Color.gray);
+        tfNombreHerramienta.setText("");
+        tfFechaCompraHerramienta.setEnabled(false);
+        tfFechaCompraHerramienta.setBackground(Color.gray);
+        tfFechaCompraHerramienta.setText("");
+        tfLugarCompraHerramienta.setEnabled(false);
+        tfLugarCompraHerramienta.setBackground(Color.gray);
+        tfLugarCompraHerramienta.setText("");
+        tfPrecioCompraHerramienta.setEnabled(false);
+        tfPrecioCompraHerramienta.setBackground(Color.gray);
+        tfPrecioCompraHerramienta.setText("");
+        btEjecutarHerramienta.setEnabled(false);
+        labelOperacionHerramienta.setText("");
+        cbResponsableHerramienta.setEnabled(false);
+        btTomarFotoHerramienta.setEnabled(false);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -1275,16 +1511,16 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEjecutarCargo;
-    private javax.swing.JButton btEjecutarConsultaObra;
     private javax.swing.JButton btEjecutarEmpleado;
     private javax.swing.JButton btEjecutarHerramienta;
+    private javax.swing.JButton btEjecutarObra;
     private javax.swing.JButton btRepHerramientasEnObra;
     private javax.swing.JButton btRepoTiempoVida;
     private javax.swing.JButton btReporteHerramientasACargo;
     private javax.swing.JButton btTomarFotoEmpleado;
     private javax.swing.JButton btTomarFotoHerramienta;
     private javax.swing.JComboBox<String> cbCargoEmpleado;
-    private javax.swing.JComboBox<String> cbResponsableerramienta;
+    private javax.swing.JComboBox<String> cbResponsableHerramienta;
     private javax.swing.JMenuItem consultarCargo;
     private javax.swing.JMenuItem consultarEmpleado;
     private javax.swing.JMenuItem consultarEmpleados;
@@ -1310,7 +1546,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelIdEmpleado;
     private javax.swing.JLabel labelIdHerramienta;
     private javax.swing.JLabel labelIdObra;
-    private javax.swing.JLabel labelImagenEmpleado;
+    public static javax.swing.JLabel labelImagenEmpleado;
     private javax.swing.JLabel labelLugarCompra;
     private javax.swing.JLabel labelNombre;
     private javax.swing.JLabel labelNombreCargo;
@@ -1321,12 +1557,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelOperacionHerramienta;
     private javax.swing.JLabel labelOperacionObra;
     private javax.swing.JLabel labelPrecioCompra;
-    private javax.swing.JLabel labelReportesEmpelado;
+    private javax.swing.JLabel labelReportesEmpleado;
     private javax.swing.JLabel labelReportesHerramienta;
     private javax.swing.JLabel labelReportesObra;
     private javax.swing.JLabel labelResponsable;
     private javax.swing.JLabel labelTituloCargo;
-    private javax.swing.JLabel labelTituloEmpelado;
+    private javax.swing.JLabel labelTituloEmpleado;
     private javax.swing.JLabel labelTituloHerramienta;
     private javax.swing.JLabel labelTituloObra;
     private javax.swing.JMenu menuCargo;
@@ -1357,9 +1593,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu opcionMovimiento;
     private javax.swing.JMenu salidaObra;
     private javax.swing.JTable tablaCargos;
+    private javax.swing.JTable tablaEmpleados;
     private javax.swing.JTable tablaHerramienta;
     private javax.swing.JTable tablaObras;
-    private javax.swing.JTable tatablaEmpelado;
     private javax.swing.JTextField tfApellidosEmpleado;
     private javax.swing.JTextField tfFechaCompraHerramienta;
     private javax.swing.JTextField tfIdCargo;

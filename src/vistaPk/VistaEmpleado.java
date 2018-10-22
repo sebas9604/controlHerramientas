@@ -36,15 +36,17 @@ public class VistaEmpleado {
 
     public void verEmpleados(ResultSet empleados, JTable tabla) {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.setColumnIdentifiers(new Object[]{"idEmpleado", "nombresEmpleado", "apellidosEmpleado", "cargoEmpleado", "fotoEmpleado"});
+        modelo.setColumnIdentifiers(new Object[]{"idEmpleado", "nombresEmpleado", "apellidosEmpleado", "cargoEmpleado"});
 
         try {
             while (empleados.next()) {
                 modelo.addRow(new Object[]{empleados.getInt("idEmpleado"), empleados.getString("nombresEmpleado"), empleados.getString("apellidosEmpleado"),
-                    empleados.getString("cargoEmpleado"), empleados.getString("fotoEmpleado")});            }
+                    empleados.getString("idCargo")});            }
             tabla.setModel(modelo);
 
         } catch (Exception ex) {
+            System.out.println("vistaPk.VistaEmpleado.verEmpleados()");
+            ex.printStackTrace();
         }
 
 }

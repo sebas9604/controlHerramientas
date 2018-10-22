@@ -52,4 +52,11 @@ public class ControllerEmpleados {
         empleados = dao.obtenerEmpleado(empleado);
         vista.verEmpleado(empleados, tabla);
     }
+    
+    public Empleados consultarEmpleado(Empleados empleado) {
+        IEmpleadosDao dao = new EmpleadosDaoImpl();
+        Empleados e;
+        e = dao.consultarEmpleado(empleado);
+        return e;
+    }
 }

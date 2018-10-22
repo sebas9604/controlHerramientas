@@ -20,4 +20,5 @@ public interface IEmpleadosDao {
 	public boolean actualizarEmpleado(Empleados empleado);
 	public boolean eliminarEmpleado(Empleados empleado);
         public ResultSet obtenerEmpleado(Empleados empleado);
+        public Empleados consultarEmpleado(Empleados empleado);
 }
