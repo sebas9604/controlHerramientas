@@ -80,6 +80,8 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
 //            stm.close();
 //            rs.close();
 //            con.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
         } catch (Exception e) {
             System.out.println("implementacion.EmpleadosDaoImpl.obtenerEmpleados()");
             e.printStackTrace();
@@ -104,6 +106,8 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
             stm = connect.createStatement();
             stm.execute(sql);
             actualizar = true;
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
         } catch (SQLException e) {
             System.out.println("Error: Clase ClienteDaoImple, método actualizar");
             e.printStackTrace();
@@ -124,6 +128,8 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
             stm = connect.createStatement();
             stm.execute(sql);
             eliminar = true;
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
         } catch (SQLException e) {
             System.out.println("Error: Clase ClienteDaoImple, método eliminar");
             e.printStackTrace();
@@ -147,6 +153,8 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
 //            stm.close();
 //            rs.close();
 //            con.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
         } catch (Exception e) {
         }
 
@@ -162,6 +170,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
         String s = consultarNombreCargoPorIdCargo(empleado);
         String sql = "SELECT idEmpleado, nombresEmpleado, ApellidosEmpleado, idCargo, fotoEmpleado FROM empleados WHERE idEmpleado = " + empleado.getIdEmpleado() + ";";
         Empleados e = new Empleados();
+        JOptionPane.showMessageDialog(null, "Operación Exitosa");
 
         try {
             con = ConexionBD.connect();
@@ -253,10 +262,10 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
             con = ConexionBD.connect();
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
-            
+
             if (rs.next()) {
                 is = rs.getBinaryStream(1);
-                BufferedImage bi =  ImageIO.read(is);
+                BufferedImage bi = ImageIO.read(is);
                 ii = new ImageIcon(bi);
             }
         } catch (Exception e) {

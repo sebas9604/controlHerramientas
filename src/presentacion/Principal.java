@@ -96,12 +96,12 @@ public class Principal extends javax.swing.JFrame {
     }
 
     public void inhabilitarBanderasEmpleado() {
-        consultarEmpleadoFlag = false;
+        consultarEmpleadosFlag = false;
         consultarEmpleadoFlag = false;
         crearEmpleadoFlag = false;
         modificarEmpleadoFlag = false;
         eliminarEmpleadoFlag = false;
-        repHerramientasEnObraFlag = false;
+//        repHerramientasEnObraFlag = false;
     }
 
     @SuppressWarnings("unchecked")
@@ -1252,6 +1252,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_consultarCargoActionPerformed
 
     private void consultarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarEmpleadosActionPerformed
+        System.out.println("presentacion.Principal.consultarEmpleadosActionPerformed()");
         inhabilitarBanderasEmpleado();
         inhabilitarCamposEmpleado();
         labelOperacionEmpleado.setText("CONSULTAR TODO");
@@ -1261,6 +1262,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_consultarEmpleadosActionPerformed
 
     private void consultarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarEmpleadoActionPerformed
+        System.out.println("presentacion.Principal.consultarEmpleadoActionPerformed()");
         inhabilitarBanderasEmpleado();
         inhabilitarCamposEmpleado();
         labelOperacionEmpleado.setText("CONSULTAR");
@@ -1276,6 +1278,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_opcionCrearObraActionPerformed
 
     private void opcionCrearEmpleadoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionCrearEmpleadoMenuSelected
+        System.out.println("presentacion.Principal.opcionCrearEmpleadoMenuSelected()");
         inhabilitarBanderasEmpleado();
         inhabilitarCamposEmpleado();
         labelOperacionEmpleado.setText("CREAR");
@@ -1292,6 +1295,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_opcionCrearEmpleadoMenuSelected
 
     private void opcionModificarEmpeladoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarEmpeladoMenuSelected
+        System.out.println("presentacion.Principal.opcionModificarEmpeladoMenuSelected()");
         inhabilitarBanderasEmpleado();
 //        inhabilitarCamposEmpleado();
         labelOperacionEmpleado.setText("MODIFICAR");
@@ -1309,6 +1313,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_opcionModificarEmpeladoMenuSelected
 
     private void opcionEliminarEmpleadoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarEmpleadoMenuSelected
+        System.out.println("presentacion.Principal.opcionEliminarEmpleadoMenuSelected()");
         inhabilitarBanderasEmpleado();
         inhabilitarCamposEmpleado();
         labelOperacionEmpleado.setText("ELIMINAR");

@@ -21,7 +21,7 @@ import modelo.Obra;
  *
  * @author tolis
  */
-public class CargoDaoImpl implements ICargoDao{
+public class CargoDaoImpl implements ICargoDao {
 
     @Override
     public boolean registrarNuevaCargo(Cargo cargo) {
@@ -31,25 +31,26 @@ public class CargoDaoImpl implements ICargoDao{
 
             ResultSet rs;
             rs = obtenerCargo(cargo);
-            if(!rs.next()){
-            String sql = "INSERT INTO cargo (idCargo, nombreCargo) " + "VALUES (?,?);";
-            con = ConexionBD.connect();
-            PreparedStatement psql = con.prepareStatement(sql);
-            psql.setInt(1, cargo.getIdCargo());
-            psql.setString(2, cargo.getNombreCargo());
-            psql.executeUpdate();
-            registrar = true;
-            psql.close();
-            con.close();
-            JOptionPane.showMessageDialog(null, "Operación Exitosa");
-            }else{
-            JOptionPane.showMessageDialog(null, "Ya existe un registro con la identificación: " + cargo.getIdCargo());
+            if (!rs.next()) {
+                String sql = "INSERT INTO cargo (idCargo, nombreCargo) " + "VALUES (?,?);";
+                con = ConexionBD.connect();
+                PreparedStatement psql = con.prepareStatement(sql);
+                psql.setInt(1, cargo.getIdCargo());
+                psql.setString(2, cargo.getNombreCargo());
+                psql.executeUpdate();
+                registrar = true;
+                psql.close();
+                con.close();
+                JOptionPane.showMessageDialog(null, "Operación Exitosa");
+            } else {
+                JOptionPane.showMessageDialog(null, "Ya existe un registro con la identificación: " + cargo.getIdCargo());
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error insertando el cargo " + ex);
         }
 
-        return registrar;   }
+        return registrar;
+    }
 
     @Override
     public ResultSet obtenerCargo(Cargo cargo) {
@@ -58,7 +59,7 @@ public class CargoDaoImpl implements ICargoDao{
         ResultSet rs = null;
 
         String sql = "SELECT idCargo, nombreCargo "
-                + "FROM cargo WHERE idCargo = " + cargo.getIdCargo()+ ";";
+                + "FROM cargo WHERE idCargo = " + cargo.getIdCargo() + ";";
         System.out.println(sql);
         try {
             con = ConexionBD.connect();
@@ -67,10 +68,13 @@ public class CargoDaoImpl implements ICargoDao{
 //            stm.close();
 //            rs.close();
 //            con.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
         } catch (Exception e) {
         }
 
-        return rs;   }
+        return rs;
+    }
 
     @Override
     public ResultSet obtenerCargos() {
@@ -97,52 +101,54 @@ public class CargoDaoImpl implements ICargoDao{
     public Cargo consultarCargo(Cargo cargo) {
         Connection con = null;
         Statement stm = null;
-        ResultSet rs = null; 
-        
-        String sql = "SELECT idCargo, nombrecargo FROM cargo WHERE idCargo = " + cargo.getIdCargo()+ ";";
+        ResultSet rs = null;
+
+        String sql = "SELECT idCargo, nombrecargo FROM cargo WHERE idCargo = " + cargo.getIdCargo() + ";";
         Cargo c = new Cargo();
-     
-        	try {			
+
+        try {
             con = ConexionBD.connect();
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
-			if (rs.next()) {
-				c.setIdCargo(rs.getInt(1));
-				c.setNombreCargo(rs.getString(2));
-                                
-			}
-			stm.close();
-			rs.close();
-			con.close();
-		} catch (SQLException e) {
-			System.out.println("Error: Clase CargoDaoImple, método consultarCargo");
-			e.printStackTrace();
-		}
+            if (rs.next()) {
+                c.setIdCargo(rs.getInt(1));
+                c.setNombreCargo(rs.getString(2));
+
+            }
+            stm.close();
+            rs.close();
+            con.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
+        } catch (SQLException e) {
+            System.out.println("Error: Clase CargoDaoImple, método consultarCargo");
+            e.printStackTrace();
+        }
         return c;
 
-       }
+    }
 
     @Override
     public boolean actualizarCargo(Cargo cargo) {
         Connection connect = null;
         Statement stm = null;
         boolean actualizar = false;
-  try {
-      ResultSet rs;
-      rs = obtenerCargo(cargo);
-      
-      if(rs.next()){
-        String sql = "UPDATE cargo SET idCargo='" + cargo.getIdCargo()
-                + "', nombrecargo='" + cargo.getNombreCargo() + "';";
-      
-            connect = ConexionBD.connect();
-            stm = connect.createStatement();
-            stm.execute(sql);
-            actualizar = true;
-            JOptionPane.showMessageDialog(null, "Operación Exitosa");
-      }else{
-                  JOptionPane.showMessageDialog(null, "El registro no existe");
-      }
+        try {
+            ResultSet rs;
+            rs = obtenerCargo(cargo);
+
+            if (rs.next()) {
+                String sql = "UPDATE cargo SET idCargo='" + cargo.getIdCargo()
+                        + "', nombrecargo='" + cargo.getNombreCargo() + "';";
+
+                connect = ConexionBD.connect();
+                stm = connect.createStatement();
+                stm.execute(sql);
+                actualizar = true;
+                JOptionPane.showMessageDialog(null, "Operación Exitosa");
+            } else {
+                JOptionPane.showMessageDialog(null, "El registro no existe");
+            }
         } catch (SQLException e) {
             System.out.println("Error: Clase CargoDaoImpl, método actualizar");
             e.printStackTrace();
@@ -161,7 +167,7 @@ public class CargoDaoImpl implements ICargoDao{
             if (rs.next()) {
 
                 String sql = "DELETE FROM cargo WHERE idCargo = "
-                        + cargo.getIdCargo()+ ";";
+                        + cargo.getIdCargo() + ";";
 
                 connect = ConexionBD.connect();
                 stm = connect.createStatement();
@@ -180,6 +186,4 @@ public class CargoDaoImpl implements ICargoDao{
 
     }
 
-
-    
 }

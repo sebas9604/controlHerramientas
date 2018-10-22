@@ -32,20 +32,20 @@ public class ObraDaoImpl implements IObraDao {
 
             ResultSet rs;
             rs = obtenerObra(obra);
-            if(!rs.next()){
-            String sql = "INSERT INTO obra (idObra, nombreObra, direccionObra) " + "VALUES (?,?,?);";
-            con = ConexionBD.connect();
-            PreparedStatement psql = con.prepareStatement(sql);
-            psql.setString(1, obra.getIdObra());
-            psql.setString(2, obra.getNombreObra());
-            psql.setString(3, obra.getDireccionObra());
-            psql.executeUpdate();
-            registrar = true;
-            psql.close();
-            con.close();
-            JOptionPane.showMessageDialog(null, "Operación Exitosa");
-            }else{
-            JOptionPane.showMessageDialog(null, "Ya existe un registro con la identificación: " + obra.getIdObra());
+            if (!rs.next()) {
+                String sql = "INSERT INTO obra (idObra, nombreObra, direccionObra) " + "VALUES (?,?,?);";
+                con = ConexionBD.connect();
+                PreparedStatement psql = con.prepareStatement(sql);
+                psql.setString(1, obra.getIdObra());
+                psql.setString(2, obra.getNombreObra());
+                psql.setString(3, obra.getDireccionObra());
+                psql.executeUpdate();
+                registrar = true;
+                psql.close();
+                con.close();
+                JOptionPane.showMessageDialog(null, "Operación Exitosa");
+            } else {
+                JOptionPane.showMessageDialog(null, "Ya existe un registro con la identificación: " + obra.getIdObra());
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error insertando al obra" + ex);
@@ -69,6 +69,8 @@ public class ObraDaoImpl implements IObraDao {
 //            stm.close();
 //            rs.close();
 //            con.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
         } catch (Exception e) {
         }
 
@@ -80,24 +82,24 @@ public class ObraDaoImpl implements IObraDao {
         Connection connect = null;
         Statement stm = null;
         boolean actualizar = false;
-  try {
-      ResultSet rs;
-      rs = obtenerObra(obra);
-      
-      if(rs.next()){
-        String sql = "UPDATE obra SET idObra='" + obra.getIdObra()
-                + "', nombreObra='" + obra.getNombreObra()
-                + "', direccionObra='" + obra.getDireccionObra()
-                + "' WHERE idObra=" + obra.getIdObra();
-      
-            connect = ConexionBD.connect();
-            stm = connect.createStatement();
-            stm.execute(sql);
-            actualizar = true;
-            JOptionPane.showMessageDialog(null, "Operación Exitosa");
-      }else{
-                  JOptionPane.showMessageDialog(null, "El registro no existe");
-      }
+        try {
+            ResultSet rs;
+            rs = obtenerObra(obra);
+
+            if (rs.next()) {
+                String sql = "UPDATE obra SET idObra='" + obra.getIdObra()
+                        + "', nombreObra='" + obra.getNombreObra()
+                        + "', direccionObra='" + obra.getDireccionObra()
+                        + "' WHERE idObra=" + obra.getIdObra();
+
+                connect = ConexionBD.connect();
+                stm = connect.createStatement();
+                stm.execute(sql);
+                actualizar = true;
+                JOptionPane.showMessageDialog(null, "Operación Exitosa");
+            } else {
+                JOptionPane.showMessageDialog(null, "El registro no existe");
+            }
         } catch (SQLException e) {
             System.out.println("Error: Clase ObraDaoImple, método actualizar");
             e.printStackTrace();
@@ -151,6 +153,8 @@ public class ObraDaoImpl implements IObraDao {
 //            stm.close();
 //            rs.close();
 //            con.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
         } catch (Exception e) {
         }
 
@@ -161,28 +165,30 @@ public class ObraDaoImpl implements IObraDao {
     public Obra consultarObra(Obra obra) {
         Connection con = null;
         Statement stm = null;
-        ResultSet rs = null; 
-        
+        ResultSet rs = null;
+
         String sql = "SELECT idObra, nombreObra, direccionObra FROM obra WHERE idObra = " + obra.getIdObra() + ";";
-        Obra o =new Obra();
-     
-        	try {			
+        Obra o = new Obra();
+
+        try {
             con = ConexionBD.connect();
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
-			if (rs.next()) {
-				o.setIdObra(rs.getString(1));
-				o.setNombreObra(rs.getString(2));
-				o.setDireccionObra(rs.getString(3));
-                                
-			}
-			stm.close();
-			rs.close();
-			con.close();
-		} catch (SQLException e) {
-			System.out.println("Error: Clase ObraDaoImple, método consultarObra");
-			e.printStackTrace();
-		}
+            if (rs.next()) {
+                o.setIdObra(rs.getString(1));
+                o.setNombreObra(rs.getString(2));
+                o.setDireccionObra(rs.getString(3));
+
+            }
+            stm.close();
+            rs.close();
+            con.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
+        } catch (SQLException e) {
+            System.out.println("Error: Clase ObraDaoImple, método consultarObra");
+            e.printStackTrace();
+        }
         return o;
 
     }
