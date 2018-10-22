@@ -177,14 +177,14 @@ public class Principal extends javax.swing.JFrame {
         labelOperacionHerramienta = new javax.swing.JLabel();
         menuOpcionesHerramientas = new javax.swing.JMenuBar();
         opcionConsultarHerramienta = new javax.swing.JMenu();
-        consultarHerramientas = new javax.swing.JMenu();
-        consultarHerramienta = new javax.swing.JMenu();
+        consultarherramientas = new javax.swing.JMenuItem();
+        consultarHerramienta = new javax.swing.JMenuItem();
         opcionCrearHerramienta = new javax.swing.JMenu();
         opcionModificarHerramienta = new javax.swing.JMenu();
         opcionEliminarHerramienta = new javax.swing.JMenu();
         opcionMovimiento = new javax.swing.JMenu();
-        entradaObra = new javax.swing.JMenu();
-        salidaObra = new javax.swing.JMenu();
+        entradaObra = new javax.swing.JMenuItem();
+        salidaObra = new javax.swing.JMenuItem();
         ventanaObra = new javax.swing.JInternalFrame();
         labelTituloObra = new javax.swing.JLabel();
         labelIdObra = new javax.swing.JLabel();
@@ -629,21 +629,58 @@ public class Principal extends javax.swing.JFrame {
 
         opcionConsultarHerramienta.setText("Consultar");
 
-        consultarHerramientas.setText("Todas las herramientas");
-        opcionConsultarHerramienta.add(consultarHerramientas);
+        consultarherramientas.setText("Todas las Herramientas");
+        consultarherramientas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarherramientasActionPerformed(evt);
+            }
+        });
+        opcionConsultarHerramienta.add(consultarherramientas);
 
         consultarHerramienta.setText("Herramienta");
+        consultarHerramienta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarHerramientaActionPerformed(evt);
+            }
+        });
         opcionConsultarHerramienta.add(consultarHerramienta);
 
         menuOpcionesHerramientas.add(opcionConsultarHerramienta);
 
         opcionCrearHerramienta.setText("Crear");
+        opcionCrearHerramienta.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                opcionCrearHerramientaMenuSelected(evt);
+            }
+        });
         menuOpcionesHerramientas.add(opcionCrearHerramienta);
 
         opcionModificarHerramienta.setText("Modificar");
+        opcionModificarHerramienta.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                opcionModificarHerramientaMenuSelected(evt);
+            }
+        });
         menuOpcionesHerramientas.add(opcionModificarHerramienta);
 
         opcionEliminarHerramienta.setText("Eliminar");
+        opcionEliminarHerramienta.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                opcionEliminarHerramientaMenuSelected(evt);
+            }
+        });
         menuOpcionesHerramientas.add(opcionEliminarHerramienta);
 
         opcionMovimiento.setText("Movimiento");
@@ -1206,7 +1243,7 @@ public class Principal extends javax.swing.JFrame {
         tfIdCargo.setBackground(Color.white);
         tfNombreCargo.setEnabled(true);
         tfNombreCargo.setBackground(Color.white);
-        btEjecutarCargo.setEnabled(true);        // TODO add your handling code here:
+        btEjecutarCargo.setEnabled(true);       
     }//GEN-LAST:event_opcionCrearCargoMenuSelected
 
     private void opcionModificarCargoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarCargoMenuSelected
@@ -1218,7 +1255,7 @@ public class Principal extends javax.swing.JFrame {
         tfIdCargo.setBackground(Color.white);
         tfNombreCargo.setEnabled(true);
         tfNombreCargo.setBackground(Color.white);
-        btEjecutarCargo.setEnabled(true);        // TODO add your handling code here:
+        btEjecutarCargo.setEnabled(true);       
     }//GEN-LAST:event_opcionModificarCargoMenuSelected
 
     private void opcionEliminarCargoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarCargoMenuSelected
@@ -1228,7 +1265,7 @@ public class Principal extends javax.swing.JFrame {
         eliminarCargoFlag = true;
         tfIdCargo.setEnabled(true);
         tfIdCargo.setBackground(Color.white);
-        btEjecutarCargo.setEnabled(true);        // TODO add your handling code here:
+        btEjecutarCargo.setEnabled(true);       
     }//GEN-LAST:event_opcionEliminarCargoMenuSelected
 
     private void consultarTodosLosCargosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarTodosLosCargosActionPerformed
@@ -1237,7 +1274,7 @@ public class Principal extends javax.swing.JFrame {
         labelOperacionCargo.setText("CONSULTAR TODO");
         consultarCargosFlag = true;
         btEjecutarCargo.setEnabled(true);
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_consultarTodosLosCargosActionPerformed
 
     private void consultarCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarCargoActionPerformed
@@ -1248,7 +1285,7 @@ public class Principal extends javax.swing.JFrame {
         tfIdCargo.setEnabled(true);
         tfIdCargo.setBackground(Color.white);
         btEjecutarCargo.setEnabled(true);
-        // TODO add your handling code here:        // TODO add your handling code here:
+              
     }//GEN-LAST:event_consultarCargoActionPerformed
 
     private void consultarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarEmpleadosActionPerformed
@@ -1258,11 +1295,10 @@ public class Principal extends javax.swing.JFrame {
         labelOperacionEmpleado.setText("CONSULTAR TODO");
         consultarEmpleadosFlag = true;
         btEjecutarEmpleado.setEnabled(true);
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_consultarEmpleadosActionPerformed
 
     private void consultarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarEmpleadoActionPerformed
-        System.out.println("presentacion.Principal.consultarEmpleadoActionPerformed()");
         inhabilitarBanderasEmpleado();
         inhabilitarCamposEmpleado();
         labelOperacionEmpleado.setText("CONSULTAR");
@@ -1270,15 +1306,14 @@ public class Principal extends javax.swing.JFrame {
         tfIdEmpleado.setEnabled(true);
         tfIdEmpleado.setBackground(Color.white);
         btEjecutarEmpleado.setEnabled(true);
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_consultarEmpleadoActionPerformed
 
     private void opcionCrearObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionCrearObraActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_opcionCrearObraActionPerformed
 
     private void opcionCrearEmpleadoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionCrearEmpleadoMenuSelected
-        System.out.println("presentacion.Principal.opcionCrearEmpleadoMenuSelected()");
         inhabilitarBanderasEmpleado();
         inhabilitarCamposEmpleado();
         labelOperacionEmpleado.setText("CREAR");
@@ -1291,11 +1326,10 @@ public class Principal extends javax.swing.JFrame {
         tfApellidosEmpleado.setBackground(Color.white);
         cbCargoEmpleado.setEnabled(true);
         btTomarFotoEmpleado.setEnabled(true);
-        btEjecutarEmpleado.setEnabled(true);        // TODO add your handling code here:
+        btEjecutarEmpleado.setEnabled(true);       
     }//GEN-LAST:event_opcionCrearEmpleadoMenuSelected
 
     private void opcionModificarEmpeladoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarEmpeladoMenuSelected
-        System.out.println("presentacion.Principal.opcionModificarEmpeladoMenuSelected()");
         inhabilitarBanderasEmpleado();
 //        inhabilitarCamposEmpleado();
         labelOperacionEmpleado.setText("MODIFICAR");
@@ -1309,11 +1343,10 @@ public class Principal extends javax.swing.JFrame {
         cbCargoEmpleado.setEnabled(true);
         btTomarFotoEmpleado.setEnabled(true);
         btEjecutarEmpleado.setEnabled(true);
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_opcionModificarEmpeladoMenuSelected
 
     private void opcionEliminarEmpleadoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarEmpleadoMenuSelected
-        System.out.println("presentacion.Principal.opcionEliminarEmpleadoMenuSelected()");
         inhabilitarBanderasEmpleado();
         inhabilitarCamposEmpleado();
         labelOperacionEmpleado.setText("ELIMINAR");
@@ -1321,7 +1354,7 @@ public class Principal extends javax.swing.JFrame {
         tfIdEmpleado.setEnabled(true);
         tfIdEmpleado.setBackground(Color.white);
         btEjecutarEmpleado.setEnabled(true);
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_opcionEliminarEmpleadoMenuSelected
 
     private void btEjecutarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarEmpleadoActionPerformed
@@ -1373,7 +1406,7 @@ public class Principal extends javax.swing.JFrame {
             labelImagenEmpleado.setIcon(icono);
 
 //            inhabilitarCamposEmpleado();
-        }        // TODO add your handling code here:
+        }       
     }//GEN-LAST:event_btEjecutarEmpleadoActionPerformed
 
     private void btTomarFotoHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTomarFotoHerramientaActionPerformed
@@ -1411,8 +1444,126 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_labelImagenEmpleadoMouseClicked
 
     private void btEjecutarHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarHerramientaActionPerformed
-        // TODO add your handling code here:
+        if (consultarHerramientasFlag) {
+            ControllerEmpleados empleadoCt = new ControllerEmpleados();
+            empleadoCt.verEmpleados(tablaEmpleados);
+            inhabilitarCamposEmpleado();
+        } else if (crearHerramientaFlag) {
+            Empleados empleado = new Empleados();
+            ControllerEmpleados empleadoCt = new ControllerEmpleados();
+            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+            empleado.setNombresEmpleado(tfNombresEmpleado.getText());
+            empleado.setApellidosEmpleado(tfApellidosEmpleado.getText());
+            empleado.setCargoEmpleado(cbCargoEmpleado.getSelectedItem().toString());
+            empleado.setFotoEmpleado("test.jpg");
+            empleadoCt.registrar(empleado);
+            inhabilitarCamposEmpleado();
+        } else if (modificarHerramientaFlag) {
+            Empleados empleado = new Empleados();
+            ControllerEmpleados empleadoCt = new ControllerEmpleados();
+            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+            empleado.setNombresEmpleado(tfNombresEmpleado.getText());
+            empleado.setApellidosEmpleado(tfApellidosEmpleado.getText());
+            empleado.setCargoEmpleado(cbCargoEmpleado.getSelectedItem().toString());
+            empleado.setFotoEmpleado("test.jpg");
+            empleadoCt.actualizar(empleado);
+            inhabilitarCamposEmpleado();
+        } else if (eliminarHerramientaFlag) {
+            Empleados empleado = new Empleados();
+            ControllerEmpleados empleadoCt = new ControllerEmpleados();
+            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+//            obra.setNombreEmpleado(tfNombreEmpleado.getText());
+//            obra.setDireccionEmpleado(tfUbicacionEmpleado.getText());
+            empleadoCt.eliminar(empleado);
+            inhabilitarCamposEmpleado();
+        } else if (consultarHerramientaFlag) {
+            Empleados empleado = new Empleados();
+            ControllerEmpleados empleadoCt = new ControllerEmpleados();
+            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+//            obra.setNombreEmpleado(tfNombreEmpleado.getText());
+//            obra.setDireccionEmpleado(tfUbicacionEmpleado.getText());
+//            obraCt.verEmpleado(tablaEmpleados, obra);
+            empleado = empleadoCt.consultarEmpleado(empleado);
+            tfNombresEmpleado.setText(empleado.getNombresEmpleado());
+            tfApellidosEmpleado.setText(empleado.getApellidosEmpleado());
+            cbCargoEmpleado.setToolTipText(empleado.getCargoEmpleado());
+            ImageIcon imagen = empleado.getFotoEmp();
+            Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(labelImagenEmpleado.getWidth(), labelImagenEmpleado.getHeight(), Image.SCALE_DEFAULT));
+            labelImagenEmpleado.setIcon(icono);
+
+//            inhabilitarCamposEmpleado();
+        }        
     }//GEN-LAST:event_btEjecutarHerramientaActionPerformed
+
+    private void consultarherramientasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarherramientasActionPerformed
+        inhabilitarBanderasHerramienta();
+        inhabilitarCamposHerramienta();
+        labelOperacionHerramienta.setText("CONSULTAR TODO");
+        consultarHerramientasFlag= true;
+        btEjecutarHerramienta.setEnabled(true);
+       
+    }//GEN-LAST:event_consultarherramientasActionPerformed
+
+    private void consultarHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarHerramientaActionPerformed
+        inhabilitarBanderasHerramienta();
+        inhabilitarCamposEmpleado();
+        labelOperacionHerramienta.setText("CONSULTAR");
+        consultarHerramientaFlag = true;
+        tfIdHerramienta.setEnabled(true);
+        tfIdHerramienta.setBackground(Color.white);
+        btEjecutarHerramienta.setEnabled(true);
+         // TODO add your handling code here:
+    }//GEN-LAST:event_consultarHerramientaActionPerformed
+
+    private void opcionCrearHerramientaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionCrearHerramientaMenuSelected
+        inhabilitarBanderasHerramienta();
+        inhabilitarCamposHerramienta();
+        labelOperacionHerramienta.setText("CREAR");
+        crearHerramientaFlag = true;
+        tfIdHerramienta.setEnabled(true);
+        tfIdHerramienta.setBackground(Color.white);
+        tfNombreHerramienta.setEnabled(true);
+        tfNombreHerramienta.setBackground(Color.white);
+        tfFechaCompraHerramienta.setEnabled(true);
+        tfFechaCompraHerramienta.setBackground(Color.white);
+        tfLugarCompraHerramienta.setEnabled(true);
+        tfLugarCompraHerramienta.setBackground(Color.white);
+        tfPrecioCompraHerramienta.setEnabled(true);
+        tfPrecioCompraHerramienta.setBackground(Color.white);
+        btEjecutarHerramienta.setEnabled(true);
+        cbResponsableHerramienta.setEnabled(true);
+        btTomarFotoHerramienta.setEnabled(true);
+    }//GEN-LAST:event_opcionCrearHerramientaMenuSelected
+
+    private void opcionModificarHerramientaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarHerramientaMenuSelected
+        inhabilitarBanderasEmpleado();
+//        inhabilitarCamposEmpleado();
+        labelOperacionHerramienta.setText("MODIFICAR");
+        modificarHerramientaFlag = true;
+        tfIdHerramienta.setEnabled(true);
+        tfIdHerramienta.setBackground(Color.white);
+        tfNombreHerramienta.setEnabled(true);
+        tfNombreHerramienta.setBackground(Color.white);
+        tfFechaCompraHerramienta.setEnabled(true);
+        tfFechaCompraHerramienta.setBackground(Color.white);
+        tfLugarCompraHerramienta.setEnabled(true);
+        tfLugarCompraHerramienta.setBackground(Color.white);
+        tfPrecioCompraHerramienta.setEnabled(true);
+        tfPrecioCompraHerramienta.setBackground(Color.white);
+        btEjecutarHerramienta.setEnabled(true);
+        cbResponsableHerramienta.setEnabled(true);
+        btTomarFotoHerramienta.setEnabled(true);
+    }//GEN-LAST:event_opcionModificarHerramientaMenuSelected
+
+    private void opcionEliminarHerramientaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarHerramientaMenuSelected
+        inhabilitarBanderasHerramienta();
+        inhabilitarCamposHerramienta();
+        labelOperacionHerramienta.setText("ELIMINAR");
+        eliminarHerramientaFlag = true;
+        tfIdHerramienta.setEnabled(true);
+        tfIdHerramienta.setBackground(Color.white);
+        btEjecutarHerramienta.setEnabled(true);
+    }//GEN-LAST:event_opcionEliminarHerramientaMenuSelected
 
     private void inhabilitarCamposObra() {
         tfIdObra.setEnabled(false);
@@ -1529,12 +1680,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem consultarCargo;
     private javax.swing.JMenuItem consultarEmpleado;
     private javax.swing.JMenuItem consultarEmpleados;
-    private javax.swing.JMenu consultarHerramienta;
-    private javax.swing.JMenu consultarHerramientas;
+    private javax.swing.JMenuItem consultarHerramienta;
     private javax.swing.JMenuItem consultarObra;
     private javax.swing.JMenuItem consultarObras;
     private javax.swing.JMenuItem consultarTodosLosCargos;
-    private javax.swing.JMenu entradaObra;
+    private javax.swing.JMenuItem consultarherramientas;
+    private javax.swing.JMenuItem entradaObra;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1596,7 +1747,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu opcionModificarHerramienta;
     private javax.swing.JMenu opcionModificarObra;
     private javax.swing.JMenu opcionMovimiento;
-    private javax.swing.JMenu salidaObra;
+    private javax.swing.JMenuItem salidaObra;
     private javax.swing.JTable tablaCargos;
     private javax.swing.JTable tablaEmpleados;
     private javax.swing.JTable tablaHerramienta;

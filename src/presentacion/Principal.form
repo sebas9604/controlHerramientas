@@ -897,48 +897,63 @@
                 <Property name="text" type="java.lang.String" value="Consultar"/>
               </Properties>
               <SubComponents>
-                <Menu class="javax.swing.JMenu" name="consultarHerramientas">
+                <MenuItem class="javax.swing.JMenuItem" name="consultarherramientas">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Todas las herramientas"/>
+                    <Property name="text" type="java.lang.String" value="Todas las Herramientas"/>
                   </Properties>
-                </Menu>
-                <Menu class="javax.swing.JMenu" name="consultarHerramienta">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultarherramientasActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="consultarHerramienta">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Herramienta"/>
                   </Properties>
-                </Menu>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultarHerramientaActionPerformed"/>
+                  </Events>
+                </MenuItem>
               </SubComponents>
             </Menu>
             <Menu class="javax.swing.JMenu" name="opcionCrearHerramienta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear"/>
               </Properties>
+              <Events>
+                <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="opcionCrearHerramientaMenuSelected"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="opcionModificarHerramienta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
+              <Events>
+                <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="opcionModificarHerramientaMenuSelected"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="opcionEliminarHerramienta">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
+              <Events>
+                <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="opcionEliminarHerramientaMenuSelected"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="opcionMovimiento">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Movimiento"/>
               </Properties>
               <SubComponents>
-                <Menu class="javax.swing.JMenu" name="entradaObra">
+                <MenuItem class="javax.swing.JMenuItem" name="entradaObra">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Entrada a Obra"/>
                   </Properties>
-                </Menu>
-                <Menu class="javax.swing.JMenu" name="salidaObra">
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="salidaObra">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Salida de Obra"/>
                   </Properties>
-                </Menu>
+                </MenuItem>
               </SubComponents>
             </Menu>
           </SubComponents>
