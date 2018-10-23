@@ -9,16 +9,21 @@ import conexion.ConexionBD;
 import java.util.List;
 import modelo.Herramientas;
 import interfaces.IHerramientasDao;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import modelo.Empleados;
 
 /**
  *
@@ -27,23 +32,24 @@ import javax.swing.JOptionPane;
 public class HerramientasDaoImpl implements IHerramientasDao {
 
     @Override
-    public boolean registrarNuevaHerramienta(Herramientas herramienta) {
+    public boolean registrarNuevaHerramienta(Herramientas herramienta, String responsable) {
         boolean registrar = false;
         Connection con;
         try {
             File archivoImg = new File(herramienta.getEstadoHerramienta());
             String sql = "INSERT INTO herramientas (idHerramienta, nombreHerramienta, lugarCompraHerramienta, "
-                    + "idObra, precioCompraHerramienta, idEmpleado, estadoHerramienta)" + "VALUES (?,?,?,?,?,?,?);";
+                    + "fechaCompraHerramienta, precioCompraHerramienta, idEmpleado, estadoHerramienta)" + "VALUES (?,?,?,?,?,?,?);";
             con = ConexionBD.connect();
+            int x = consultarIdResponsableporNombresyApellidos(responsable);
             FileInputStream convertir_imagen = new FileInputStream(archivoImg);
             PreparedStatement psql = con.prepareStatement(sql);
             psql.setString(1, herramienta.getIdHerramienta());
             psql.setString(2, herramienta.getNombreHerramienta());
             psql.setString(3, herramienta.getLugarCompraHerramienta());
-            psql.setInt(4, herramienta.getIdObra());
+            psql.setString(4, herramienta.getFechaCompraHerramienta());
             psql.setInt(5, herramienta.getPrecioCompraHerramienta());
-            psql.setInt(5, herramienta.getIdEmpleado());
-            psql.setBlob(6, convertir_imagen, archivoImg.length());
+            psql.setInt(6, x);
+            psql.setBlob(7, convertir_imagen, archivoImg.length());
             psql.executeUpdate();
             registrar = true;
             psql.close();
@@ -63,9 +69,9 @@ public class HerramientasDaoImpl implements IHerramientasDao {
         Statement stm = null;
         ResultSet rs = null;
 
-        String sql = "SELECT idHerramienta, nombreHerramienta, lugarCompraHerramienta, precioCompraHerramienta,"
-                + " idObra, fechaEntradaObraHerramienta, fechaSalidaObraHerramienta, idEmpleado, estadoHerramienta"
-                + "FROM empleados ORDER BY idEmpleado";
+        String sql = "SELECT idHerramienta, nombreHerramienta, lugarCompraHerramienta, fechaCompraHerramienta, precioCompraHerramienta,"
+                + " idEmpleado "
+                + "FROM herramientas ORDER BY idHerramienta";
         try {
             con = ConexionBD.connect();
             stm = con.createStatement();
@@ -125,13 +131,13 @@ public class HerramientasDaoImpl implements IHerramientasDao {
 
     @Override
     public ResultSet obtenerHerramienta(Herramientas herramienta) {
-         Connection con = null;
+        Connection con = null;
         Statement stm = null;
         ResultSet rs = null;
 
         String sql = "SELECT idHerramienta, nombreHerramienta, lugarCompraHerramienta, precioCompraHerramienta,"
                 + " idObra, fechaEntradaObraHerramienta, fechaSalidaObraHerramienta, idEmpleado, estadoHerramienta"
-                + "FROM herramientas WHERE idHerramienta = " +  herramienta.getIdHerramienta();
+                + "FROM herramientas WHERE idHerramienta = " + herramienta.getIdHerramienta();
         try {
             con = ConexionBD.connect();
             stm = con.createStatement();
@@ -165,6 +171,128 @@ public class HerramientasDaoImpl implements IHerramientasDao {
         } catch (Exception e) {
         }
 
-        return listaCargos;    }
+        return listaCargos;
+    }
+
+    @Override
+    public Herramientas consultarHerramienta(Herramientas herramienta) {
+        ImageIcon ii = getFoto(herramienta);
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+        String s = consultarResponsablePorIdEmpleado(herramienta);
+        String sql = "SELECT idHerramienta, nombreHerramienta, lugarCompraHerramienta, fechaCompraHerramienta, "
+                + "precioCompraHerramienta, idEmpleado, estadoHerramienta FROM herramientas WHERE idHerramienta = " + herramienta.getIdHerramienta() + ";";
+        Herramientas h = new Herramientas();
+        System.out.println(sql);
+        JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            if (rs.next()) {
+                h.setIdHerramienta(rs.getString(1));
+                h.setNombreHerramienta(rs.getString(2));
+                h.setLugarCompraHerramienta(rs.getString(3));
+                h.setFechaCompraHerramienta(rs.getString(4));
+                h.setPrecioCompraHerramienta(rs.getInt(5));
+                h.setIdEmpleado(rs.getInt(6));
+                h.setEstadoHerramienta(rs.getString(7));
+
+//                Blob bytesImagen = rs.getBlob("fotoEmpleado");
+//                byte[] bytesLeidos = bytesImagen.getBytes(1, (int) bytesImagen.length());
+//
+//                ImageIcon image = new ImageIcon(bytesLeidos);
+                h.setFotoHerr(ii);
+            }
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("Error: Clase HeramientaDaoImple, método consultarHerramietna");
+            ex.printStackTrace();
+        }
+        return h;
+    }
+
+    public ImageIcon getFoto(Herramientas herramienta) {
+
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT estadoHerramienta FROM herramientas WHERE idHerramienta = " + herramienta.getIdHerramienta() + ";";
+        ImageIcon ii = null;
+        InputStream is = null;
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+
+            if (rs.next()) {
+                is = rs.getBinaryStream(1);
+                BufferedImage bi = ImageIO.read(is);
+                ii = new ImageIcon(bi);
+            }
+        } catch (Exception e) {
+        }
+        return ii;
+    }
+
+    @Override
+    public String consultarResponsablePorIdEmpleado(Herramientas herramienta) {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+
+        String sql = "select nombresEmpleado, apellidosEmpleado from empleados where idEmpleado = " + herramienta.getIdEmpleado() + ";";
+        Empleados e = new Empleados();
+        String rt = "";
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            if (rs.next()) {
+                e.setNombresEmpleado(rs.getString(1));
+                e.setApellidosEmpleado(rs.getString(2));
+            }
+            rt = e.getNombresEmpleado() + " " + e.getApellidosEmpleado();
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return rt;
+    }
+
+    public int consultarIdResponsableporNombresyApellidos(String responsable) {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+        System.out.println("Immlpresponsabe: = " + responsable);
+        String sql = "SELECT idEmpleado "
+                + "from empleados "
+                + "where concat(nombresEmpleado,' ',apellidosEmpleado) = '" + responsable +"';";
+        System.out.println("SQL query = " + sql);
+        int rt = -1;
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            if (rs.next()) {
+                System.out.println("getint " + rs.getInt(1) + "getstring" + rs.getString(1));
+            rt = rs.getInt(1);
+        }
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("rt ::." + rt);
+        return rt;
+    }
 
 }

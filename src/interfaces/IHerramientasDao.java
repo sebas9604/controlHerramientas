@@ -14,11 +14,20 @@ import modelo.Herramientas;
  * @author tolis
  */
 public interface IHerramientasDao {
-        public boolean registrarNuevaHerramienta(Herramientas herramienta);
-	public ResultSet obtenerHerramientas();
-	public boolean actualizarHerramienta(Herramientas herramienta);
-	public boolean eliminarHerramienta(Herramientas herramienta);
-        public ResultSet obtenerHerramienta(Herramientas herramienta);
-        public List<String> llenarComboResponsable();
 
+    public boolean registrarNuevaHerramienta(Herramientas herramienta, String responsable);
+
+    public ResultSet obtenerHerramientas();
+
+    public boolean actualizarHerramienta(Herramientas herramienta);
+
+    public boolean eliminarHerramienta(Herramientas herramienta);
+
+    public ResultSet obtenerHerramienta(Herramientas herramienta);
+
+    public List<String> llenarComboResponsable();
+
+    public Herramientas consultarHerramienta(Herramientas herramienta);
+
+    public String consultarResponsablePorIdEmpleado(Herramientas herramienta);
 }

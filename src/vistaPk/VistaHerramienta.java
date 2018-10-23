@@ -17,13 +17,13 @@ public class VistaHerramienta {
         public void verHerramienta(ResultSet herramientas, JTable tabla) {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.setColumnIdentifiers(new Object[]{"idHerramienta", "nombreHerramienta", "lugarCompraHerramienta", "idObra", "precioCompraHerramienta",
-            "idEmpleado", "estadoHerramienta"});
+            "idEmpleado"});
 
         try {
 
             while (herramientas.next()) {
                 modelo.addRow(new Object[]{herramientas.getString("idHerramienta"), herramientas.getString("nombreHerramienta"), herramientas.getString("lugarCompraHerramienta"),
-                    herramientas.getInt("idObra"), herramientas.getInt("precioCompraHerramienta")});
+                    herramientas.getInt("idObra"), herramientas.getInt("precioCompraHerramienta"), herramientas.getInt("idEmpleado")});
             }
             tabla.setModel(modelo);
 
@@ -34,14 +34,13 @@ public class VistaHerramienta {
 
     public void verHerramientas(ResultSet herramientas, JTable tabla) {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.setColumnIdentifiers(new Object[]{"idHerramienta", "nombreHerramienta", "lugarCompraHerramienta", "idObra", "precioCompraHerramienta",
-            "idEmpleado", "estadoHerramienta"});
+        modelo.setColumnIdentifiers(new Object[]{"idHerramienta", "nombreHerramienta", "lugarCompraHerramienta", "fechaCompraHerramienta", "precioCompraHerramienta"});
 
         try {
 
             while (herramientas.next()) {
                 modelo.addRow(new Object[]{herramientas.getString("idHerramienta"), herramientas.getString("nombreHerramienta"), herramientas.getString("lugarCompraHerramienta"),
-                    herramientas.getInt("idObra"), herramientas.getInt("precioCompraHerramienta")});
+                    herramientas.getString("fechaCompraHerramienta"), herramientas.getInt("precioCompraHerramienta")});
             }
             tabla.setModel(modelo);
 

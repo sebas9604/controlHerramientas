@@ -5,7 +5,8 @@
  */
 package modelo;
 
-import java.sql.Date;
+import javax.swing.ImageIcon;
+
 
 /**
  *
@@ -16,46 +17,17 @@ public class Herramientas {
     public Herramientas() {
     }
 
-    public Herramientas(String idHerramienta, String nombreHerramienta, String lugarCompraHerramienta, int precioCompraHerramienta, int idEmpleado, String estadoHerramienta) {
-        this.idHerramienta = idHerramienta;
-        this.nombreHerramienta = nombreHerramienta;
-        this.lugarCompraHerramienta = lugarCompraHerramienta;
-        this.precioCompraHerramienta = precioCompraHerramienta;
-        this.idEmpleado = idEmpleado;
-        this.estadoHerramienta = estadoHerramienta;
-    }
-
-    public Herramientas(String idHerramienta, int idObra, Date fechaEntradaObraHerramienta, Date fechaSalidaObraHerramienta, int idEmpleado) {
-        this.idHerramienta = idHerramienta;
-        this.idObra = idObra;
-        this.fechaEntradaObraHerramienta = fechaEntradaObraHerramienta;
-        this.fechaSalidaObraHerramienta = fechaSalidaObraHerramienta;
-        this.idEmpleado = idEmpleado;
-    }
-
-    public Herramientas(String idHerramienta, String nombreHerramienta, String lugarCompraHerramienta, int precioCompraHerramienta, int idObra, Date fechaEntradaObraHerramienta, Date fechaSalidaObraHerramienta, int idEmpleado, String estadoHerramienta) {
-        this.idHerramienta = idHerramienta;
-        this.nombreHerramienta = nombreHerramienta;
-        this.lugarCompraHerramienta = lugarCompraHerramienta;
-        this.precioCompraHerramienta = precioCompraHerramienta;
-        this.idObra = idObra;
-        this.fechaEntradaObraHerramienta = fechaEntradaObraHerramienta;
-        this.fechaSalidaObraHerramienta = fechaSalidaObraHerramienta;
-        this.idEmpleado = idEmpleado;
-        this.estadoHerramienta = estadoHerramienta;
-    }
-    
-    
-    
     private String idHerramienta;
     private String nombreHerramienta;
     private String lugarCompraHerramienta;
     private int precioCompraHerramienta;
+    private String fechaCompraHerramienta;
     private int idObra;
-    private Date fechaEntradaObraHerramienta;
-    private Date fechaSalidaObraHerramienta;
+    private String fechaEntradaObraHerramienta;
+    private String fechaSalidaObraHerramienta;
     private int idEmpleado;
     private String estadoHerramienta;
+    private ImageIcon fotoHerr;
 
     public String getIdHerramienta() {
         return idHerramienta;
@@ -97,19 +69,19 @@ public class Herramientas {
         this.idObra = idObra;
     }
 
-    public Date getFechaEntradaObraHerramienta() {
+    public String getFechaEntradaObraHerramienta() {
         return fechaEntradaObraHerramienta;
     }
 
-    public void setFechaEntradaObraHerramienta(Date fechaEntradaObraHerramienta) {
+    public void setFechaEntradaObraHerramienta(String fechaEntradaObraHerramienta) {
         this.fechaEntradaObraHerramienta = fechaEntradaObraHerramienta;
     }
 
-    public Date getFechaSalidaObraHerramienta() {
+    public String getFechaSalidaObraHerramienta() {
         return fechaSalidaObraHerramienta;
     }
 
-    public void setFechaSalidaObraHerramienta(Date fechaSalidaObraHerramienta) {
+    public void setFechaSalidaObraHerramienta(String fechaSalidaObraHerramienta) {
         this.fechaSalidaObraHerramienta = fechaSalidaObraHerramienta;
     }
 
@@ -127,6 +99,22 @@ public class Herramientas {
 
     public void setEstadoHerramienta(String estadoHerramienta) {
         this.estadoHerramienta = estadoHerramienta;
+    }
+    
+    public String getFechaCompraHerramienta() {
+        return fechaCompraHerramienta;
+    }
+
+    public void setFechaCompraHerramienta(String fechaCompraHerramienta) {
+        this.fechaCompraHerramienta = fechaCompraHerramienta;
+    }
+
+    public ImageIcon getFotoHerr() {
+        return fotoHerr;
+    }
+
+    public void setFotoHerr(ImageIcon fotoHerr) {
+        this.fotoHerr = fotoHerr;
     }
 
     @Override

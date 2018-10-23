@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +24,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import modelo.Cargo;
 import modelo.Empleados;
+import modelo.Herramientas;
 import modelo.Obra;
 
 /**
@@ -37,6 +39,8 @@ public class Principal extends javax.swing.JFrame {
         ocultarVentanas();
     }
 
+    public static boolean fotoEmpleado = false;
+    public static boolean fotoHerramienta = false;
     //OPCIONES OBRA   
     public boolean consultarObrasFlag;
     public boolean consultarObraFlag;
@@ -95,6 +99,7 @@ public class Principal extends javax.swing.JFrame {
         modificarHerramientaFlag = false;
         eliminarHerramientaFlag = false;
         repHerramientasEnHerramientaFlag = false;
+        fotoHerramienta = false;
     }
 
     public void inhabilitarBanderasEmpleado() {
@@ -103,6 +108,7 @@ public class Principal extends javax.swing.JFrame {
         crearEmpleadoFlag = false;
         modificarEmpleadoFlag = false;
         eliminarEmpleadoFlag = false;
+        fotoEmpleado = false;
 //        repHerramientasEnObraFlag = false;
     }
 
@@ -168,7 +174,7 @@ public class Principal extends javax.swing.JFrame {
         tfPrecioCompraHerramienta = new javax.swing.JTextField();
         cbResponsableHerramienta = new javax.swing.JComboBox<>();
         labelEstadoHerramienta = new javax.swing.JLabel();
-        labelFoto = new javax.swing.JLabel();
+        labelFotoHerramienta = new javax.swing.JLabel();
         labelFechaCompra = new javax.swing.JLabel();
         tfFechaCompraHerramienta = new javax.swing.JTextField();
         btRepoTiempoVida = new javax.swing.JButton();
@@ -594,7 +600,7 @@ public class Principal extends javax.swing.JFrame {
 
         labelEstadoHerramienta.setText("Estado");
 
-        labelFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelFotoHerramienta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         labelFechaCompra.setText("Fecha de compra");
 
@@ -702,6 +708,14 @@ public class Principal extends javax.swing.JFrame {
         ventanaHerramientaLayout.setHorizontalGroup(
             ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ventanaHerramientaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(ventanaHerramientaLayout.createSequentialGroup()
+                .addGap(347, 347, 347)
+                .addComponent(btEjecutarHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanaHerramientaLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
@@ -733,21 +747,13 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(79, 79, 79)
                         .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(labelEstadoHerramienta)
-                            .addComponent(labelFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelFotoHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btTomarFotoHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelReportesHerramienta)
                     .addComponent(btRepoTiempoVida))
                 .addGap(242, 242, 242))
-            .addGroup(ventanaHerramientaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
-            .addGroup(ventanaHerramientaLayout.createSequentialGroup()
-                .addGap(347, 347, 347)
-                .addComponent(btEjecutarHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ventanaHerramientaLayout.setVerticalGroup(
             ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -785,7 +791,7 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(tfPrecioCompraHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                                 .addGap(27, 27, 27)
-                                .addComponent(labelFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(labelFotoHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1319,6 +1325,7 @@ public class Principal extends javax.swing.JFrame {
         System.out.println("presentacion.Principal.opcionCrearEmpleadoMenuSelected()");
         inhabilitarBanderasEmpleado();
         inhabilitarCamposEmpleado();
+        fotoEmpleado = true;
         labelOperacionEmpleado.setText("CREAR");
         crearEmpleadoFlag = true;
         tfIdEmpleado.setEnabled(true);
@@ -1336,6 +1343,7 @@ public class Principal extends javax.swing.JFrame {
     private void opcionModificarEmpeladoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarEmpeladoMenuSelected
         inhabilitarBanderasEmpleado();
 //        inhabilitarCamposEmpleado();
+        fotoEmpleado = true;
         labelOperacionEmpleado.setText("MODIFICAR");
         modificarEmpleadoFlag = true;
         tfIdEmpleado.setEnabled(true);
@@ -1404,7 +1412,9 @@ public class Principal extends javax.swing.JFrame {
             empleado = empleadoCt.consultarEmpleado(empleado);
             tfNombresEmpleado.setText(empleado.getNombresEmpleado());
             tfApellidosEmpleado.setText(empleado.getApellidosEmpleado());
-            cbCargoEmpleado.setToolTipText(empleado.getCargoEmpleado());
+            cbCargoEmpleado.removeAllItems();
+            System.out.println(empleado.getCargoEmpleado());
+            cbCargoEmpleado.addItem(empleado.getCargoEmpleado());
             ImageIcon imagen = empleado.getFotoEmp();
             Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(labelImagenEmpleado.getWidth(), labelImagenEmpleado.getHeight(), Image.SCALE_DEFAULT));
             labelImagenEmpleado.setIcon(icono);
@@ -1449,18 +1459,20 @@ public class Principal extends javax.swing.JFrame {
 
     private void btEjecutarHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarHerramientaActionPerformed
         if (consultarHerramientasFlag) {
-            ControllerEmpleados empleadoCt = new ControllerEmpleados();
-            empleadoCt.verEmpleados(tablaEmpleados);
+            ControllerHerramientas herramientaCt = new ControllerHerramientas();
+            herramientaCt.verHerramientas(tablaHerramienta);
             inhabilitarCamposEmpleado();
         } else if (crearHerramientaFlag) {
-            Empleados empleado = new Empleados();
-            ControllerEmpleados empleadoCt = new ControllerEmpleados();
-            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
-            empleado.setNombresEmpleado(tfNombresEmpleado.getText());
-            empleado.setApellidosEmpleado(tfApellidosEmpleado.getText());
-            empleado.setCargoEmpleado(cbCargoEmpleado.getSelectedItem().toString());
-            empleado.setFotoEmpleado("test.jpg");
-            empleadoCt.registrar(empleado);
+            Herramientas herramienta = new Herramientas();
+            ControllerHerramientas herramientaCt = new ControllerHerramientas();
+            herramienta.setIdHerramienta(tfIdHerramienta.getText());
+            herramienta.setNombreHerramienta(tfNombreHerramienta.getText());
+            herramienta.setLugarCompraHerramienta(tfLugarCompraHerramienta.getText());
+            herramienta.setFechaCompraHerramienta(tfFechaCompraHerramienta.getText());
+            herramienta.setPrecioCompraHerramienta(Integer.parseInt(tfPrecioCompraHerramienta.getText()));
+            herramienta.setEstadoHerramienta("test.jpg");
+            System.out.println("responsable principal" + cbResponsableHerramienta.getSelectedItem().toString());
+            herramientaCt.registrar(herramienta, cbResponsableHerramienta.getSelectedItem().toString());
             inhabilitarCamposEmpleado();
         } else if (modificarHerramientaFlag) {
             Empleados empleado = new Empleados();
@@ -1481,19 +1493,25 @@ public class Principal extends javax.swing.JFrame {
             empleadoCt.eliminar(empleado);
             inhabilitarCamposEmpleado();
         } else if (consultarHerramientaFlag) {
-            Empleados empleado = new Empleados();
-            ControllerEmpleados empleadoCt = new ControllerEmpleados();
-            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+            Herramientas herramienta = new Herramientas();
+            ControllerHerramientas herramientaCt = new ControllerHerramientas();
+            herramienta.setIdHerramienta(tfIdHerramienta.getText());
 //            obra.setNombreEmpleado(tfNombreEmpleado.getText());
 //            obra.setDireccionEmpleado(tfUbicacionEmpleado.getText());
 //            obraCt.verEmpleado(tablaEmpleados, obra);
-            empleado = empleadoCt.consultarEmpleado(empleado);
-            tfNombresEmpleado.setText(empleado.getNombresEmpleado());
-            tfApellidosEmpleado.setText(empleado.getApellidosEmpleado());
-            cbCargoEmpleado.setToolTipText(empleado.getCargoEmpleado());
-            ImageIcon imagen = empleado.getFotoEmp();
+            herramienta = herramientaCt.consultarHerramienta(herramienta);
+            String s = herramientaCt.consultarResponsablePorIdEmpleado(herramienta);
+            System.out.println("Responsable " + s);
+            tfNombreHerramienta.setText(herramienta.getNombreHerramienta());
+            tfLugarCompraHerramienta.setText(herramienta.getLugarCompraHerramienta());
+            tfFechaCompraHerramienta.setText(herramienta.getFechaCompraHerramienta());
+            tfPrecioCompraHerramienta.setText(herramienta.getPrecioCompraHerramienta() + "");
+//            cbResponsableHerramienta.setToolTipText(s);
+            cbResponsableHerramienta.removeAllItems();
+            cbResponsableHerramienta.addItem(s);
+            ImageIcon imagen = herramienta.getFotoHerr();
             Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(labelImagenEmpleado.getWidth(), labelImagenEmpleado.getHeight(), Image.SCALE_DEFAULT));
-            labelImagenEmpleado.setIcon(icono);
+            labelFotoHerramienta.setIcon(icono);
 
 //            inhabilitarCamposEmpleado();
         }
@@ -1510,7 +1528,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void consultarHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarHerramientaActionPerformed
         inhabilitarBanderasHerramienta();
-        inhabilitarCamposEmpleado();
+        inhabilitarCamposHerramienta();
         labelOperacionHerramienta.setText("CONSULTAR");
         consultarHerramientaFlag = true;
         tfIdHerramienta.setEnabled(true);
@@ -1524,6 +1542,8 @@ public class Principal extends javax.swing.JFrame {
         inhabilitarCamposHerramienta();
         labelOperacionHerramienta.setText("CREAR");
         crearHerramientaFlag = true;
+        fotoHerramienta = true;
+        llenarComboResponsableHerramienta();
         tfIdHerramienta.setEnabled(true);
         tfIdHerramienta.setBackground(Color.white);
         tfNombreHerramienta.setEnabled(true);
@@ -1631,6 +1651,7 @@ public class Principal extends javax.swing.JFrame {
         labelOperacionHerramienta.setText("");
         cbResponsableHerramienta.setEnabled(false);
         btTomarFotoHerramienta.setEnabled(false);
+        labelFotoHerramienta.setIcon(null);
     }
 
     /**
@@ -1700,8 +1721,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelDireccionObra;
     private javax.swing.JLabel labelEstadoHerramienta;
     private javax.swing.JLabel labelFechaCompra;
-    private javax.swing.JLabel labelFoto;
     private javax.swing.JLabel labelFotoEmpleado;
+    public static javax.swing.JLabel labelFotoHerramienta;
     private javax.swing.JLabel labelIdCargo;
     private javax.swing.JLabel labelIdEmpleado;
     private javax.swing.JLabel labelIdHerramienta;
@@ -1805,14 +1826,14 @@ public class Principal extends javax.swing.JFrame {
         }
 
     }
-    
-        private void llenarComboResponsableHerramienta() {
+
+    private void llenarComboResponsableHerramienta() {
         ControllerHerramientas herramientaCt = new ControllerHerramientas();
         cbResponsableHerramienta.removeAllItems();
         List<String> list = herramientaCt.llenarComboResponsable();
 
         for (String responsable : list) {
-            cbCargoEmpleado.addItem(responsable);
+            cbResponsableHerramienta.addItem(responsable);
         }
 
     }

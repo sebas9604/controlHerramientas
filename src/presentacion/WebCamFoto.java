@@ -217,7 +217,11 @@ public class WebCamFoto extends JFrame implements ActionListener, Runnable, Webc
             try {
                 // save image to PNG file
                 ImageIO.write(image, "PNG", new File("test.jpg"));
+                if(Principal.fotoEmpleado){
             rsscalelabel.RSScaleLabel.setScaleLabel(Principal.labelImagenEmpleado, "test.jpg");
+                }else if(Principal.fotoHerramienta){
+                                rsscalelabel.RSScaleLabel.setScaleLabel(Principal.labelFotoHerramienta, "test.jpg");
+                }
             } catch (IOException ex) {
                 Logger.getLogger(WebCamFoto.class.getName()).log(Level.SEVERE, null, ex);
             }

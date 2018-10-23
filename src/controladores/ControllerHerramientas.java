@@ -21,9 +21,9 @@ public class ControllerHerramientas {
       private VistaHerramienta vista = new VistaHerramienta();
 
     //llama al DAO para guardar un herramienta
-    public void registrar(Herramientas herramienta) {
+    public void registrar(Herramientas herramienta, String responsable) {
         IHerramientasDao dao = new HerramientasDaoImpl();
-        dao.registrarNuevaHerramienta(herramienta);
+        dao.registrarNuevaHerramienta(herramienta, responsable);
     }
 
     //llama al DAO para actualizar un herramienta
@@ -53,6 +53,13 @@ public class ControllerHerramientas {
         vista.verHerramienta(herramientas, tabla);
     }  
     
+        public Herramientas consultarHerramienta(Herramientas herramienta) {
+        IHerramientasDao dao = new HerramientasDaoImpl();
+        Herramientas h;
+        h = dao.consultarHerramienta(herramienta);
+        return h;
+    }
+        
         public List<String> llenarComboResponsable(){
             IHerramientasDao dao = new HerramientasDaoImpl();
         List<String> list = dao.llenarComboResponsable();
@@ -60,4 +67,11 @@ public class ControllerHerramientas {
         
         return list;
     }
+        
+        public String consultarResponsablePorIdEmpleado(Herramientas herramienta){
+                IHerramientasDao dao = new HerramientasDaoImpl();
+        String h;
+        h = dao.consultarResponsablePorIdEmpleado(herramienta);
+        return h;
+        }
 }
