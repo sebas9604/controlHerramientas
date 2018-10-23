@@ -19,5 +19,6 @@ public interface IHerramientasDao {
 	public boolean actualizarHerramienta(Herramientas herramienta);
 	public boolean eliminarHerramienta(Herramientas herramienta);
         public ResultSet obtenerHerramienta(Herramientas herramienta);
+        public List<String> llenarComboResponsable();
 
 }

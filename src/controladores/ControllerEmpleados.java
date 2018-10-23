@@ -10,6 +10,7 @@ import modelo.Empleados;
 import vistaPk.VistaEmpleado;
 import interfaces.IEmpleadosDao;
 import java.sql.ResultSet;
+import java.util.List;
 import javax.swing.JTable;
 
 /**
@@ -58,5 +59,13 @@ public class ControllerEmpleados {
         Empleados e;
         e = dao.consultarEmpleado(empleado);
         return e;
+    }
+    
+    public List<String> llenarComboCargo(){
+            IEmpleadosDao dao = new EmpleadosDaoImpl();
+        List<String> list = dao.llenarComboEmpleado();
+    
+        
+        return list;
     }
 }

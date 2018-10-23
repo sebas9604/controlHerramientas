@@ -145,4 +145,26 @@ public class HerramientasDaoImpl implements IHerramientasDao {
         return rs;
     }
 
+    @Override
+    public List<String> llenarComboResponsable() {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+        String sql = "SELECT nombresEmpleado, apellidosEmpleado FROM empleados ORDER BY nombresEmpleado;";
+        List<String> listaCargos = new ArrayList<String>();
+
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                //este es el Jcombobox
+                listaCargos.add(rs.getString(1) + " " + rs.getString(2));
+            }
+            con.close();
+        } catch (Exception e) {
+        }
+
+        return listaCargos;    }
+
 }

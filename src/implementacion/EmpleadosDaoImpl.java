@@ -22,10 +22,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import jdk.internal.org.xml.sax.InputSource;
 import modelo.Cargo;
 import presentacion.Principal;
@@ -271,5 +274,28 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
         } catch (Exception e) {
         }
         return ii;
+    }
+
+    @Override
+    public List<String> llenarComboEmpleado() {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+        String sql = "SELECT nombreCargo FROM cargo ORDER BY nombreCargo;";
+        List<String> listaCargos = new ArrayList<String>();
+
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                //este es el Jcombobox
+                listaCargos.add(rs.getString(1));
+            }
+            con.close();
+        } catch (Exception e) {
+        }
+
+        return listaCargos;
     }
 }

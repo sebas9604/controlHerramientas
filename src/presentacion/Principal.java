@@ -3,6 +3,7 @@ package presentacion;
 import conexion.ConexionBD;
 import controladores.ControllerCargo;
 import controladores.ControllerEmpleados;
+import controladores.ControllerHerramientas;
 import controladores.ControllerObra;
 import java.awt.Color;
 import java.awt.Image;
@@ -13,6 +14,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -1243,7 +1245,7 @@ public class Principal extends javax.swing.JFrame {
         tfIdCargo.setBackground(Color.white);
         tfNombreCargo.setEnabled(true);
         tfNombreCargo.setBackground(Color.white);
-        btEjecutarCargo.setEnabled(true);       
+        btEjecutarCargo.setEnabled(true);
     }//GEN-LAST:event_opcionCrearCargoMenuSelected
 
     private void opcionModificarCargoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarCargoMenuSelected
@@ -1255,7 +1257,7 @@ public class Principal extends javax.swing.JFrame {
         tfIdCargo.setBackground(Color.white);
         tfNombreCargo.setEnabled(true);
         tfNombreCargo.setBackground(Color.white);
-        btEjecutarCargo.setEnabled(true);       
+        btEjecutarCargo.setEnabled(true);
     }//GEN-LAST:event_opcionModificarCargoMenuSelected
 
     private void opcionEliminarCargoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarCargoMenuSelected
@@ -1265,7 +1267,7 @@ public class Principal extends javax.swing.JFrame {
         eliminarCargoFlag = true;
         tfIdCargo.setEnabled(true);
         tfIdCargo.setBackground(Color.white);
-        btEjecutarCargo.setEnabled(true);       
+        btEjecutarCargo.setEnabled(true);
     }//GEN-LAST:event_opcionEliminarCargoMenuSelected
 
     private void consultarTodosLosCargosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarTodosLosCargosActionPerformed
@@ -1274,7 +1276,7 @@ public class Principal extends javax.swing.JFrame {
         labelOperacionCargo.setText("CONSULTAR TODO");
         consultarCargosFlag = true;
         btEjecutarCargo.setEnabled(true);
-       
+
     }//GEN-LAST:event_consultarTodosLosCargosActionPerformed
 
     private void consultarCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarCargoActionPerformed
@@ -1285,7 +1287,7 @@ public class Principal extends javax.swing.JFrame {
         tfIdCargo.setEnabled(true);
         tfIdCargo.setBackground(Color.white);
         btEjecutarCargo.setEnabled(true);
-              
+
     }//GEN-LAST:event_consultarCargoActionPerformed
 
     private void consultarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarEmpleadosActionPerformed
@@ -1295,7 +1297,7 @@ public class Principal extends javax.swing.JFrame {
         labelOperacionEmpleado.setText("CONSULTAR TODO");
         consultarEmpleadosFlag = true;
         btEjecutarEmpleado.setEnabled(true);
-       
+
     }//GEN-LAST:event_consultarEmpleadosActionPerformed
 
     private void consultarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarEmpleadoActionPerformed
@@ -1306,14 +1308,15 @@ public class Principal extends javax.swing.JFrame {
         tfIdEmpleado.setEnabled(true);
         tfIdEmpleado.setBackground(Color.white);
         btEjecutarEmpleado.setEnabled(true);
-       
+
     }//GEN-LAST:event_consultarEmpleadoActionPerformed
 
     private void opcionCrearObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcionCrearObraActionPerformed
-       
+
     }//GEN-LAST:event_opcionCrearObraActionPerformed
 
     private void opcionCrearEmpleadoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionCrearEmpleadoMenuSelected
+        System.out.println("presentacion.Principal.opcionCrearEmpleadoMenuSelected()");
         inhabilitarBanderasEmpleado();
         inhabilitarCamposEmpleado();
         labelOperacionEmpleado.setText("CREAR");
@@ -1326,7 +1329,8 @@ public class Principal extends javax.swing.JFrame {
         tfApellidosEmpleado.setBackground(Color.white);
         cbCargoEmpleado.setEnabled(true);
         btTomarFotoEmpleado.setEnabled(true);
-        btEjecutarEmpleado.setEnabled(true);       
+        llenarComboCargoEmpleado();
+        btEjecutarEmpleado.setEnabled(true);
     }//GEN-LAST:event_opcionCrearEmpleadoMenuSelected
 
     private void opcionModificarEmpeladoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarEmpeladoMenuSelected
@@ -1343,7 +1347,7 @@ public class Principal extends javax.swing.JFrame {
         cbCargoEmpleado.setEnabled(true);
         btTomarFotoEmpleado.setEnabled(true);
         btEjecutarEmpleado.setEnabled(true);
-       
+
     }//GEN-LAST:event_opcionModificarEmpeladoMenuSelected
 
     private void opcionEliminarEmpleadoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarEmpleadoMenuSelected
@@ -1354,7 +1358,7 @@ public class Principal extends javax.swing.JFrame {
         tfIdEmpleado.setEnabled(true);
         tfIdEmpleado.setBackground(Color.white);
         btEjecutarEmpleado.setEnabled(true);
-       
+
     }//GEN-LAST:event_opcionEliminarEmpleadoMenuSelected
 
     private void btEjecutarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarEmpleadoActionPerformed
@@ -1406,7 +1410,7 @@ public class Principal extends javax.swing.JFrame {
             labelImagenEmpleado.setIcon(icono);
 
 //            inhabilitarCamposEmpleado();
-        }       
+        }
     }//GEN-LAST:event_btEjecutarEmpleadoActionPerformed
 
     private void btTomarFotoHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTomarFotoHerramientaActionPerformed
@@ -1492,16 +1496,16 @@ public class Principal extends javax.swing.JFrame {
             labelImagenEmpleado.setIcon(icono);
 
 //            inhabilitarCamposEmpleado();
-        }        
+        }
     }//GEN-LAST:event_btEjecutarHerramientaActionPerformed
 
     private void consultarherramientasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarherramientasActionPerformed
         inhabilitarBanderasHerramienta();
         inhabilitarCamposHerramienta();
         labelOperacionHerramienta.setText("CONSULTAR TODO");
-        consultarHerramientasFlag= true;
+        consultarHerramientasFlag = true;
         btEjecutarHerramienta.setEnabled(true);
-       
+
     }//GEN-LAST:event_consultarherramientasActionPerformed
 
     private void consultarHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarHerramientaActionPerformed
@@ -1512,7 +1516,7 @@ public class Principal extends javax.swing.JFrame {
         tfIdHerramienta.setEnabled(true);
         tfIdHerramienta.setBackground(Color.white);
         btEjecutarHerramienta.setEnabled(true);
-         // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_consultarHerramientaActionPerformed
 
     private void opcionCrearHerramientaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionCrearHerramientaMenuSelected
@@ -1789,5 +1793,27 @@ public class Principal extends javax.swing.JFrame {
 
         }
         return datos;
+    }
+
+    private void llenarComboCargoEmpleado() {
+        ControllerEmpleados empleadoCt = new ControllerEmpleados();
+        cbCargoEmpleado.removeAllItems();
+        List<String> list = empleadoCt.llenarComboCargo();
+
+        for (String cargo : list) {
+            cbCargoEmpleado.addItem(cargo);
+        }
+
+    }
+    
+        private void llenarComboResponsableHerramienta() {
+        ControllerHerramientas herramientaCt = new ControllerHerramientas();
+        cbResponsableHerramienta.removeAllItems();
+        List<String> list = herramientaCt.llenarComboResponsable();
+
+        for (String responsable : list) {
+            cbCargoEmpleado.addItem(responsable);
+        }
+
     }
 }

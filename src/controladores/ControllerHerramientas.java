@@ -8,6 +8,7 @@ package controladores;
 import implementacion.HerramientasDaoImpl;
 import interfaces.IHerramientasDao;
 import java.sql.ResultSet;
+import java.util.List;
 import javax.swing.JTable;
 import modelo.Herramientas;
 import vistaPk.VistaHerramienta;
@@ -51,4 +52,12 @@ public class ControllerHerramientas {
         herramientas = dao.obtenerHerramienta(herramienta);
         vista.verHerramienta(herramientas, tabla);
     }  
+    
+        public List<String> llenarComboResponsable(){
+            IHerramientasDao dao = new HerramientasDaoImpl();
+        List<String> list = dao.llenarComboResponsable();
+    
+        
+        return list;
+    }
 }
