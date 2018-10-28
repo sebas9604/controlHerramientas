@@ -158,7 +158,7 @@ public class Principal extends javax.swing.JFrame {
         consultarEmpleados = new javax.swing.JMenuItem();
         consultarEmpleado = new javax.swing.JMenuItem();
         opcionCrearEmpleado = new javax.swing.JMenu();
-        opcionModificarEmpelado = new javax.swing.JMenu();
+        opcionModificarEmpleado = new javax.swing.JMenu();
         opcionEliminarEmpleado = new javax.swing.JMenu();
         ventanaHerramienta = new javax.swing.JInternalFrame();
         labelTituloHerramienta = new javax.swing.JLabel();
@@ -460,17 +460,17 @@ public class Principal extends javax.swing.JFrame {
         });
         menuOpcionEmpleado.add(opcionCrearEmpleado);
 
-        opcionModificarEmpelado.setText("Modificar");
-        opcionModificarEmpelado.addMenuListener(new javax.swing.event.MenuListener() {
+        opcionModificarEmpleado.setText("Modificar");
+        opcionModificarEmpleado.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
-                opcionModificarEmpeladoMenuSelected(evt);
+                opcionModificarEmpleadoMenuSelected(evt);
             }
         });
-        menuOpcionEmpleado.add(opcionModificarEmpelado);
+        menuOpcionEmpleado.add(opcionModificarEmpleado);
 
         opcionEliminarEmpleado.setText("Eliminar");
         opcionEliminarEmpleado.addMenuListener(new javax.swing.event.MenuListener() {
@@ -1116,7 +1116,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void opcionEliminarObraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarObraMenuSelected
         inhabilitarBanderasObra();
-//        inhabilitarCamposObra();
+        inhabilitarCamposObra();
         labelOperacionObra.setText("ELIMINAR");
         eliminarObraFlag = true;
         tfIdObra.setEnabled(true);
@@ -1215,11 +1215,11 @@ public class Principal extends javax.swing.JFrame {
             cargoCt.registrar(cargo);
             inhabilitarCamposCargo();
         } else if (modificarCargoFlag) {
-            Cargo obra = new Cargo();
-            ControllerCargo obraCt = new ControllerCargo();
-            obra.setIdCargo(Integer.parseInt(tfIdCargo.getText()));
-            obra.setNombreCargo(tfNombreCargo.getText());
-            obraCt.actualizar(obra);
+            Cargo cargo = new Cargo();
+            ControllerCargo cargoCt = new ControllerCargo();
+            cargo.setIdCargo(Integer.parseInt(tfIdCargo.getText()));
+            cargo.setNombreCargo(tfNombreCargo.getText());
+            cargoCt.actualizar(cargo);
             inhabilitarCamposCargo();
         } else if (eliminarCargoFlag) {
             Cargo cargo = new Cargo();
@@ -1340,10 +1340,11 @@ public class Principal extends javax.swing.JFrame {
         btEjecutarEmpleado.setEnabled(true);
     }//GEN-LAST:event_opcionCrearEmpleadoMenuSelected
 
-    private void opcionModificarEmpeladoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarEmpeladoMenuSelected
+    private void opcionModificarEmpleadoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarEmpleadoMenuSelected
         inhabilitarBanderasEmpleado();
 //        inhabilitarCamposEmpleado();
         fotoEmpleado = true;
+        llenarComboCargoEmpleado();
         labelOperacionEmpleado.setText("MODIFICAR");
         modificarEmpleadoFlag = true;
         tfIdEmpleado.setEnabled(true);
@@ -1356,7 +1357,7 @@ public class Principal extends javax.swing.JFrame {
         btTomarFotoEmpleado.setEnabled(true);
         btEjecutarEmpleado.setEnabled(true);
 
-    }//GEN-LAST:event_opcionModificarEmpeladoMenuSelected
+    }//GEN-LAST:event_opcionModificarEmpleadoMenuSelected
 
     private void opcionEliminarEmpleadoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionEliminarEmpleadoMenuSelected
         inhabilitarBanderasEmpleado();
@@ -1471,27 +1472,27 @@ public class Principal extends javax.swing.JFrame {
             herramienta.setFechaCompraHerramienta(tfFechaCompraHerramienta.getText());
             herramienta.setPrecioCompraHerramienta(Integer.parseInt(tfPrecioCompraHerramienta.getText()));
             herramienta.setEstadoHerramienta("test.jpg");
-            System.out.println("responsable principal" + cbResponsableHerramienta.getSelectedItem().toString());
             herramientaCt.registrar(herramienta, cbResponsableHerramienta.getSelectedItem().toString());
             inhabilitarCamposEmpleado();
         } else if (modificarHerramientaFlag) {
-            Empleados empleado = new Empleados();
-            ControllerEmpleados empleadoCt = new ControllerEmpleados();
-            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
-            empleado.setNombresEmpleado(tfNombresEmpleado.getText());
-            empleado.setApellidosEmpleado(tfApellidosEmpleado.getText());
-            empleado.setCargoEmpleado(cbCargoEmpleado.getSelectedItem().toString());
-            empleado.setFotoEmpleado("test.jpg");
-            empleadoCt.actualizar(empleado);
+            Herramientas herramienta = new Herramientas();
+            ControllerHerramientas herramientaCt = new ControllerHerramientas();
+            herramienta.setIdHerramienta(tfIdHerramienta.getText());
+            herramienta.setNombreHerramienta(tfNombreHerramienta.getText());
+            herramienta.setLugarCompraHerramienta(tfLugarCompraHerramienta.getText());
+            herramienta.setFechaCompraHerramienta(tfFechaCompraHerramienta.getText());
+            herramienta.setPrecioCompraHerramienta(Integer.parseInt(tfPrecioCompraHerramienta.getText()));
+            herramienta.setEstadoHerramienta("test.jpg");
+            herramientaCt.actualizar(herramienta, cbResponsableHerramienta.getSelectedItem().toString());
             inhabilitarCamposEmpleado();
         } else if (eliminarHerramientaFlag) {
-            Empleados empleado = new Empleados();
-            ControllerEmpleados empleadoCt = new ControllerEmpleados();
-            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+            Herramientas herramienta = new Herramientas();
+            ControllerHerramientas herramientaCt = new ControllerHerramientas();
+            herramienta.setIdHerramienta(tfIdHerramienta.getText());
 //            obra.setNombreEmpleado(tfNombreEmpleado.getText());
 //            obra.setDireccionEmpleado(tfUbicacionEmpleado.getText());
-            empleadoCt.eliminar(empleado);
-            inhabilitarCamposEmpleado();
+            herramientaCt.eliminar(herramienta);
+            inhabilitarCamposHerramienta();
         } else if (consultarHerramientaFlag) {
             Herramientas herramienta = new Herramientas();
             ControllerHerramientas herramientaCt = new ControllerHerramientas();
@@ -1562,8 +1563,10 @@ public class Principal extends javax.swing.JFrame {
     private void opcionModificarHerramientaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_opcionModificarHerramientaMenuSelected
         inhabilitarBanderasEmpleado();
 //        inhabilitarCamposEmpleado();
+        fotoHerramienta = true;
         labelOperacionHerramienta.setText("MODIFICAR");
         modificarHerramientaFlag = true;
+        llenarComboResponsableHerramienta();
         tfIdHerramienta.setEnabled(true);
         tfIdHerramienta.setBackground(Color.white);
         tfNombreHerramienta.setEnabled(true);
@@ -1768,7 +1771,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu opcionEliminarHerramienta;
     private javax.swing.JMenu opcionEliminarObra;
     private javax.swing.JMenu opcionModificarCargo;
-    private javax.swing.JMenu opcionModificarEmpelado;
+    private javax.swing.JMenu opcionModificarEmpleado;
     private javax.swing.JMenu opcionModificarHerramienta;
     private javax.swing.JMenu opcionModificarObra;
     private javax.swing.JMenu opcionMovimiento;

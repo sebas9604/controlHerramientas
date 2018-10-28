@@ -20,6 +20,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -86,25 +88,44 @@ public class HerramientasDaoImpl implements IHerramientasDao {
     }
 
     @Override
-    public boolean actualizarHerramienta(Herramientas herramienta) {
-        Connection connect = null;
+    public boolean actualizarHerramienta(Herramientas herramienta, String responsable) {
+        Connection con = null;
         Statement stm = null;
-
         boolean actualizar = false;
 
-        String sql = "UPDATE herramientas SET idHerramienta='" + herramienta.getIdHerramienta() + "', nombreHerramienta='" + herramienta.getNombreHerramienta()
-                + "', lugarCompraHerramienta='" + herramienta.getLugarCompraHerramienta() + "', precioCompraHerramienta=" + herramienta.getPrecioCompraHerramienta()
-                + ", idObra=" + herramienta.getIdObra() + ", fechaEntradaObraHerramienta='" + herramienta.getFechaEntradaObraHerramienta() + "', fechaSalidaObraHerramienta='" + herramienta.getFechaSalidaObraHerramienta()
-                + "', idHerramienta=" + herramienta.getIdHerramienta() + ", estadoHerramienta='" + herramienta.getEstadoHerramienta()
-                + "' WHERE idHerramienta=" + herramienta.getIdHerramienta();
+//        String sql = "UPDATE herramientas SET idHerramienta='" + herramienta.getIdHerramienta() + "', nombreHerramienta='" + herramienta.getNombreHerramienta()
+//                + "', lugarCompraHerramienta='" + herramienta.getLugarCompraHerramienta() + "', precioCompraHerramienta=" + herramienta.getPrecioCompraHerramienta()
+//                + ", fechaCompraHerramienta=" + herramienta.getFechaCompraHerramienta()
+//                + "', idEmpleado=" + x + ", estadoHerramienta='" + herramienta.getEstadoHerramienta()
+//                + "' WHERE idHerramienta=" + herramienta.getIdHerramienta();
         try {
-            connect = ConexionBD.connect();
-            stm = connect.createStatement();
-            stm.execute(sql);
+            File archivoImg = new File(herramienta.getEstadoHerramienta());
+            int x = consultarIdResponsableporNombresyApellidos(responsable);
+
+            String sql = "UPDATE herramientas "
+                    + "SET nombreHerramienta = ?, lugarCompraHerramienta = ?, precioCompraHerramienta = ?, fechaCompraHerramienta = ?, "
+                    + "idEmpleado = ?, estadoHerramienta = ? "
+                    + "WHERE idHerramienta = ?;";
+            con = ConexionBD.connect();
+            FileInputStream convertir_imagen = new FileInputStream(archivoImg);
+            PreparedStatement psql = con.prepareStatement(sql);
+            psql.setString(1, herramienta.getNombreHerramienta());
+            psql.setString(2, herramienta.getLugarCompraHerramienta());
+            psql.setInt(3, herramienta.getPrecioCompraHerramienta());
+            psql.setString(4, herramienta.getFechaCompraHerramienta());
+            psql.setInt(5, x);
+            psql.setBlob(6, convertir_imagen, archivoImg.length());
+            psql.setString(7, herramienta.getIdHerramienta());
+            psql.executeUpdate();
+            psql.close();
+            con.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
             actualizar = true;
         } catch (SQLException e) {
             System.out.println("Error: Clase ClienteDaoImple, método actualizar");
             e.printStackTrace();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(HerramientasDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return actualizar;
     }
@@ -116,12 +137,14 @@ public class HerramientasDaoImpl implements IHerramientasDao {
 
         boolean eliminar = false;
 
-        String sql = "DELETE FROM herramientas WHERE idHerramienta=" + herramienta.getIdEmpleado();
+        String sql = "DELETE FROM herramientas WHERE idHerramienta=" + herramienta.getIdHerramienta();
         try {
             connect = ConexionBD.connect();
             stm = connect.createStatement();
             stm.execute(sql);
             eliminar = true;
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
         } catch (SQLException e) {
             System.out.println("Error: Clase ClienteDaoImple, método eliminar");
             e.printStackTrace();
@@ -274,7 +297,7 @@ public class HerramientasDaoImpl implements IHerramientasDao {
         System.out.println("Immlpresponsabe: = " + responsable);
         String sql = "SELECT idEmpleado "
                 + "from empleados "
-                + "where concat(nombresEmpleado,' ',apellidosEmpleado) = '" + responsable +"';";
+                + "where concat(nombresEmpleado,' ',apellidosEmpleado) = '" + responsable + "';";
         System.out.println("SQL query = " + sql);
         int rt = -1;
         try {
@@ -283,8 +306,8 @@ public class HerramientasDaoImpl implements IHerramientasDao {
             rs = stm.executeQuery(sql);
             if (rs.next()) {
                 System.out.println("getint " + rs.getInt(1) + "getstring" + rs.getString(1));
-            rt = rs.getInt(1);
-        }
+                rt = rs.getInt(1);
+            }
             stm.close();
             rs.close();
             con.close();

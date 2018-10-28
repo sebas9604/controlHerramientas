@@ -19,7 +19,7 @@ public interface IHerramientasDao {
 
     public ResultSet obtenerHerramientas();
 
-    public boolean actualizarHerramienta(Herramientas herramienta);
+    public boolean actualizarHerramienta(Herramientas herramienta, String responsable);
 
     public boolean eliminarHerramienta(Herramientas herramienta);
 

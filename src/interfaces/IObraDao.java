@@ -17,7 +17,7 @@ public interface IObraDao {
 
     public boolean registrarNuevaObra(Obra obra);
 
-    public ResultSet obtenerObra(Obra obra);
+    public ResultSet obtenerObra(Obra obra, Boolean msj);
 
     public ResultSet obtenerObras();
     
@@ -26,4 +26,6 @@ public interface IObraDao {
     public boolean actualizarObra(Obra obra);
 
     public boolean eliminarObra(Obra obra);
+    
+    public ResultSet reporteHerramientasEnObra(Obra obra);
 }

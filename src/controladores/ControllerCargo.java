@@ -49,7 +49,7 @@ public class ControllerCargo {
     public void verCargo(JTable tabla, Cargo cargo) {
         ResultSet cargos = null;
         ICargoDao dao = new CargoDaoImpl();
-        cargos = dao.obtenerCargo(cargo);
+        cargos = dao.obtenerCargo(cargo, true);
         vista.verCargo(cargos, tabla);
     }
     

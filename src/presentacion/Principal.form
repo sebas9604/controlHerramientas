@@ -596,12 +596,12 @@
                 <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="opcionCrearEmpleadoMenuSelected"/>
               </Events>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="opcionModificarEmpelado">
+            <Menu class="javax.swing.JMenu" name="opcionModificarEmpleado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
               <Events>
-                <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="opcionModificarEmpeladoMenuSelected"/>
+                <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="opcionModificarEmpleadoMenuSelected"/>
               </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="opcionEliminarEmpleado">
@@ -1040,7 +1040,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="btEjecutarObra" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace pref="75" max="32767" attributes="0"/>
+                  <EmptySpace pref="79" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="360" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               </Group>

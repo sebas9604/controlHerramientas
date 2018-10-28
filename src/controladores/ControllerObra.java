@@ -56,7 +56,7 @@ public class ControllerObra {
     public void verObra(JTable tabla, Obra obra) {
         ResultSet obras = null;
         IObraDao dao = new ObraDaoImpl();
-        obras = dao.obtenerObra(obra);
+        obras = dao.obtenerObra(obra,true);
         vista.verObra(obras, tabla);
     }
 
@@ -65,5 +65,12 @@ public class ControllerObra {
         Obra o;
         o = dao.consultarObra(obra);
         return o;
+    }
+    
+        public void reporteHerramientasEnObra(JTable tabla,Obra obra) {
+        ResultSet obras = null;
+        IObraDao dao = new ObraDaoImpl();
+        obras = dao.reporteHerramientasEnObra(obra);
+        vista.reporteHerramientasEnObra(obras, tabla);
     }
 }

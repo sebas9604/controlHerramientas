@@ -27,9 +27,9 @@ public class ControllerHerramientas {
     }
 
     //llama al DAO para actualizar un herramienta
-    public void actualizar(Herramientas herramienta) {
+    public void actualizar(Herramientas herramienta, String responsable) {
         IHerramientasDao dao = new HerramientasDaoImpl();
-        dao.actualizarHerramienta(herramienta);
+        dao.actualizarHerramienta(herramienta, responsable);
     }
 
     //llama al DAO para eliminar un herramienta

@@ -16,7 +16,7 @@ public interface ICargoDao {
     
     public boolean registrarNuevaCargo(Cargo cargo);
 
-    public ResultSet obtenerCargo(Cargo cargo);
+    public ResultSet obtenerCargo(Cargo cargo, Boolean msj);
 
     public ResultSet obtenerCargos();
     

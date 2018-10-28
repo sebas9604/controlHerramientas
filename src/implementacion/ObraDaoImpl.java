@@ -31,7 +31,7 @@ public class ObraDaoImpl implements IObraDao {
         try {
 
             ResultSet rs;
-            rs = obtenerObra(obra);
+            rs = obtenerObra(obra, false);
             if (!rs.next()) {
                 String sql = "INSERT INTO obra (idObra, nombreObra, direccionObra) " + "VALUES (?,?,?);";
                 con = ConexionBD.connect();
@@ -43,7 +43,7 @@ public class ObraDaoImpl implements IObraDao {
                 registrar = true;
                 psql.close();
                 con.close();
-                JOptionPane.showMessageDialog(null, "Operación Exitosa");
+                JOptionPane.showMessageDialog(null, "Creación Exitosa", "Creación Obra", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Ya existe un registro con la identificación: " + obra.getIdObra());
             }
@@ -69,7 +69,7 @@ public class ObraDaoImpl implements IObraDao {
 //            stm.close();
 //            rs.close();
 //            con.close();
-            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Consultar Todo", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
         }
@@ -84,7 +84,7 @@ public class ObraDaoImpl implements IObraDao {
         boolean actualizar = false;
         try {
             ResultSet rs;
-            rs = obtenerObra(obra);
+            rs = obtenerObra(obra, false);
 
             if (rs.next()) {
                 String sql = "UPDATE obra SET idObra='" + obra.getIdObra()
@@ -96,7 +96,7 @@ public class ObraDaoImpl implements IObraDao {
                 stm = connect.createStatement();
                 stm.execute(sql);
                 actualizar = true;
-                JOptionPane.showMessageDialog(null, "Operación Exitosa");
+                JOptionPane.showMessageDialog(null, "Operación Exitosa", "Actualizar Obra", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "El registro no existe");
             }
@@ -114,7 +114,7 @@ public class ObraDaoImpl implements IObraDao {
         boolean eliminar = false;
 
         try {
-            ResultSet rs = obtenerObra(obra);
+            ResultSet rs = obtenerObra(obra, false);
             if (rs.next()) {
 
                 String sql = "DELETE FROM obra WHERE idObra = "
@@ -124,7 +124,7 @@ public class ObraDaoImpl implements IObraDao {
                 stm = connect.createStatement();
                 stm.execute(sql);
                 eliminar = true;
-                JOptionPane.showMessageDialog(null, "Operación Exitosa");
+                JOptionPane.showMessageDialog(null, "Operación Exitosa", "Eliminar Obra", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "El registro no existe");
 
@@ -138,14 +138,13 @@ public class ObraDaoImpl implements IObraDao {
     }
 
     @Override
-    public ResultSet obtenerObra(Obra obra) {
+    public ResultSet obtenerObra(Obra obra, Boolean msj) {
         Connection con = null;
         Statement stm = null;
         ResultSet rs = null;
 
         String sql = "SELECT idObra, nombreObra, direccionObra "
                 + "FROM obra WHERE idObra = " + obra.getIdObra() + ";";
-        System.out.println(sql);
         try {
             con = ConexionBD.connect();
             stm = con.createStatement();
@@ -153,7 +152,10 @@ public class ObraDaoImpl implements IObraDao {
 //            stm.close();
 //            rs.close();
 //            con.close();
-            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
+            if (msj) {
+                JOptionPane.showMessageDialog(null, "Operación Exitosa", "Consultar Obra", JOptionPane.INFORMATION_MESSAGE);
+            }
 
         } catch (Exception e) {
         }
@@ -180,10 +182,14 @@ public class ObraDaoImpl implements IObraDao {
                 o.setDireccionObra(rs.getString(3));
 
             }
+            if (o.getIdObra() == null) {
+                JOptionPane.showMessageDialog(null, "El registro no existe", "Consultar Obra", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Operación Exitosa", "Consultar Obra", JOptionPane.INFORMATION_MESSAGE);
+            }
             stm.close();
             rs.close();
             con.close();
-            JOptionPane.showMessageDialog(null, "Operación Exitosa");
 
         } catch (SQLException e) {
             System.out.println("Error: Clase ObraDaoImple, método consultarObra");
@@ -191,6 +197,34 @@ public class ObraDaoImpl implements IObraDao {
         }
         return o;
 
+    }
+
+    @Override
+    public ResultSet reporteHerramientasEnObra(Obra obra) {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT obra.idObra, obra.nombreObra, herr.idHerramienta, herr.nombreHerramienta "
+                + "FROM obra AS obra "
+                + "INNER JOIN herramientasxobra AS hxo "
+                + "ON obra.idObra = hxo.idObra "
+                + "INNER JOIN herramientas AS herr "
+                + "ON herr.idHerramienta = hxo.idHerramienta "
+                + "where obra.idObra = '" + obra.getIdObra() + "';";
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+//            stm.close();
+//            rs.close();
+//            con.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Reporte Obra", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+        }
+
+        return rs;
     }
 
 }

@@ -20,7 +20,7 @@ public class VistaObra {
 
     public void verObra(ResultSet obras, JTable tabla) {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.setColumnIdentifiers(new Object[]{"Identificación", "Nombre", "Dirección"});
+        modelo.setColumnIdentifiers(new Object[]{"Centro de costo", "Nombre", "Dirección"});
 
         try {
 
@@ -48,11 +48,25 @@ public class VistaObra {
 //    }
     public void verObras(ResultSet obras, JTable tabla) {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.setColumnIdentifiers(new Object[]{"Identificación", "Nombre", "Dirección"});
+        modelo.setColumnIdentifiers(new Object[]{"Centro de Costo", "Nombre", "Dirección"});
 
         try {
             while (obras.next()) {
                 modelo.addRow(new Object[]{obras.getInt("idObra"), obras.getString("nombreObra"), obras.getString("direccionObra")});
+            }
+            tabla.setModel(modelo);
+
+        } catch (Exception ex) {
+        }
+    }
+    
+    public void reporteHerramientasEnObra(ResultSet obras, JTable tabla){
+            DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Centro de Costo", "Nombre", "Referencia Herramienta", "Herramienta"});
+
+        try {
+            while (obras.next()) {
+                modelo.addRow(new Object[]{obras.getInt("idObra"), obras.getString("nombreObra"), obras.getString("idHerramienta"), obras.getString("nombreHerramienta")});
             }
             tabla.setModel(modelo);
 

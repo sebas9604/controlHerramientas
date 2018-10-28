@@ -30,7 +30,7 @@ public class CargoDaoImpl implements ICargoDao {
         try {
 
             ResultSet rs;
-            rs = obtenerCargo(cargo);
+            rs = obtenerCargo(cargo, false);
             if (!rs.next()) {
                 String sql = "INSERT INTO cargo (idCargo, nombreCargo) " + "VALUES (?,?);";
                 con = ConexionBD.connect();
@@ -53,7 +53,7 @@ public class CargoDaoImpl implements ICargoDao {
     }
 
     @Override
-    public ResultSet obtenerCargo(Cargo cargo) {
+    public ResultSet obtenerCargo(Cargo cargo, Boolean msj) {
         Connection con = null;
         Statement stm = null;
         ResultSet rs = null;
@@ -68,8 +68,9 @@ public class CargoDaoImpl implements ICargoDao {
 //            stm.close();
 //            rs.close();
 //            con.close();
-            JOptionPane.showMessageDialog(null, "Operación Exitosa");
-
+            if (msj) {
+                JOptionPane.showMessageDialog(null, "Operación Exitosa", "Consultar Cargo", JOptionPane.INFORMATION_MESSAGE);
+            }
         } catch (Exception e) {
         }
 
@@ -113,12 +114,15 @@ public class CargoDaoImpl implements ICargoDao {
             if (rs.next()) {
                 c.setIdCargo(rs.getInt(1));
                 c.setNombreCargo(rs.getString(2));
-
+            if (c.getIdCargo() == 0) {
+                JOptionPane.showMessageDialog(null, "El registro no existe", "Consultar Cargo", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Operación Exitosa", "Consultar Cargo", JOptionPane.INFORMATION_MESSAGE);
+            }
             }
             stm.close();
             rs.close();
             con.close();
-            JOptionPane.showMessageDialog(null, "Operación Exitosa");
 
         } catch (SQLException e) {
             System.out.println("Error: Clase CargoDaoImple, método consultarCargo");
@@ -135,12 +139,12 @@ public class CargoDaoImpl implements ICargoDao {
         boolean actualizar = false;
         try {
             ResultSet rs;
-            rs = obtenerCargo(cargo);
+            rs = obtenerCargo(cargo, false);
 
             if (rs.next()) {
-                String sql = "UPDATE cargo SET idCargo='" + cargo.getIdCargo()
-                        + "', nombrecargo='" + cargo.getNombreCargo() + "';";
-
+                String sql = "UPDATE cargo SET nombrecargo = '" + cargo.getNombreCargo() + "'"
+                        + " WHERE idCargo = " + cargo.getIdCargo() + ";";
+                System.out.println(sql);
                 connect = ConexionBD.connect();
                 stm = connect.createStatement();
                 stm.execute(sql);
@@ -163,7 +167,7 @@ public class CargoDaoImpl implements ICargoDao {
         boolean eliminar = false;
 
         try {
-            ResultSet rs = obtenerCargo(cargo);
+            ResultSet rs = obtenerCargo(cargo, false);
             if (rs.next()) {
 
                 String sql = "DELETE FROM cargo WHERE idCargo = "
