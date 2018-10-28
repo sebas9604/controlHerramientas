@@ -62,7 +62,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
             JOptionPane.showMessageDialog(null, "Operación Exitosa");
 
         } catch (FileNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error insertando al empleado" + ex);
+            JOptionPane.showMessageDialog(null, "Error insertando al empleado: Ya existe un registro con esta identificación");
         }
 
         return registrar;
@@ -95,25 +95,40 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
 
     @Override
     public boolean actualizarEmpleado(Empleados empleado) {
-        Connection connect = null;
+        Connection con = null;
         Statement stm = null;
 
         boolean actualizar = false;
         int idCargo = consultarIdCargoPorNombreCargo(empleado);
 
-        String sql = "UPDATE empleados SET idEmpleado=" + empleado.getIdEmpleado() + ", nombresEmpleado='" + empleado.getNombresEmpleado()
-                + "', apellidosEmpleado='" + empleado.getApellidosEmpleado() + "', idCargo='" + idCargo
-                + "', fotoEmpleado='" + empleado.getFotoEmpleado() + "' WHERE idEmpleado=" + empleado.getIdEmpleado();
         try {
-            connect = ConexionBD.connect();
-            stm = connect.createStatement();
-            stm.execute(sql);
-            actualizar = true;
+            File archivoImg = new File(empleado.getFotoEmpleado());
+    
+        String sql = "UPDATE empleados "
+                + "SET nombresEmpleado = ?, "
+                + "apellidosEmpleado = ?, "
+                + "idCargo = ?, "
+                + "fotoEmpleado = ? "
+                + "WHERE idEmpleado = ?;";
+        
+            con = ConexionBD.connect();
+            FileInputStream convertir_imagen = new FileInputStream(archivoImg);
+            PreparedStatement psql = con.prepareStatement(sql);
+            psql.setString(1, empleado.getNombresEmpleado());
+            psql.setString(2, empleado.getApellidosEmpleado());
+            psql.setInt(3, idCargo);
+            psql.setBlob(4, convertir_imagen, archivoImg.length());
+            psql.setInt(5, empleado.getIdEmpleado());
+            psql.executeUpdate();
+            psql.close();
+            con.close();
             JOptionPane.showMessageDialog(null, "Operación Exitosa");
-
+            actualizar = true;
         } catch (SQLException e) {
             System.out.println("Error: Clase ClienteDaoImple, método actualizar");
             e.printStackTrace();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(EmpleadosDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return actualizar;
     }
@@ -170,7 +185,6 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
         Connection con = null;
         Statement stm = null;
         ResultSet rs = null;
-        String s = consultarNombreCargoPorIdCargo(empleado);
         String sql = "SELECT idEmpleado, nombresEmpleado, ApellidosEmpleado, idCargo, fotoEmpleado FROM empleados WHERE idEmpleado = " + empleado.getIdEmpleado() + ";";
         Empleados e = new Empleados();
         JOptionPane.showMessageDialog(null, "Operación Exitosa");
@@ -183,7 +197,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
                 e.setIdEmpleado(rs.getInt(1));
                 e.setNombresEmpleado(rs.getString(2));
                 e.setApellidosEmpleado(rs.getString(3));
-                e.setCargoEmpleado(s);
+                e.setCargoEmpleado(rs.getString(4));
                 e.setFotoEmpleado(rs.getString(5));
 
 //                Blob bytesImagen = rs.getBlob("fotoEmpleado");
@@ -233,7 +247,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
         Statement stm = null;
         ResultSet rs = null;
 
-        String sql = "select nombreCargo from cargo where idCargo = " + empleado.getCargoEmpleado() + ";";
+        String sql = "select nombreCargo from cargo where idCargo = '" + empleado.getCargoEmpleado() + "';";
         Cargo c = new Cargo();
 
         try {
@@ -297,5 +311,31 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
         }
 
         return listaCargos;
+    }
+
+    @Override
+    public String consultarCargoPorIdCargo(Empleados empleado) {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+        System.out.println("CargoEmpleado de Empleado: " + empleado.getCargoEmpleado());
+        String sql = "select nombreCargo from cargo where idCargo = " + empleado.getCargoEmpleado()+ ";";
+        Cargo c = new Cargo();
+        String rt = "";
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            if (rs.next()) {
+                c.setNombreCargo(rs.getString(1));
+            }
+            rt = c.getNombreCargo();
+            stm.close();
+            rs.close();
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return rt;
     }
 }

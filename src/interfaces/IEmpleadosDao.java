@@ -29,4 +29,6 @@ public interface IEmpleadosDao {
     public Empleados consultarEmpleado(Empleados empleado);
 
     public List<String> llenarComboEmpleado();
+
+    public String consultarCargoPorIdCargo(Empleados empleado);
 }

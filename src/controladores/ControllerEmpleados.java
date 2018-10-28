@@ -53,19 +53,25 @@ public class ControllerEmpleados {
         empleados = dao.obtenerEmpleado(empleado);
         vista.verEmpleado(empleados, tabla);
     }
-    
+
     public Empleados consultarEmpleado(Empleados empleado) {
         IEmpleadosDao dao = new EmpleadosDaoImpl();
         Empleados e;
         e = dao.consultarEmpleado(empleado);
         return e;
     }
-    
-    public List<String> llenarComboCargo(){
-            IEmpleadosDao dao = new EmpleadosDaoImpl();
+
+    public List<String> llenarComboCargo() {
+        IEmpleadosDao dao = new EmpleadosDaoImpl();
         List<String> list = dao.llenarComboEmpleado();
-    
-        
+
         return list;
+    }
+
+    public String consultarCargoPorIdCargo(Empleados empleado) {
+        IEmpleadosDao dao = new EmpleadosDaoImpl();
+        String h;
+        h = dao.consultarCargoPorIdCargo(empleado);
+        return h;
     }
 }

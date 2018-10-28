@@ -1411,10 +1411,11 @@ public class Principal extends javax.swing.JFrame {
 //            obra.setDireccionEmpleado(tfUbicacionEmpleado.getText());
 //            obraCt.verEmpleado(tablaEmpleados, obra);
             empleado = empleadoCt.consultarEmpleado(empleado);
+//            String s = empleadoCt.consultarCargoPorIdCargo(empleado);
+//            System.out.println("nombre cargo: " + s );
             tfNombresEmpleado.setText(empleado.getNombresEmpleado());
             tfApellidosEmpleado.setText(empleado.getApellidosEmpleado());
             cbCargoEmpleado.removeAllItems();
-            System.out.println(empleado.getCargoEmpleado());
             cbCargoEmpleado.addItem(empleado.getCargoEmpleado());
             ImageIcon imagen = empleado.getFotoEmp();
             Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(labelImagenEmpleado.getWidth(), labelImagenEmpleado.getHeight(), Image.SCALE_DEFAULT));
@@ -1502,7 +1503,6 @@ public class Principal extends javax.swing.JFrame {
 //            obraCt.verEmpleado(tablaEmpleados, obra);
             herramienta = herramientaCt.consultarHerramienta(herramienta);
             String s = herramientaCt.consultarResponsablePorIdEmpleado(herramienta);
-            System.out.println("Responsable " + s);
             tfNombreHerramienta.setText(herramienta.getNombreHerramienta());
             tfLugarCompraHerramienta.setText(herramienta.getLugarCompraHerramienta());
             tfFechaCompraHerramienta.setText(herramienta.getFechaCompraHerramienta());
