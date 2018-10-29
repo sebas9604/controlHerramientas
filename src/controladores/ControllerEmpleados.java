@@ -74,4 +74,11 @@ public class ControllerEmpleados {
         h = dao.consultarCargoPorIdCargo(empleado);
         return h;
     }
+    
+        public void verHerramientasACargo(JTable tabla) {
+        ResultSet herramientasACargo = null;
+        IEmpleadosDao dao = new EmpleadosDaoImpl();
+        herramientasACargo = dao.obtenerHerramientasACargo();
+        vista.verHerramientasACargo(herramientasACargo, tabla);
+    }
 }

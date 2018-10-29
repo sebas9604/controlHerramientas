@@ -19,6 +19,8 @@ public interface IEmpleadosDao {
     public boolean registrarNuevoEmpleado(Empleados empleado);
 
     public ResultSet obtenerEmpleados();
+    
+    public ResultSet obtenerHerramientasACargo();
 
     public boolean actualizarEmpleado(Empleados empleado);
 

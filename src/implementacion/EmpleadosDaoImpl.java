@@ -338,4 +338,29 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
         }
         return rt;
     }
+
+    @Override
+    public ResultSet obtenerHerramientasACargo() {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT idEmpleado, nombresEmpleado, apellidosEmpleado, idCargo "
+                + "FROM empleados ORDER BY idEmpleado";
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+//            stm.close();
+//            rs.close();
+//            con.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
+        } catch (Exception e) {
+            System.out.println("implementacion.EmpleadosDaoImpl.obtenerEmpleados()");
+            e.printStackTrace();
+        }
+
+        return rs;
+    }
 }

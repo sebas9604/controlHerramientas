@@ -554,6 +554,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="HERRAMIENTAS A CARGO"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btReporteHerramientasACargoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btTomarFotoEmpleado">
           <Properties>

@@ -22,6 +22,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import modelo.Cargo;
 import modelo.Empleados;
 import modelo.Herramientas;
@@ -420,6 +421,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         btReporteHerramientasACargo.setText("HERRAMIENTAS A CARGO");
+        btReporteHerramientasACargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btReporteHerramientasACargoActionPerformed(evt);
+            }
+        });
 
         btTomarFotoEmpleado.setText("TOMAR FOTO");
         btTomarFotoEmpleado.addActionListener(new java.awt.event.ActionListener() {
@@ -962,7 +968,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(tfIdObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(btEjecutarObra, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
@@ -1463,7 +1469,7 @@ public class Principal extends javax.swing.JFrame {
         if (consultarHerramientasFlag) {
             ControllerHerramientas herramientaCt = new ControllerHerramientas();
             herramientaCt.verHerramientas(tablaHerramienta);
-            inhabilitarCamposEmpleado();
+            inhabilitarCamposHerramienta();
         } else if (crearHerramientaFlag) {
             Herramientas herramienta = new Herramientas();
             ControllerHerramientas herramientaCt = new ControllerHerramientas();
@@ -1474,7 +1480,7 @@ public class Principal extends javax.swing.JFrame {
             herramienta.setPrecioCompraHerramienta(Integer.parseInt(tfPrecioCompraHerramienta.getText()));
             herramienta.setEstadoHerramienta("test.jpg");
             herramientaCt.registrar(herramienta, cbResponsableHerramienta.getSelectedItem().toString());
-            inhabilitarCamposEmpleado();
+            inhabilitarCamposHerramienta();
         } else if (modificarHerramientaFlag) {
             Herramientas herramienta = new Herramientas();
             ControllerHerramientas herramientaCt = new ControllerHerramientas();
@@ -1485,7 +1491,7 @@ public class Principal extends javax.swing.JFrame {
             herramienta.setPrecioCompraHerramienta(Integer.parseInt(tfPrecioCompraHerramienta.getText()));
             herramienta.setEstadoHerramienta("test.jpg");
             herramientaCt.actualizar(herramienta, cbResponsableHerramienta.getSelectedItem().toString());
-            inhabilitarCamposEmpleado();
+            inhabilitarCamposHerramienta();
         } else if (eliminarHerramientaFlag) {
             Herramientas herramienta = new Herramientas();
             ControllerHerramientas herramientaCt = new ControllerHerramientas();
@@ -1591,6 +1597,16 @@ public class Principal extends javax.swing.JFrame {
         tfIdHerramienta.setBackground(Color.white);
         btEjecutarHerramienta.setEnabled(true);
     }//GEN-LAST:event_opcionEliminarHerramientaMenuSelected
+
+    private void btReporteHerramientasACargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReporteHerramientasACargoActionPerformed
+if(consultarHerramientaFlag){
+            ControllerEmpleados empleadoCt = new ControllerEmpleados();
+            empleadoCt.verHerramientasACargo(tablaEmpleados);
+            inhabilitarCamposEmpleado();
+}else{
+    JOptionPane.showMessageDialog(null, "Primero debe consultar un empleado");
+}        // TODO add your handling code here:
+    }//GEN-LAST:event_btReporteHerramientasACargoActionPerformed
 
     private void inhabilitarCamposObra() {
         tfIdObra.setEnabled(false);

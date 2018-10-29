@@ -50,4 +50,23 @@ public class VistaEmpleado {
         }
 
 }
+    
+    
+    
+    public void verHerramientasACargo(ResultSet empleados, JTable tabla) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"idEmpleado", "nombresEmpleado", "apellidosEmpleado", "idHerramienta", "nombreHerramienta"});
+
+        try {
+            while (empleados.next()) {
+                modelo.addRow(new Object[]{empleados.getInt("idEmpleado"), empleados.getString("nombresEmpleado"), empleados.getString("apellidosEmpleado"),
+                    empleados.getString("idCargo")});            }
+            tabla.setModel(modelo);
+
+        } catch (Exception ex) {
+            System.out.println("vistaPk.VistaEmpleado.verEmpleados()");
+            ex.printStackTrace();
+        }
+
+}
 }
