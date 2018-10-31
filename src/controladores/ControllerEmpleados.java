@@ -75,10 +75,10 @@ public class ControllerEmpleados {
         return h;
     }
     
-        public void verHerramientasACargo(JTable tabla) {
+        public void verHerramientasACargo(JTable tabla, Empleados empleado) {
         ResultSet herramientasACargo = null;
         IEmpleadosDao dao = new EmpleadosDaoImpl();
-        herramientasACargo = dao.obtenerHerramientasACargo();
+        herramientasACargo = dao.obtenerHerramientasACargo(empleado);
         vista.verHerramientasACargo(herramientasACargo, tabla);
     }
 }

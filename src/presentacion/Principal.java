@@ -1384,7 +1384,7 @@ public class Principal extends javax.swing.JFrame {
         } else if (crearEmpleadoFlag) {
             Empleados empleado = new Empleados();
             ControllerEmpleados empleadoCt = new ControllerEmpleados();
-            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+            empleado.setIdEmpleado(tfIdEmpleado.getText());
             empleado.setNombresEmpleado(tfNombresEmpleado.getText());
             empleado.setApellidosEmpleado(tfApellidosEmpleado.getText());
             empleado.setCargoEmpleado(cbCargoEmpleado.getSelectedItem().toString());
@@ -1394,7 +1394,7 @@ public class Principal extends javax.swing.JFrame {
         } else if (modificarEmpleadoFlag) {
             Empleados empleado = new Empleados();
             ControllerEmpleados empleadoCt = new ControllerEmpleados();
-            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+            empleado.setIdEmpleado(tfIdEmpleado.getText());
             empleado.setNombresEmpleado(tfNombresEmpleado.getText());
             empleado.setApellidosEmpleado(tfApellidosEmpleado.getText());
             empleado.setCargoEmpleado(cbCargoEmpleado.getSelectedItem().toString());
@@ -1404,7 +1404,7 @@ public class Principal extends javax.swing.JFrame {
         } else if (eliminarEmpleadoFlag) {
             Empleados empleado = new Empleados();
             ControllerEmpleados empleadoCt = new ControllerEmpleados();
-            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+            empleado.setIdEmpleado(tfIdEmpleado.getText());
 //            obra.setNombreEmpleado(tfNombreEmpleado.getText());
 //            obra.setDireccionEmpleado(tfUbicacionEmpleado.getText());
             empleadoCt.eliminar(empleado);
@@ -1412,17 +1412,17 @@ public class Principal extends javax.swing.JFrame {
         } else if (consultarEmpleadoFlag) {
             Empleados empleado = new Empleados();
             ControllerEmpleados empleadoCt = new ControllerEmpleados();
-            empleado.setIdEmpleado(Integer.parseInt(tfIdEmpleado.getText()));
+            empleado.setIdEmpleado(tfIdEmpleado.getText());
 //            obra.setNombreEmpleado(tfNombreEmpleado.getText());
 //            obra.setDireccionEmpleado(tfUbicacionEmpleado.getText());
 //            obraCt.verEmpleado(tablaEmpleados, obra);
             empleado = empleadoCt.consultarEmpleado(empleado);
-//            String s = empleadoCt.consultarCargoPorIdCargo(empleado);
+            String s = empleadoCt.consultarCargoPorIdCargo(empleado);
 //            System.out.println("nombre cargo: " + s );
             tfNombresEmpleado.setText(empleado.getNombresEmpleado());
             tfApellidosEmpleado.setText(empleado.getApellidosEmpleado());
             cbCargoEmpleado.removeAllItems();
-            cbCargoEmpleado.addItem(empleado.getCargoEmpleado());
+            cbCargoEmpleado.addItem(s);
             ImageIcon imagen = empleado.getFotoEmp();
             Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(labelImagenEmpleado.getWidth(), labelImagenEmpleado.getHeight(), Image.SCALE_DEFAULT));
             labelImagenEmpleado.setIcon(icono);
@@ -1599,9 +1599,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_opcionEliminarHerramientaMenuSelected
 
     private void btReporteHerramientasACargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReporteHerramientasACargoActionPerformed
-if(consultarHerramientaFlag){
+if(consultarEmpleadoFlag){
+    Empleados empleado = new Empleados();
+    empleado.setIdEmpleado(tfIdEmpleado.getText());
             ControllerEmpleados empleadoCt = new ControllerEmpleados();
-            empleadoCt.verHerramientasACargo(tablaEmpleados);
+            empleadoCt.verHerramientasACargo(tablaEmpleados, empleado);
             inhabilitarCamposEmpleado();
 }else{
     JOptionPane.showMessageDialog(null, "Primero debe consultar un empleado");

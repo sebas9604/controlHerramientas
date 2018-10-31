@@ -24,7 +24,7 @@ public class VistaEmpleado {
         try {
 
             while (empleados.next()) {
-                modelo.addRow(new Object[]{empleados.getInt("idEmpleado"), empleados.getString("nombresEmpleado"), empleados.getString("apellidosEmpleado"),
+                modelo.addRow(new Object[]{empleados.getString("idEmpleado"), empleados.getString("nombresEmpleado"), empleados.getString("apellidosEmpleado"),
                     empleados.getString("cargoEmpleado"), empleados.getString("fotoEmpleado")});
             }
             tabla.setModel(modelo);
@@ -40,7 +40,7 @@ public class VistaEmpleado {
 
         try {
             while (empleados.next()) {
-                modelo.addRow(new Object[]{empleados.getInt("idEmpleado"), empleados.getString("nombresEmpleado"), empleados.getString("apellidosEmpleado"),
+                modelo.addRow(new Object[]{empleados.getString("idEmpleado"), empleados.getString("nombresEmpleado"), empleados.getString("apellidosEmpleado"),
                     empleados.getString("idCargo")});            }
             tabla.setModel(modelo);
 
@@ -59,8 +59,8 @@ public class VistaEmpleado {
 
         try {
             while (empleados.next()) {
-                modelo.addRow(new Object[]{empleados.getInt("idEmpleado"), empleados.getString("nombresEmpleado"), empleados.getString("apellidosEmpleado"),
-                    empleados.getString("idCargo")});            }
+                modelo.addRow(new Object[]{empleados.getString("idEmpleado"), empleados.getString("nombresEmpleado"), empleados.getString("apellidosEmpleado"),
+                    empleados.getString("idHerramienta"), empleados.getString("nombreHerramienta")});            }
             tabla.setModel(modelo);
 
         } catch (Exception ex) {

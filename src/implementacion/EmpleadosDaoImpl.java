@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -50,7 +50,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
             String sql = "INSERT INTO empleados (idEmpleado, nombresEmpleado, apellidosEmpleado, idCargo, fotoEmpleado)" + "VALUES (?,?,?,?,?);";
             FileInputStream convertir_imagen = new FileInputStream(archivoImg);
             PreparedStatement psql = con.prepareStatement(sql);
-            psql.setInt(1, empleado.getIdEmpleado());
+            psql.setString(1, empleado.getIdEmpleado());
             psql.setString(2, empleado.getNombresEmpleado());
             psql.setString(3, empleado.getApellidosEmpleado());
             psql.setInt(4, idCargo);
@@ -62,7 +62,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
             JOptionPane.showMessageDialog(null, "Operación Exitosa");
 
         } catch (FileNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error insertando al empleado: Ya existe un registro con esta identificación");
+            JOptionPane.showMessageDialog(null, "Error insertando al empleado: Ya existe un registro con esta identificación \n" + ex);
         }
 
         return registrar;
@@ -103,14 +103,14 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
 
         try {
             File archivoImg = new File(empleado.getFotoEmpleado());
-    
-        String sql = "UPDATE empleados "
-                + "SET nombresEmpleado = ?, "
-                + "apellidosEmpleado = ?, "
-                + "idCargo = ?, "
-                + "fotoEmpleado = ? "
-                + "WHERE idEmpleado = ?;";
-        
+
+            String sql = "UPDATE empleados "
+                    + "SET nombresEmpleado = ?, "
+                    + "apellidosEmpleado = ?, "
+                    + "idCargo = ?, "
+                    + "fotoEmpleado = ? "
+                    + "WHERE idEmpleado = ?;";
+
             con = ConexionBD.connect();
             FileInputStream convertir_imagen = new FileInputStream(archivoImg);
             PreparedStatement psql = con.prepareStatement(sql);
@@ -118,7 +118,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
             psql.setString(2, empleado.getApellidosEmpleado());
             psql.setInt(3, idCargo);
             psql.setBlob(4, convertir_imagen, archivoImg.length());
-            psql.setInt(5, empleado.getIdEmpleado());
+            psql.setString(5, empleado.getIdEmpleado());
             psql.executeUpdate();
             psql.close();
             con.close();
@@ -140,7 +140,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
 
         boolean eliminar = false;
 
-        String sql = "DELETE FROM empleados WHERE idEmpleado=" + empleado.getIdEmpleado();
+        String sql = "DELETE FROM empleados WHERE idEmpleado = '" + empleado.getIdEmpleado() + "';";
         try {
             connect = ConexionBD.connect();
             stm = connect.createStatement();
@@ -162,7 +162,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
         ResultSet rs = null;
 
         String sql = "SELECT idEmpleado, nombresEmpleado, apellidosEmpleado, cargoEmpleado, fotoEmpleado "
-                + "FROM empleados WHERE idEmpleado = " + empleado.getIdEmpleado() + ";";
+                + "FROM empleados WHERE idEmpleado = '" + empleado.getIdEmpleado() + "';";
         System.out.println(sql);
         try {
             con = ConexionBD.connect();
@@ -185,7 +185,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
         Connection con = null;
         Statement stm = null;
         ResultSet rs = null;
-        String sql = "SELECT idEmpleado, nombresEmpleado, ApellidosEmpleado, idCargo, fotoEmpleado FROM empleados WHERE idEmpleado = " + empleado.getIdEmpleado() + ";";
+        String sql = "SELECT idEmpleado, nombresEmpleado, ApellidosEmpleado, idCargo, fotoEmpleado FROM empleados WHERE idEmpleado = '" + empleado.getIdEmpleado() + "';";
         Empleados e = new Empleados();
         JOptionPane.showMessageDialog(null, "Operación Exitosa");
 
@@ -194,7 +194,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
             if (rs.next()) {
-                e.setIdEmpleado(rs.getInt(1));
+                e.setIdEmpleado(rs.getString(1));
                 e.setNombresEmpleado(rs.getString(2));
                 e.setApellidosEmpleado(rs.getString(3));
                 e.setCargoEmpleado(rs.getString(4));
@@ -272,7 +272,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
         Statement stm = null;
         ResultSet rs = null;
 
-        String sql = "SELECT fotoEmpleado FROM empleados WHERE idEmpleado = " + empleado.getIdEmpleado() + ";";
+        String sql = "SELECT fotoEmpleado FROM empleados WHERE idEmpleado = '" + empleado.getIdEmpleado() + "';";
         ImageIcon ii = null;
         InputStream is = null;
         try {
@@ -319,7 +319,7 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
         Statement stm = null;
         ResultSet rs = null;
         System.out.println("CargoEmpleado de Empleado: " + empleado.getCargoEmpleado());
-        String sql = "select nombreCargo from cargo where idCargo = " + empleado.getCargoEmpleado()+ ";";
+        String sql = "select nombreCargo from cargo where idCargo = " + empleado.getCargoEmpleado() + ";";
         Cargo c = new Cargo();
         String rt = "";
         try {
@@ -340,13 +340,16 @@ public class EmpleadosDaoImpl implements IEmpleadosDao {
     }
 
     @Override
-    public ResultSet obtenerHerramientasACargo() {
+    public ResultSet obtenerHerramientasACargo(Empleados empleado) {
         Connection con = null;
         Statement stm = null;
         ResultSet rs = null;
 
-        String sql = "SELECT idEmpleado, nombresEmpleado, apellidosEmpleado, idCargo "
-                + "FROM empleados ORDER BY idEmpleado";
+        String sql = "SELECT e.idEmpleado, e.nombresEmpleado, e.apellidosEmpleado, h.idHerramienta, h.nombreHerramienta "
+                + "FROM empleados AS e "
+                + "INNER JOIN herramientas AS h "
+                + "ON e.idEmpleado = h.idEmpleado "
+                + "WHERE e.idEmpleado = '" + empleado.getIdEmpleado() + "';";
         try {
             con = ConexionBD.connect();
             stm = con.createStatement();
