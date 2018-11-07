@@ -18,7 +18,8 @@ import vistaPk.VistaHerramienta;
  * @author jlinares
  */
 public class ControllerHerramientas {
-      private VistaHerramienta vista = new VistaHerramienta();
+
+    private VistaHerramienta vista = new VistaHerramienta();
 
     //llama al DAO para guardar un herramienta
     public void registrar(Herramientas herramienta, String responsable) {
@@ -51,27 +52,33 @@ public class ControllerHerramientas {
         IHerramientasDao dao = new HerramientasDaoImpl();
         herramientas = dao.obtenerHerramienta(herramienta);
         vista.verHerramienta(herramientas, tabla);
-    }  
-    
-        public Herramientas consultarHerramienta(Herramientas herramienta) {
+    }
+
+    public void verTiempoVida(JTable tabla, Herramientas herramienta) {
+        ResultSet herramientas = null;
+        IHerramientasDao dao = new HerramientasDaoImpl();
+        herramientas = dao.tiempoDeVida(herramienta);
+        vista.tiempoVidaHerramienta(herramientas, tabla);
+    }
+
+    public Herramientas consultarHerramienta(Herramientas herramienta) {
         IHerramientasDao dao = new HerramientasDaoImpl();
         Herramientas h;
         h = dao.consultarHerramienta(herramienta);
         return h;
     }
-        
-        public List<String> llenarComboResponsable(){
-            IHerramientasDao dao = new HerramientasDaoImpl();
+
+    public List<String> llenarComboResponsable() {
+        IHerramientasDao dao = new HerramientasDaoImpl();
         List<String> list = dao.llenarComboResponsable();
-    
-        
+
         return list;
     }
-        
-        public String consultarResponsablePorIdEmpleado(Herramientas herramienta){
-                IHerramientasDao dao = new HerramientasDaoImpl();
+
+    public String consultarResponsablePorIdEmpleado(Herramientas herramienta) {
+        IHerramientasDao dao = new HerramientasDaoImpl();
         String h;
         h = dao.consultarResponsablePorIdEmpleado(herramienta);
         return h;
-        }
+    }
 }

@@ -318,4 +318,28 @@ public class HerramientasDaoImpl implements IHerramientasDao {
         return rt;
     }
 
+    @Override
+    public ResultSet tiempoDeVida(Herramientas herramienta) {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT idHerramienta AS Referencia, NombreHerramienta AS Herramienta, "
+                + "fechaCompraHerramienta AS Compra, "
+                + "CONCAT(DATEDIFF(NOW(), (SELECT fechaCompraHerramienta FROM herramientas "
+                + "WHERE idHerramienta = '" + herramienta.getIdHerramienta() + "')), ' Dias') AS 'Tiempo de Vida'"
+                + "FROM Herramientas WHERE idHerramienta = '" + herramienta.getIdHerramienta() + "';";
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+//            stm.close();
+//            rs.close();
+//            con.close();
+        } catch (Exception e) {
+        }
+
+        return rs;
+    }
+
 }

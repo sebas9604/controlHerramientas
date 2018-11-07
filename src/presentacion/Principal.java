@@ -613,6 +613,11 @@ public class Principal extends javax.swing.JFrame {
         tfFechaCompraHerramienta.setToolTipText("MM/DD/AA");
 
         btRepoTiempoVida.setText("TIEMPO DE VIDA");
+        btRepoTiempoVida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRepoTiempoVidaActionPerformed(evt);
+            }
+        });
 
         tablaHerramienta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1609,6 +1614,18 @@ if(consultarEmpleadoFlag){
     JOptionPane.showMessageDialog(null, "Primero debe consultar un empleado");
 }        // TODO add your handling code here:
     }//GEN-LAST:event_btReporteHerramientasACargoActionPerformed
+
+    private void btRepoTiempoVidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRepoTiempoVidaActionPerformed
+if(consultarHerramientaFlag){
+    Herramientas herramienta = new Herramientas();
+    herramienta.setIdHerramienta(tfIdHerramienta.getText());
+            ControllerHerramientas herramientaCt = new ControllerHerramientas();
+            herramientaCt.verTiempoVida(tablaHerramienta, herramienta);
+           
+}else{
+    JOptionPane.showMessageDialog(null, "Primero debe consultar una herramienta");
+}         // TODO add your handling code here:
+    }//GEN-LAST:event_btRepoTiempoVidaActionPerformed
 
     private void inhabilitarCamposObra() {
         tfIdObra.setEnabled(false);

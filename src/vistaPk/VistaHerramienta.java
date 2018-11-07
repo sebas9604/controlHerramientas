@@ -48,4 +48,22 @@ public class VistaHerramienta {
         }
 
 }
+
+
+    public void tiempoVidaHerramienta(ResultSet herramientas, JTable tabla) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Referencia", "Herramienta", "Compra", "Tiempo de Vida"});
+
+        try {
+
+            while (herramientas.next()) {
+                modelo.addRow(new Object[]{herramientas.getString("Referencia"), herramientas.getString("Herramienta"), herramientas.getString("Compra"),
+                    herramientas.getString("Tiempo de Vida")});
+            }
+            tabla.setModel(modelo);
+
+        } catch (Exception ex) {
+        }
+
+}
 }
