@@ -87,9 +87,9 @@
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
                   <Component id="ventanaHerramienta" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
               </Group>
           </Group>
           <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
@@ -117,9 +117,9 @@
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
                   <Component id="ventanaHerramienta" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
               </Group>
           </Group>
           <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
@@ -635,62 +635,74 @@
                   <Component id="jScrollPane2" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="347" max="-2" attributes="0"/>
-                  <Component id="btEjecutarHerramienta" min="-2" pref="230" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="labelTituloHerramienta" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="labelOperacionHerramienta" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="labelTituloHerramienta" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="labelOperacionHerramienta" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="labelLugarCompra" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labelPrecioCompra" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labelResponsable" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="labelLugarCompra" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="labelPrecioCompra" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="labelResponsable" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="tfPrecioCompraHerramienta" max="32767" attributes="0"/>
+                                              <Component id="cbResponsableHerramienta" pref="272" max="32767" attributes="0"/>
+                                              <Component id="tfLugarCompraHerramienta" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="labelIdHerramienta" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="labelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="labelFechaCompra" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="tfIdHerramienta" max="32767" attributes="0"/>
+                                              <Component id="tfNombreHerramienta" pref="272" max="32767" attributes="0"/>
+                                              <Component id="tfFechaCompraHerramienta" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="tfPrecioCompraHerramienta" max="32767" attributes="0"/>
-                                      <Component id="cbResponsableHerramienta" pref="272" max="32767" attributes="0"/>
-                                      <Component id="tfLugarCompraHerramienta" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="labelEstadoHerramienta" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labelFotoHerramienta" max="32767" attributes="0"/>
+                                      <Component id="btTomarFotoHerramienta" alignment="0" pref="214" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="labelIdHerramienta" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labelNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labelFechaCompra" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="tfIdHerramienta" max="32767" attributes="0"/>
-                                      <Component id="tfNombreHerramienta" pref="272" max="32767" attributes="0"/>
-                                      <Component id="tfFechaCompraHerramienta" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="labelEstadoHerramienta" min="-2" max="-2" attributes="0"/>
-                              <Component id="labelFotoHerramienta" max="32767" attributes="0"/>
-                              <Component id="btTomarFotoHerramienta" alignment="0" pref="214" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="347" max="-2" attributes="0"/>
+                          <Component id="btEjecutarHerramienta" min="-2" pref="230" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="130" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="labelReportesHerramienta" min="-2" max="-2" attributes="0"/>
-                      <Component id="btRepoTiempoVida" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace pref="130" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="labelReportesHerramienta" min="-2" max="-2" attributes="0"/>
+                              <Component id="btRepoTiempoVida" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="242" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                          <Component id="panelHerramientaMovimiento" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="24" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="242" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -748,15 +760,18 @@
                               </Group>
                               <Component id="btTomarFotoHerramienta" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="btEjecutarHerramienta" pref="44" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           <Component id="btRepoTiempoVida" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="panelHerramientaMovimiento" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btEjecutarHerramienta" pref="44" max="32767" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="272" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
@@ -899,6 +914,122 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelOperacionHerramienta">
         </Component>
+        <Container class="javax.swing.JPanel" name="panelHerramientaMovimiento">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="labelTituloMovimiento" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="labelCentroCostoMovimiento" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="labelFechaEntradaMovimiento" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="labelFechaSalidaMovimiento" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="tfFechaEntradaMovimiento" max="32767" attributes="0"/>
+                          <Component id="cbCentroCostoMovimiento" pref="244" max="32767" attributes="0"/>
+                          <Component id="tfFechaSalidaMovimiento" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                      <Component id="btEjecutarMovimiento" min="-2" pref="199" max="-2" attributes="0"/>
+                      <EmptySpace pref="125" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="labelTituloMovimiento" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="labelCentroCostoMovimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbCentroCostoMovimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="tfFechaEntradaMovimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelFechaEntradaMovimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="labelFechaSalidaMovimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfFechaSalidaMovimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btEjecutarMovimiento" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="41" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="labelTituloMovimiento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="MOVIMIENTO"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelCentroCostoMovimiento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Centro de Costo"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cbCentroCostoMovimiento">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Item 1"/>
+                    <StringItem index="1" value="Item 2"/>
+                    <StringItem index="2" value="Item 3"/>
+                    <StringItem index="3" value="Item 4"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelFechaEntradaMovimiento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fecha Entrada"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfFechaEntradaMovimiento">
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelFechaSalidaMovimiento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fecha Salida"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfFechaSalidaMovimiento">
+            </Component>
+            <Component class="javax.swing.JButton" name="btEjecutarMovimiento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="GUARDAR"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEjecutarMovimientoActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
         <Menu class="javax.swing.JMenuBar" name="menuOpcionesHerramientas">
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="opcionConsultarHerramienta">
@@ -957,6 +1088,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Entrada a Obra"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="entradaObraActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="salidaObra">
                   <Properties>

@@ -4,6 +4,7 @@ import conexion.ConexionBD;
 import controladores.ControllerCargo;
 import controladores.ControllerEmpleados;
 import controladores.ControllerHerramientas;
+import controladores.ControllerHerramientasXObra;
 import controladores.ControllerObra;
 import java.awt.Color;
 import java.awt.Image;
@@ -14,7 +15,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 import modelo.Cargo;
 import modelo.Empleados;
 import modelo.Herramientas;
+import modelo.HerramientasXObra;
 import modelo.Obra;
 
 /**
@@ -74,6 +75,10 @@ public class Principal extends javax.swing.JFrame {
     public boolean eliminarEmpleadoFlag;
     public boolean repHerramientasEnEmpleadoFlag;
 
+    //OPCIONES 
+    public boolean registrarMovimientoFlag;
+    public boolean actualizarMovimientoFlag;
+    
     //INHABILITAR BANDERAS
     public void inhabilitarBanderasObra() {
         consultarObrasFlag = false;
@@ -111,6 +116,11 @@ public class Principal extends javax.swing.JFrame {
         eliminarEmpleadoFlag = false;
         fotoEmpleado = false;
 //        repHerramientasEnObraFlag = false;
+    }
+    
+    public void inhabilitarBanderasMovimiento() {
+    registrarMovimientoFlag = false;
+    actualizarMovimientoFlag = false;
     }
 
     @SuppressWarnings("unchecked")
@@ -184,6 +194,15 @@ public class Principal extends javax.swing.JFrame {
         btTomarFotoHerramienta = new javax.swing.JButton();
         btEjecutarHerramienta = new javax.swing.JButton();
         labelOperacionHerramienta = new javax.swing.JLabel();
+        panelHerramientaMovimiento = new javax.swing.JPanel();
+        labelTituloMovimiento = new javax.swing.JLabel();
+        labelCentroCostoMovimiento = new javax.swing.JLabel();
+        cbCentroCostoMovimiento = new javax.swing.JComboBox<>();
+        labelFechaEntradaMovimiento = new javax.swing.JLabel();
+        tfFechaEntradaMovimiento = new javax.swing.JTextField();
+        labelFechaSalidaMovimiento = new javax.swing.JLabel();
+        tfFechaSalidaMovimiento = new javax.swing.JTextField();
+        btEjecutarMovimiento = new javax.swing.JButton();
         menuOpcionesHerramientas = new javax.swing.JMenuBar();
         opcionConsultarHerramienta = new javax.swing.JMenu();
         consultarherramientas = new javax.swing.JMenuItem();
@@ -646,6 +665,74 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        labelTituloMovimiento.setText("MOVIMIENTO");
+
+        labelCentroCostoMovimiento.setText("Centro de Costo");
+
+        cbCentroCostoMovimiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        labelFechaEntradaMovimiento.setText("Fecha Entrada");
+
+        labelFechaSalidaMovimiento.setText("Fecha Salida");
+
+        btEjecutarMovimiento.setText("GUARDAR");
+        btEjecutarMovimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEjecutarMovimientoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelHerramientaMovimientoLayout = new javax.swing.GroupLayout(panelHerramientaMovimiento);
+        panelHerramientaMovimiento.setLayout(panelHerramientaMovimientoLayout);
+        panelHerramientaMovimientoLayout.setHorizontalGroup(
+            panelHerramientaMovimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHerramientaMovimientoLayout.createSequentialGroup()
+                .addGroup(panelHerramientaMovimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelHerramientaMovimientoLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(labelTituloMovimiento))
+                    .addGroup(panelHerramientaMovimientoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelCentroCostoMovimiento))
+                    .addGroup(panelHerramientaMovimientoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelFechaEntradaMovimiento))
+                    .addGroup(panelHerramientaMovimientoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelFechaSalidaMovimiento)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelHerramientaMovimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfFechaEntradaMovimiento)
+                    .addComponent(cbCentroCostoMovimiento, 0, 244, Short.MAX_VALUE)
+                    .addComponent(tfFechaSalidaMovimiento))
+                .addGap(27, 27, 27))
+            .addGroup(panelHerramientaMovimientoLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(btEjecutarMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(125, Short.MAX_VALUE))
+        );
+        panelHerramientaMovimientoLayout.setVerticalGroup(
+            panelHerramientaMovimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelHerramientaMovimientoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelTituloMovimiento)
+                .addGap(27, 27, 27)
+                .addGroup(panelHerramientaMovimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCentroCostoMovimiento)
+                    .addComponent(cbCentroCostoMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(panelHerramientaMovimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfFechaEntradaMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelFechaEntradaMovimiento))
+                .addGap(18, 18, 18)
+                .addGroup(panelHerramientaMovimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelFechaSalidaMovimiento)
+                    .addComponent(tfFechaSalidaMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btEjecutarMovimiento)
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+
         opcionConsultarHerramienta.setText("Consultar");
 
         consultarherramientas.setText("Todas las Herramientas");
@@ -705,6 +792,11 @@ public class Principal extends javax.swing.JFrame {
         opcionMovimiento.setText("Movimiento");
 
         entradaObra.setText("Entrada a Obra");
+        entradaObra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entradaObraActionPerformed(evt);
+            }
+        });
         opcionMovimiento.add(entradaObra);
 
         salidaObra.setText("Salida de Obra");
@@ -723,48 +815,55 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jScrollPane2)
                 .addContainerGap())
             .addGroup(ventanaHerramientaLayout.createSequentialGroup()
-                .addGap(347, 347, 347)
-                .addComponent(btEjecutarHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanaHerramientaLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
-                        .addComponent(labelTituloHerramienta)
-                        .addGap(80, 80, 80)
-                        .addComponent(labelOperacionHerramienta))
-                    .addGroup(ventanaHerramientaLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
                         .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ventanaHerramientaLayout.createSequentialGroup()
-                                .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelLugarCompra)
-                                    .addComponent(labelPrecioCompra)
-                                    .addComponent(labelResponsable))
-                                .addGap(48, 48, 48)
-                                .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfPrecioCompraHerramienta)
-                                    .addComponent(cbResponsableHerramienta, 0, 272, Short.MAX_VALUE)
-                                    .addComponent(tfLugarCompraHerramienta)))
+                                .addComponent(labelTituloHerramienta)
+                                .addGap(80, 80, 80)
+                                .addComponent(labelOperacionHerramienta))
                             .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelIdHerramienta)
-                                    .addComponent(labelNombre)
-                                    .addComponent(labelFechaCompra))
-                                .addGap(49, 49, 49)
+                                    .addGroup(ventanaHerramientaLayout.createSequentialGroup()
+                                        .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labelLugarCompra)
+                                            .addComponent(labelPrecioCompra)
+                                            .addComponent(labelResponsable))
+                                        .addGap(48, 48, 48)
+                                        .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tfPrecioCompraHerramienta)
+                                            .addComponent(cbResponsableHerramienta, 0, 272, Short.MAX_VALUE)
+                                            .addComponent(tfLugarCompraHerramienta)))
+                                    .addGroup(ventanaHerramientaLayout.createSequentialGroup()
+                                        .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labelIdHerramienta)
+                                            .addComponent(labelNombre)
+                                            .addComponent(labelFechaCompra))
+                                        .addGap(49, 49, 49)
+                                        .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tfIdHerramienta)
+                                            .addComponent(tfNombreHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                                            .addComponent(tfFechaCompraHerramienta))))
+                                .addGap(79, 79, 79)
                                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfIdHerramienta)
-                                    .addComponent(tfNombreHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                                    .addComponent(tfFechaCompraHerramienta))))
-                        .addGap(79, 79, 79)
-                        .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelEstadoHerramienta)
-                            .addComponent(labelFotoHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btTomarFotoHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                                    .addComponent(labelEstadoHerramienta)
+                                    .addComponent(labelFotoHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btTomarFotoHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)))))
+                    .addGroup(ventanaHerramientaLayout.createSequentialGroup()
+                        .addGap(347, 347, 347)
+                        .addComponent(btEjecutarHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelReportesHerramienta)
-                    .addComponent(btRepoTiempoVida))
-                .addGap(242, 242, 242))
+                    .addGroup(ventanaHerramientaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                        .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelReportesHerramienta)
+                            .addComponent(btRepoTiempoVida))
+                        .addGap(242, 242, 242))
+                    .addGroup(ventanaHerramientaLayout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(panelHerramientaMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(24, Short.MAX_VALUE))))
         );
         ventanaHerramientaLayout.setVerticalGroup(
             ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -808,13 +907,16 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(labelResponsable)
                                 .addComponent(cbResponsableHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btTomarFotoHerramienta)))
+                            .addComponent(btTomarFotoHerramienta))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btEjecutarHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(btRepoTiempoVida)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btEjecutarHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btRepoTiempoVida)
+                        .addGap(24, 24, 24)
+                        .addComponent(panelHerramientaMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
@@ -1038,9 +1140,9 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 12, Short.MAX_VALUE)
                     .addComponent(ventanaHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 12, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 12, Short.MAX_VALUE)
@@ -1060,9 +1162,9 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 11, Short.MAX_VALUE)
                     .addComponent(ventanaHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 11, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1627,6 +1729,26 @@ if(consultarHerramientaFlag){
 }         // TODO add your handling code here:
     }//GEN-LAST:event_btRepoTiempoVidaActionPerformed
 
+    private void btEjecutarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarMovimientoActionPerformed
+ if(consultarHerramientaFlag){
+    HerramientasXObra objeto = new HerramientasXObra();
+    objeto.setIdHerramienta(tfIdHerramienta.getText());
+    ControllerHerramientasXObra HxOCt = new ControllerHerramientasXObra();
+           
+}else{
+    JOptionPane.showMessageDialog(null, "Primero debe consultar una herramienta");
+}       // TODO add your handling code here:
+    }//GEN-LAST:event_btEjecutarMovimientoActionPerformed
+
+    private void entradaObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entradaObraActionPerformed
+ inhabilitarBanderasMovimiento();
+ inhabilitarCamposMovimiento();
+ llenarComboObra();
+ tfFechaEntradaMovimiento.setEnabled(true);
+ tfFechaSalidaMovimiento.setBackground(Color.white);
+// TODO add your handling code here:
+    }//GEN-LAST:event_entradaObraActionPerformed
+
     private void inhabilitarCamposObra() {
         tfIdObra.setEnabled(false);
         tfIdObra.setBackground(Color.gray);
@@ -1690,8 +1812,21 @@ if(consultarHerramientaFlag){
         cbResponsableHerramienta.setEnabled(false);
         btTomarFotoHerramienta.setEnabled(false);
         labelFotoHerramienta.setIcon(null);
+        panelHerramientaMovimiento.setVisible(false);
+    }
+    
+    private void inhabilitarCamposMovimiento() {
+        cbCentroCostoMovimiento.setEnabled(false);
+        tfFechaEntradaMovimiento.setEnabled(false);
+        tfFechaEntradaMovimiento.setText("");
+        tfFechaEntradaMovimiento.setBackground(Color.gray);
+        tfFechaSalidaMovimiento.setEnabled(false);
+        tfFechaSalidaMovimiento.setText("");
+        tfFechaSalidaMovimiento.setBackground(Color.gray);
+        
     }
 
+  
     /**
      * @param args the command line arguments
      */
@@ -1732,6 +1867,7 @@ if(consultarHerramientaFlag){
     private javax.swing.JButton btEjecutarCargo;
     private javax.swing.JButton btEjecutarEmpleado;
     private javax.swing.JButton btEjecutarHerramienta;
+    private javax.swing.JButton btEjecutarMovimiento;
     private javax.swing.JButton btEjecutarObra;
     private javax.swing.JButton btRepHerramientasEnObra;
     private javax.swing.JButton btRepoTiempoVida;
@@ -1739,6 +1875,7 @@ if(consultarHerramientaFlag){
     private javax.swing.JButton btTomarFotoEmpleado;
     private javax.swing.JButton btTomarFotoHerramienta;
     private javax.swing.JComboBox<String> cbCargoEmpleado;
+    private javax.swing.JComboBox<String> cbCentroCostoMovimiento;
     private javax.swing.JComboBox<String> cbResponsableHerramienta;
     private javax.swing.JMenuItem consultarCargo;
     private javax.swing.JMenuItem consultarEmpleado;
@@ -1756,9 +1893,12 @@ if(consultarHerramientaFlag){
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel labelApellidosEmpleado;
     private javax.swing.JLabel labelCargoEmpleado;
+    private javax.swing.JLabel labelCentroCostoMovimiento;
     private javax.swing.JLabel labelDireccionObra;
     private javax.swing.JLabel labelEstadoHerramienta;
     private javax.swing.JLabel labelFechaCompra;
+    private javax.swing.JLabel labelFechaEntradaMovimiento;
+    private javax.swing.JLabel labelFechaSalidaMovimiento;
     private javax.swing.JLabel labelFotoEmpleado;
     public static javax.swing.JLabel labelFotoHerramienta;
     private javax.swing.JLabel labelIdCargo;
@@ -1783,6 +1923,7 @@ if(consultarHerramientaFlag){
     private javax.swing.JLabel labelTituloCargo;
     private javax.swing.JLabel labelTituloEmpleado;
     private javax.swing.JLabel labelTituloHerramienta;
+    private javax.swing.JLabel labelTituloMovimiento;
     private javax.swing.JLabel labelTituloObra;
     private javax.swing.JMenu menuCargo;
     private javax.swing.JMenuBar menuElementos;
@@ -1810,6 +1951,7 @@ if(consultarHerramientaFlag){
     private javax.swing.JMenu opcionModificarHerramienta;
     private javax.swing.JMenu opcionModificarObra;
     private javax.swing.JMenu opcionMovimiento;
+    private javax.swing.JPanel panelHerramientaMovimiento;
     private javax.swing.JMenuItem salidaObra;
     private javax.swing.JTable tablaCargos;
     private javax.swing.JTable tablaEmpleados;
@@ -1817,6 +1959,8 @@ if(consultarHerramientaFlag){
     private javax.swing.JTable tablaObras;
     private javax.swing.JTextField tfApellidosEmpleado;
     private javax.swing.JTextField tfFechaCompraHerramienta;
+    private javax.swing.JTextField tfFechaEntradaMovimiento;
+    private javax.swing.JTextField tfFechaSalidaMovimiento;
     private javax.swing.JTextField tfIdCargo;
     private javax.swing.JTextField tfIdEmpleado;
     private javax.swing.JTextField tfIdHerramienta;
@@ -1875,4 +2019,14 @@ if(consultarHerramientaFlag){
         }
 
     }
+
+    private void llenarComboObra() {
+        ControllerHerramientasXObra HxOCt = new ControllerHerramientasXObra();
+        cbCentroCostoMovimiento.removeAllItems();
+        List<String> list = HxOCt.llenarComboCentroCosto();
+
+        for (String responsable : list) {
+            cbCentroCostoMovimiento.addItem(responsable);
+            }
+}
 }
