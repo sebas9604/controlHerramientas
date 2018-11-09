@@ -800,6 +800,11 @@ public class Principal extends javax.swing.JFrame {
         opcionMovimiento.add(entradaObra);
 
         salidaObra.setText("Salida de Obra");
+        salidaObra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salidaObraActionPerformed(evt);
+            }
+        });
         opcionMovimiento.add(salidaObra);
 
         menuOpcionesHerramientas.add(opcionMovimiento);
@@ -1733,8 +1738,15 @@ if(consultarHerramientaFlag){
  if(consultarHerramientaFlag){
     HerramientasXObra objeto = new HerramientasXObra();
     objeto.setIdHerramienta(tfIdHerramienta.getText());
+    objeto.setIdObra(cbCentroCostoMovimiento.getSelectedItem().toString());
+    objeto.setFechaEntradaObraHerramienta(tfFechaEntradaMovimiento.getText());
+    objeto.setFechaSalidaObraHerramienta(tfFechaSalidaMovimiento.getText());
     ControllerHerramientasXObra HxOCt = new ControllerHerramientasXObra();
-           
+           if(registrarMovimientoFlag){
+           HxOCt.registrar(objeto);
+           }else if(actualizarMovimientoFlag){
+           HxOCt.actualizar(objeto);
+           }
 }else{
     JOptionPane.showMessageDialog(null, "Primero debe consultar una herramienta");
 }       // TODO add your handling code here:
@@ -1743,11 +1755,25 @@ if(consultarHerramientaFlag){
     private void entradaObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entradaObraActionPerformed
  inhabilitarBanderasMovimiento();
  inhabilitarCamposMovimiento();
- llenarComboObra();
+ cbCentroCostoMovimiento.setEnabled(true);
+  llenarComboObra();
+  registrarMovimientoFlag = true;
+ panelHerramientaMovimiento.setVisible(true);
  tfFechaEntradaMovimiento.setEnabled(true);
- tfFechaSalidaMovimiento.setBackground(Color.white);
+ tfFechaEntradaMovimiento.setBackground(Color.white);
 // TODO add your handling code here:
     }//GEN-LAST:event_entradaObraActionPerformed
+
+    private void salidaObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaObraActionPerformed
+  inhabilitarBanderasMovimiento();
+ inhabilitarCamposMovimiento();
+ actualizarMovimientoFlag = true;
+// cbCentroCostoMovimiento.setEnabled(true);
+//  llenarComboObra();
+ panelHerramientaMovimiento.setVisible(true);
+ tfFechaSalidaMovimiento.setEnabled(true);
+ tfFechaSalidaMovimiento.setBackground(Color.white);       // TODO add your handling code here:
+    }//GEN-LAST:event_salidaObraActionPerformed
 
     private void inhabilitarCamposObra() {
         tfIdObra.setEnabled(false);
