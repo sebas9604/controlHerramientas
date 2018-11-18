@@ -1183,7 +1183,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="btEjecutarObra" min="-2" pref="45" max="-2" attributes="0"/>
-                  <EmptySpace pref="79" max="32767" attributes="0"/>
+                  <EmptySpace pref="87" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="360" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
@@ -1257,6 +1257,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="HERRAMIENTAS EN OBRA"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRepHerramientasEnObraActionPerformed"/>
+          </Events>
         </Component>
         <Menu class="javax.swing.JMenuBar" name="menuOpcionesObra">
           <SubComponents>

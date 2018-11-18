@@ -74,4 +74,19 @@ public class VistaObra {
         }
     }
 
+        public void verHerramientasEnObra(ResultSet herramientas, JTable tabla) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"idObra", "idHerramienta", "nombreHerramienta"});
+
+        try {
+            while (herramientas.next()) {
+                modelo.addRow(new Object[]{herramientas.getString("idObra"), herramientas.getString("idHerramienta"), herramientas.getString("nombreHerramienta")});            }
+            tabla.setModel(modelo);
+
+        } catch (Exception ex) {
+            System.out.println("vistaPk.VistaObra.verHerramientasEnObra()");
+            ex.printStackTrace();
+        }
+
+}
 }

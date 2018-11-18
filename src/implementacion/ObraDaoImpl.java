@@ -227,4 +227,28 @@ public class ObraDaoImpl implements IObraDao {
         return rs;
     }
 
+    @Override
+    public ResultSet obtenerHerramientasEnObra(Obra obra) {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+
+        String sql = "";
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+//            stm.close();
+//            rs.close();
+//            con.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+
+        } catch (Exception e) {
+            System.out.println("implementacion.EmpleadosDaoImpl.obtenerEmpleados()");
+            e.printStackTrace();
+        }
+
+        return rs;
+    }
+
 }

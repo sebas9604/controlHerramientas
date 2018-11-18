@@ -73,4 +73,11 @@ public class ControllerObra {
         obras = dao.reporteHerramientasEnObra(obra);
         vista.reporteHerramientasEnObra(obras, tabla);
     }
+        
+        public void verHerramientasEnObra(JTable tabla, Obra obra) {
+        ResultSet herramientasEnObra = null;
+        IObraDao dao = new ObraDaoImpl();
+        herramientasEnObra = dao.obtenerHerramientasEnObra(obra);
+        vista.verHerramientasEnObra(herramientasEnObra, tabla);
+    }
 }

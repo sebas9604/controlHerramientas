@@ -20,7 +20,7 @@ public interface IEmpleadosDao {
 
     public ResultSet obtenerEmpleados();
     
-    public ResultSet obtenerHerramientasACargo(Empleados empleadp);
+    public ResultSet obtenerHerramientasACargo(Empleados empleado);
 
     public boolean actualizarEmpleado(Empleados empleado);
 

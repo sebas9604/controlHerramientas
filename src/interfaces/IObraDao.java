@@ -28,4 +28,7 @@ public interface IObraDao {
     public boolean eliminarObra(Obra obra);
     
     public ResultSet reporteHerramientasEnObra(Obra obra);
+    
+    public ResultSet obtenerHerramientasEnObra(Obra obra);
+
 }

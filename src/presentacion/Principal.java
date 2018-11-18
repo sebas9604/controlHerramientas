@@ -959,6 +959,11 @@ public class Principal extends javax.swing.JFrame {
         labelReportesObra.setText("REPORTES");
 
         btRepHerramientasEnObra.setText("HERRAMIENTAS EN OBRA");
+        btRepHerramientasEnObra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRepHerramientasEnObraActionPerformed(evt);
+            }
+        });
 
         opcionConsultarObra.setText("Consultar");
 
@@ -1774,6 +1779,18 @@ if(consultarHerramientaFlag){
  tfFechaSalidaMovimiento.setEnabled(true);
  tfFechaSalidaMovimiento.setBackground(Color.white);       // TODO add your handling code here:
     }//GEN-LAST:event_salidaObraActionPerformed
+
+    private void btRepHerramientasEnObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRepHerramientasEnObraActionPerformed
+if(consultarObraFlag){
+    Obra obra = new Obra();
+    obra.setIdObra(tfIdObra.getText());
+            ControllerObra obraCt = new ControllerObra();
+            obraCt.verHerramientasEnObra(tablaObras, obra);
+            inhabilitarCamposObra();
+}else{
+    JOptionPane.showMessageDialog(null, "Primero debe consultar un empleado");
+}         // TODO add your handling code here:
+    }//GEN-LAST:event_btRepHerramientasEnObraActionPerformed
 
     private void inhabilitarCamposObra() {
         tfIdObra.setEnabled(false);
