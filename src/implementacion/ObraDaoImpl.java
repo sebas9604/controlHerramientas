@@ -233,7 +233,15 @@ public class ObraDaoImpl implements IObraDao {
         Statement stm = null;
         ResultSet rs = null;
 
-        String sql = "";
+        String sql = "	SELECT ob.idobra, hxo.idherramienta, herr.nombreherramienta " +
+"	FROM herramientasxobra AS hxo " +
+"	INNER JOIN obra AS ob " +
+"	ON hxo.idobra = ob.idobra " +
+"	INNER JOIN herramientas AS herr " +
+"	ON herr.idherramienta = hxo.idherramienta " +
+"	WHERE ob.idobra = " + obra.getIdObra() + " and ob.idobra = (select idobra from herramientasxobra where  " +
+"	fechaentradaobraherramienta =  " +
+"	(select max(fechaentradaobraherramienta) from herramientasxobra));";
         try {
             con = ConexionBD.connect();
             stm = con.createStatement();
