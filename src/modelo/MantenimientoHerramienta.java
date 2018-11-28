@@ -5,7 +5,6 @@
  */
 package modelo;
 
-import java.sql.Date;
 
 /**
  *
@@ -16,7 +15,7 @@ public class MantenimientoHerramienta {
     public MantenimientoHerramienta() {
     }
 
-    public MantenimientoHerramienta(int idFacturaMantenimiento, String idHerramienta, String lugarMantenimiento, Date fechaEntradaMantenimiento, String descripcionMantenimiento, String fotoAntesMantenimiento) {
+    public MantenimientoHerramienta(int idFacturaMantenimiento, String idHerramienta, String lugarMantenimiento, String fechaEntradaMantenimiento, String descripcionMantenimiento, String fotoAntesMantenimiento) {
         this.idFacturaMantenimiento = idFacturaMantenimiento;
         this.idHerramienta = idHerramienta;
         this.lugarMantenimiento = lugarMantenimiento;
@@ -25,7 +24,7 @@ public class MantenimientoHerramienta {
         this.fotoAntesMantenimiento = fotoAntesMantenimiento;
     }
 
-    public MantenimientoHerramienta(int idFacturaMantenimiento, String idHerramienta, String lugarMantenimiento, Date fechaEntradaMantenimiento, Date fechaSalidaMantenimiento, String descripcionMantenimiento, String fotoAntesMantenimiento, String fotoDespuesMantenimiento) {
+    public MantenimientoHerramienta(int idFacturaMantenimiento, String idHerramienta, String lugarMantenimiento, String fechaEntradaMantenimiento, String fechaSalidaMantenimiento, String descripcionMantenimiento, String fotoAntesMantenimiento, String fotoDespuesMantenimiento) {
         this.idFacturaMantenimiento = idFacturaMantenimiento;
         this.idHerramienta = idHerramienta;
         this.lugarMantenimiento = lugarMantenimiento;
@@ -40,8 +39,8 @@ public class MantenimientoHerramienta {
     private int idFacturaMantenimiento;
     private String idHerramienta;
     private String lugarMantenimiento;
-    private Date fechaEntradaMantenimiento;
-    private Date fechaSalidaMantenimiento;
+    private String fechaEntradaMantenimiento;
+    private String fechaSalidaMantenimiento;
     private String descripcionMantenimiento;
     private String fotoAntesMantenimiento;
     private String fotoDespuesMantenimiento;
@@ -70,19 +69,19 @@ public class MantenimientoHerramienta {
         this.lugarMantenimiento = lugarMantenimiento;
     }
 
-    public Date getFechaEntradaMantenimiento() {
+    public String getFechaEntradaMantenimiento() {
         return fechaEntradaMantenimiento;
     }
 
-    public void setFechaEntradaMantenimiento(Date fechaEntradaMantenimiento) {
+    public void setFechaEntradaMantenimiento(String fechaEntradaMantenimiento) {
         this.fechaEntradaMantenimiento = fechaEntradaMantenimiento;
     }
 
-    public Date getFechaSalidaMantenimiento() {
+    public String getFechaSalidaMantenimiento() {
         return fechaSalidaMantenimiento;
     }
 
-    public void setFechaSalidaMantenimiento(Date fechaSalidaMantenimiento) {
+    public void setFechaSalidaMantenimiento(String fechaSalidaMantenimiento) {
         this.fechaSalidaMantenimiento = fechaSalidaMantenimiento;
     }
 

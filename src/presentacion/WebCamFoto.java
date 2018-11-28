@@ -27,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import static presentacion.Principal.fotoMantenimiento;
 
 
 /**
@@ -221,6 +222,8 @@ public class WebCamFoto extends JFrame implements ActionListener, Runnable, Webc
             rsscalelabel.RSScaleLabel.setScaleLabel(Principal.labelImagenEmpleado, "test.jpg");
                 }else if(Principal.fotoHerramienta){
                                 rsscalelabel.RSScaleLabel.setScaleLabel(Principal.labelFotoHerramienta, "test.jpg");
+                }else if(fotoMantenimiento = true){
+                                                rsscalelabel.RSScaleLabel.setScaleLabel(Principal.labelFotoManteniemiento, "test.jpg");
                 }
             } catch (IOException ex) {
                 Logger.getLogger(WebCamFoto.class.getName()).log(Level.SEVERE, null, ex);

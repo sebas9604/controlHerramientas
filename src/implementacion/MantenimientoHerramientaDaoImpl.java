@@ -18,36 +18,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author jlinares
  */
-public class MantenimientoHerramientaDaoImpl implements IMantenimientoHerramientaDao{
+public class MantenimientoHerramientaDaoImpl implements IMantenimientoHerramientaDao {
 
     @Override
     public boolean registrarNuevoMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta) {
-             boolean registrar = false;
-            Connection con;
+        boolean registrar = false;
+        Connection con;
         try {
             File archivoImgAntes = new File(mantenimientoHerramienta.getFotoAntesMantenimiento());
-            File archivoImgDespues = new File(mantenimientoHerramienta.getFotoDespuesMantenimiento());
 
-            String sql = "INSERT INTO mantenimiemtoHerramienta (idFacturaMantenimiento, idHerramienta, lugarMantenimiento, "
-                    + "fechaEntradaMantenimiento, fechaSalidaMantenimiento, descripcionMantenimiento, fotoAntesMantenimiento, fotoDespuesMantenimiento)" + "VALUES (?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO mantenimientoHerramienta (idFacturaMantenimiento, idHerramienta, lugarMantenimiento, "
+                    + "fechaEntradaMantenimiento, descripcionMantenimiento, fotoAntesMantenimiento)" + "VALUES (?,?,?,?,?,?);";
             con = ConexionBD.connect();
             FileInputStream convertir_imagen_antes = new FileInputStream(archivoImgAntes);
-            FileInputStream convertir_imagen_despues = new FileInputStream(archivoImgDespues);            
             PreparedStatement psql = con.prepareStatement(sql);
             psql.setInt(1, mantenimientoHerramienta.getIdFacturaMantenimiento());
             psql.setString(2, mantenimientoHerramienta.getIdHerramienta());
             psql.setString(3, mantenimientoHerramienta.getLugarMantenimiento());
-            psql.setDate(4, mantenimientoHerramienta.getFechaEntradaMantenimiento());
-            psql.setDate(5, mantenimientoHerramienta.getFechaSalidaMantenimiento());
-            psql.setString(6, mantenimientoHerramienta.getDescripcionMantenimiento());
-            psql.setBlob(7, convertir_imagen_antes, archivoImgAntes.length());
-            psql.setBlob(8, convertir_imagen_despues, archivoImgDespues.length());            
+            psql.setString(4, mantenimientoHerramienta.getFechaEntradaMantenimiento());
+            psql.setString(5, mantenimientoHerramienta.getDescripcionMantenimiento());
+            psql.setBlob(6, convertir_imagen_antes, archivoImgAntes.length());
             psql.executeUpdate();
             registrar = true;
             psql.close();
@@ -59,6 +57,45 @@ public class MantenimientoHerramientaDaoImpl implements IMantenimientoHerramient
         }
 
         return registrar;
+    }
+
+    @Override
+    public boolean actualizarMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta) {
+        Connection con = null;
+        boolean actualizar = false;
+
+        try {
+            File archivoImgDespues = new File(mantenimientoHerramienta.getFotoDespuesMantenimiento());
+//		String sql="UPDATE mantenimientoherramientas SET idFacturaMantenimiento='"+mantenimientoHerramienta.getIdFacturaMantenimiento()
+//                        +"', idHerramienta='"+mantenimientoHerramienta.getIdHerramienta()
+//                        +"', lugarMantenimiento='"+mantenimientoHerramienta.getLugarMantenimiento()
+//                        +"', fechaEntradaMantenimiento='"+mantenimientoHerramienta.getFechaEntradaMantenimiento()
+//                        +"', fechaSalidaMantenimiento='"+mantenimientoHerramienta.getFechaSalidaMantenimiento()
+//                        +"', descripcionMantenimiento='"+mantenimientoHerramienta.getDescripcionMantenimiento()
+//                        +"', fotoAntesMantenimiento='"+mantenimientoHerramienta.getFotoAntesMantenimiento()
+//                        +"', fotoDespuesMantenimiento='"+mantenimientoHerramienta.getFotoDespuesMantenimiento()
+//                        +"' WHERE idFacturaMantenimiento="+mantenimientoHerramienta.getIdFacturaMantenimiento();
+
+            String sql = "UPDATE mantenimientoherramientas "
+                    + "SET fechaSalidaMantenimiento = ?, fotoDespuesMantenimiento = ?;";
+
+            FileInputStream convertir_imagen_despues = new FileInputStream(archivoImgDespues);
+            PreparedStatement psql = con.prepareStatement(sql);
+            psql.setString(1, mantenimientoHerramienta.getFechaSalidaMantenimiento());
+            psql.setBlob(2, convertir_imagen_despues, archivoImgDespues.length());
+
+            psql.executeUpdate();
+            psql.close();
+            con.close();
+            JOptionPane.showMessageDialog(null, "Operación Exitosa");
+            actualizar = true;
+        } catch (SQLException e) {
+            System.out.println("implementacion.MantenimientoHerramientaDaoImpl.actualizarMantenimientoHerramienta()");
+            e.printStackTrace();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MantenimientoHerramientaDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return actualizar;
     }
 
     @Override
@@ -84,77 +121,49 @@ public class MantenimientoHerramientaDaoImpl implements IMantenimientoHerramient
     }
 
     @Override
-    public boolean actualizarMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta) {
-		Connection connect= null;
-		Statement stm= null;
-		
-		boolean actualizar=false;
-				
-		String sql="UPDATE mantenimientoherramientas SET idFacturaMantenimiento='"+mantenimientoHerramienta.getIdFacturaMantenimiento()
-                        +"', idHerramienta='"+mantenimientoHerramienta.getIdHerramienta()
-                        +"', lugarMantenimiento='"+mantenimientoHerramienta.getLugarMantenimiento()
-                        +"', fechaEntradaMantenimiento='"+mantenimientoHerramienta.getFechaEntradaMantenimiento()
-                        +"', fechaSalidaMantenimiento='"+mantenimientoHerramienta.getFechaSalidaMantenimiento()
-                        +"', descripcionMantenimiento='"+mantenimientoHerramienta.getDescripcionMantenimiento()
-                        +"', fotoAntesMantenimiento='"+mantenimientoHerramienta.getFotoAntesMantenimiento()
-                        +"', fotoDespuesMantenimiento='"+mantenimientoHerramienta.getFotoDespuesMantenimiento()
-                        +"' WHERE idFacturaMantenimiento="+mantenimientoHerramienta.getIdFacturaMantenimiento();
-		try {
-			connect=ConexionBD.connect();
-			stm=connect.createStatement();
-			stm.execute(sql);
-			actualizar=true;
-		} catch (SQLException e) {
-			System.out.println("Error: Clase ClienteDaoImple, método actualizar");
-			e.printStackTrace();
-		}		
-		return actualizar;  
-    }
-
-    @Override
     public boolean eliminarMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta) {
-		Connection connect= null;
-		Statement stm= null;
-		
-		boolean eliminar=false;
-				
-		String sql="DELETE FROM mantenimientoHerramienta WHERE idFacturaMantenimiento="
-                        +mantenimientoHerramienta.getIdFacturaMantenimiento();
-		try {
-			connect=ConexionBD.connect();
-			stm=connect.createStatement();
-			stm.execute(sql);
-			eliminar=true;
-		} catch (SQLException e) {
-			System.out.println("Error: Clase ClienteDaoImple, método eliminar");
-			e.printStackTrace();
-		}		
-		return eliminar;
-    
+        Connection connect = null;
+        Statement stm = null;
+
+        boolean eliminar = false;
+
+        String sql = "DELETE FROM mantenimientoHerramienta WHERE idFacturaMantenimiento="
+                + mantenimientoHerramienta.getIdFacturaMantenimiento();
+        try {
+            connect = ConexionBD.connect();
+            stm = connect.createStatement();
+            stm.execute(sql);
+            eliminar = true;
+        } catch (SQLException e) {
+            System.out.println("Error: Clase ClienteDaoImple, método eliminar");
+            e.printStackTrace();
+        }
+        return eliminar;
+
     }
 
     @Override
     public ResultSet obtenerMantenimientoHerramienta(MantenimientoHerramienta mantenimientoHerramienta) {
-{
-        Connection con = null;
-        Statement stm = null;
-        ResultSet rs = null;
+        {
+            Connection con = null;
+            Statement stm = null;
+            ResultSet rs = null;
 
-        String sql = "SELECT idFacturaMantenimiento, idHerramienta, lugarMantenimiento, fechaEntradaMantenimiento,"
-                + " fechaSalidaMantenimiento, descripcionMantenimiento, fotoAntesMantenimiento, fotoDespuesMantenimiento"
-                + "FROM empleados WHERE idHerramienta = " + mantenimientoHerramienta.getIdFacturaMantenimiento();
-        try {
-            con = ConexionBD.connect();
-            stm = con.createStatement();
-            rs = stm.executeQuery(sql);
+            String sql = "SELECT idFacturaMantenimiento, idHerramienta, lugarMantenimiento, fechaEntradaMantenimiento,"
+                    + " fechaSalidaMantenimiento, descripcionMantenimiento, fotoAntesMantenimiento, fotoDespuesMantenimiento"
+                    + "FROM empleados WHERE idHerramienta = " + mantenimientoHerramienta.getIdFacturaMantenimiento();
+            try {
+                con = ConexionBD.connect();
+                stm = con.createStatement();
+                rs = stm.executeQuery(sql);
 //            stm.close();
 //            rs.close();
 //            con.close();
-        } catch (Exception e) {
-        }
+            } catch (Exception e) {
+            }
 
-        return rs;
+            return rs;
+        }
     }
-    }
-    
+
 }
