@@ -75,16 +75,21 @@ public class MantenimientoHerramientaDaoImpl implements IMantenimientoHerramient
 //                        +"', fotoAntesMantenimiento='"+mantenimientoHerramienta.getFotoAntesMantenimiento()
 //                        +"', fotoDespuesMantenimiento='"+mantenimientoHerramienta.getFotoDespuesMantenimiento()
 //                        +"' WHERE idFacturaMantenimiento="+mantenimientoHerramienta.getIdFacturaMantenimiento();
-
-            String sql = "UPDATE mantenimientoherramientas "
-                    + "SET fechaSalidaMantenimiento = ?, fotoDespuesMantenimiento = ?;";
+            String sql = "UPDATE mantenimientoherramienta "
+                    + "SET fechaSalidaMantenimiento = ?, fotoDespuesMantenimiento = ?"
+                    + " WHERE idfacturamantenimiento = ?;";
+            
+                        con = ConexionBD.connect();
 
             FileInputStream convertir_imagen_despues = new FileInputStream(archivoImgDespues);
+
             PreparedStatement psql = con.prepareStatement(sql);
             psql.setString(1, mantenimientoHerramienta.getFechaSalidaMantenimiento());
             psql.setBlob(2, convertir_imagen_despues, archivoImgDespues.length());
+            psql.setInt(3, mantenimientoHerramienta.getIdFacturaMantenimiento());
 
             psql.executeUpdate();
+
             psql.close();
             con.close();
             JOptionPane.showMessageDialog(null, "Operación Exitosa");

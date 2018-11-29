@@ -20,6 +20,8 @@ public interface IHerramientasDao {
     public ResultSet obtenerHerramientas();
     
     public ResultSet tiempoDeVida(Herramientas herramienta);
+    
+    public ResultSet mantenimientosHerramienta(Herramientas herramienta);
 
     public boolean actualizarHerramienta(Herramientas herramienta, String responsable);
 

@@ -66,4 +66,21 @@ public class VistaHerramienta {
         }
 
 }
+    
+        public void mantenimientosHerramienta(ResultSet herramientas, JTable tabla) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Factura", "Referencia", "Lugar_Mantenimiento", "Fecha_Entrada", "Fecha_Salida", "Descripcion"});
+
+        try {
+
+            while (herramientas.next()) {
+                modelo.addRow(new Object[]{herramientas.getString("Factura"), herramientas.getString("Referencia"), herramientas.getString("Lugar_Mantenimiento"),
+                    herramientas.getString("Fecha_Entrada"), herramientas.getString("Fechas_Salida"), herramientas.getString("Descripcion")});
+            }
+            tabla.setModel(modelo);
+
+        } catch (Exception ex) {
+        }
+
+}
 }

@@ -961,10 +961,11 @@
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace pref="130" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace pref="120" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="labelReportesHerramienta" min="-2" max="-2" attributes="0"/>
-                              <Component id="btRepoTiempoVida" min="-2" max="-2" attributes="0"/>
+                              <Component id="btRepoTiempoVida" max="32767" attributes="0"/>
+                              <Component id="btVerMantenimientos" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="242" max="-2" attributes="0"/>
                       </Group>
@@ -987,7 +988,10 @@
                       <Component id="labelOperacionHerramienta" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="labelEstadoHerramienta" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="labelEstadoHerramienta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btRepoTiempoVida" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -1032,13 +1036,13 @@
                               <Component id="btTomarFotoHerramienta" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btEjecutarHerramienta" pref="44" max="32767" attributes="0"/>
+                          <Component id="btEjecutarHerramienta" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Component id="btRepoTiempoVida" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="btVerMantenimientos" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="panelHerramientaMovimiento" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -1301,6 +1305,14 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="btVerMantenimientos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="MANTENIMIENTOS"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVerMantenimientosActionPerformed"/>
+          </Events>
+        </Component>
         <Menu class="javax.swing.JMenuBar" name="menuOpcionesHerramientas">
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="opcionConsultarHerramienta">

@@ -239,6 +239,7 @@ public class Principal extends javax.swing.JFrame {
         labelFechaSalidaMovimiento = new javax.swing.JLabel();
         tfFechaSalidaMovimiento = new javax.swing.JTextField();
         btEjecutarMovimiento = new javax.swing.JButton();
+        btVerMantenimientos = new javax.swing.JButton();
         menuOpcionesHerramientas = new javax.swing.JMenuBar();
         opcionConsultarHerramienta = new javax.swing.JMenu();
         consultarherramientas = new javax.swing.JMenuItem();
@@ -933,6 +934,13 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
+        btVerMantenimientos.setText("MANTENIMIENTOS");
+        btVerMantenimientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVerMantenimientosActionPerformed(evt);
+            }
+        });
+
         opcionConsultarHerramienta.setText("Consultar");
 
         consultarherramientas.setText("Todas las Herramientas");
@@ -1060,10 +1068,11 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(btEjecutarHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                        .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                        .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(labelReportesHerramienta)
-                            .addComponent(btRepoTiempoVida))
+                            .addComponent(btRepoTiempoVida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btVerMantenimientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(242, 242, 242))
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                         .addGap(77, 77, 77)
@@ -1079,7 +1088,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(labelReportesHerramienta)
                     .addComponent(labelOperacionHerramienta))
                 .addGap(18, 18, 18)
-                .addComponent(labelEstadoHerramienta)
+                .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelEstadoHerramienta)
+                    .addComponent(btRepoTiempoVida))
                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                         .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1114,12 +1125,12 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(cbResponsableHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btTomarFotoHerramienta))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btEjecutarHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                        .addComponent(btEjecutarHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(btRepoTiempoVida)
-                        .addGap(24, 24, 24)
+                        .addGap(23, 23, 23)
+                        .addComponent(btVerMantenimientos)
+                        .addGap(18, 18, 18)
                         .addComponent(panelHerramientaMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2056,6 +2067,8 @@ public class Principal extends javax.swing.JFrame {
         salidaMantenimientoFlag = true;
         tfFechaSalidaMantenimiento.setEnabled(true);
         tfFechaSalidaMantenimiento.setBackground(Color.white);
+        tfFacturaMantenimiento.setEnabled(true);
+        tfFacturaMantenimiento.setBackground(Color.white);
         btTomarFotoMantenimiento.setEnabled(true);
         btEjecutarMantenimiento.setEnabled(true);
         labelOperacionMantenimiento.setText("Salida");// TODO add your handling code here:
@@ -2066,6 +2079,7 @@ public class Principal extends javax.swing.JFrame {
             MantenimientoHerramienta mantenimientoHerramienta = new MantenimientoHerramienta();
             ControllerMantenimientoHerramienta mantenimientoCt = new ControllerMantenimientoHerramienta();
             mantenimientoHerramienta.setIdFacturaMantenimiento(Integer.parseInt(tfFacturaMantenimiento.getText()));
+            mantenimientoHerramienta.setIdHerramienta(tfReferenciaHerramientaMantenimiento.getText());
             mantenimientoHerramienta.setLugarMantenimiento(tfLugarMantenimiento.getText());
             mantenimientoHerramienta.setFechaEntradaMantenimiento(tfFechaEntradaMantenimiento.getText());
             mantenimientoHerramienta.setDescripcionMantenimiento(tfDescripcionMantenimiento.getText());
@@ -2073,17 +2087,27 @@ public class Principal extends javax.swing.JFrame {
             mantenimientoCt.registrar(mantenimientoHerramienta);
             inhabilitarCamposMantenimiento();
         } else if (salidaMantenimientoFlag) {
-            Empleados empleado = new Empleados();
-            ControllerEmpleados empleadoCt = new ControllerEmpleados();
-            empleado.setIdEmpleado(tfIdEmpleado.getText());
-            empleado.setNombresEmpleado(tfNombresEmpleado.getText());
-            empleado.setApellidosEmpleado(tfApellidosEmpleado.getText());
-            empleado.setCargoEmpleado(cbCargoEmpleado.getSelectedItem().toString());
-            empleado.setFotoEmpleado("test.jpg");
-            empleadoCt.actualizar(empleado);
+            MantenimientoHerramienta mantenimientoHerramienta = new MantenimientoHerramienta();
+            ControllerMantenimientoHerramienta mantenimientoCt = new ControllerMantenimientoHerramienta();
+            mantenimientoHerramienta.setIdFacturaMantenimiento(Integer.parseInt(tfFacturaMantenimiento.getText()));
+            mantenimientoHerramienta.setFechaSalidaMantenimiento(tfFechaSalidaMantenimiento.getText());
+            mantenimientoHerramienta.setFotoDespuesMantenimiento("test.jpg");
+            mantenimientoCt.actualizar(mantenimientoHerramienta);
             inhabilitarCamposMantenimiento();
         }
     }//GEN-LAST:event_btEjecutarMantenimientoActionPerformed
+
+    private void btVerMantenimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerMantenimientosActionPerformed
+        if (consultarHerramientaFlag) {
+            Herramientas herramienta = new Herramientas();
+            herramienta.setIdHerramienta(tfIdHerramienta.getText());
+            ControllerHerramientas herramientaCt = new ControllerHerramientas();
+            herramientaCt.verMantenimientos(tablaHerramienta, herramienta);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero debe consultar una herramienta");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btVerMantenimientosActionPerformed
 
     private void inhabilitarCamposMantenimiento() {
         tfFacturaMantenimiento.setEnabled(false);
@@ -2238,6 +2262,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btTomarFotoEmpleado;
     private javax.swing.JButton btTomarFotoHerramienta;
     private javax.swing.JButton btTomarFotoMantenimiento;
+    private javax.swing.JButton btVerMantenimientos;
     private javax.swing.JComboBox<String> cbCargoEmpleado;
     private javax.swing.JComboBox<String> cbCentroCostoMovimiento;
     private javax.swing.JComboBox<String> cbResponsableHerramienta;

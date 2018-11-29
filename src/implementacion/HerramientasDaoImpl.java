@@ -342,4 +342,27 @@ public class HerramientasDaoImpl implements IHerramientasDao {
         return rs;
     }
 
+    @Override
+    public ResultSet mantenimientosHerramienta(Herramientas herramienta) {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT idFacturaMantenimiento AS Factura, idHerramienta as Referencia, lugarMantenimiento AS Lugar_Mantenimiento, " +
+"fechaEntradaMantenimiento as Fecha_Entrada, fechaSalidaMantenimiento AS Fechas_Salida, descripcionMantenimiento AS Descripcion " +
+"FROM mantenimientoHerramienta " +
+"WHERE idHerramienta = '" + herramienta.getIdHerramienta() + "';";
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+//            stm.close();
+//            rs.close();
+//            con.close();
+        } catch (Exception e) {
+        }
+
+        return rs;
+    }
+
 }

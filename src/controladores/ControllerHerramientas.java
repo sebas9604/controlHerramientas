@@ -60,6 +60,13 @@ public class ControllerHerramientas {
         herramientas = dao.tiempoDeVida(herramienta);
         vista.tiempoVidaHerramienta(herramientas, tabla);
     }
+    
+    public void verMantenimientos(JTable tabla, Herramientas herramienta) {
+        ResultSet herramientas = null;
+        IHerramientasDao dao = new HerramientasDaoImpl();
+        herramientas = dao.mantenimientosHerramienta(herramienta);
+        vista.mantenimientosHerramienta(herramientas, tabla);
+    }
 
     public Herramientas consultarHerramienta(Herramientas herramienta) {
         IHerramientasDao dao = new HerramientasDaoImpl();
