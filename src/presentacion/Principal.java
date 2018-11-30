@@ -134,6 +134,7 @@ public class Principal extends javax.swing.JFrame {
     public void inhabilitarBanderasMantenimiento() {
         entradaMantenimientoFlag = false;
         salidaMantenimientoFlag = false;
+        fotoMantenimiento = false;
     }
 
     @SuppressWarnings("unchecked")
@@ -1738,7 +1739,7 @@ public class Principal extends javax.swing.JFrame {
             empleado.setNombresEmpleado(tfNombresEmpleado.getText());
             empleado.setApellidosEmpleado(tfApellidosEmpleado.getText());
             empleado.setCargoEmpleado(cbCargoEmpleado.getSelectedItem().toString());
-            empleado.setFotoEmpleado("test.jpg");
+            empleado.setFotoEmpleado("C:/test.jpg");
             empleadoCt.registrar(empleado);
             inhabilitarCamposEmpleado();
         } else if (modificarEmpleadoFlag) {
@@ -1748,7 +1749,7 @@ public class Principal extends javax.swing.JFrame {
             empleado.setNombresEmpleado(tfNombresEmpleado.getText());
             empleado.setApellidosEmpleado(tfApellidosEmpleado.getText());
             empleado.setCargoEmpleado(cbCargoEmpleado.getSelectedItem().toString());
-            empleado.setFotoEmpleado("test.jpg");
+            empleado.setFotoEmpleado("C:/test.jpg");
             empleadoCt.actualizar(empleado);
             inhabilitarCamposEmpleado();
         } else if (eliminarEmpleadoFlag) {
@@ -1828,7 +1829,7 @@ public class Principal extends javax.swing.JFrame {
             herramienta.setLugarCompraHerramienta(tfLugarCompraHerramienta.getText());
             herramienta.setFechaCompraHerramienta(tfFechaCompraHerramienta.getText());
             herramienta.setPrecioCompraHerramienta(Integer.parseInt(tfPrecioCompraHerramienta.getText()));
-            herramienta.setEstadoHerramienta("test.jpg");
+            herramienta.setEstadoHerramienta("C:/test.jpg");
             herramientaCt.registrar(herramienta, cbResponsableHerramienta.getSelectedItem().toString());
             inhabilitarCamposHerramienta();
         } else if (modificarHerramientaFlag) {
@@ -1839,7 +1840,7 @@ public class Principal extends javax.swing.JFrame {
             herramienta.setLugarCompraHerramienta(tfLugarCompraHerramienta.getText());
             herramienta.setFechaCompraHerramienta(tfFechaCompraHerramienta.getText());
             herramienta.setPrecioCompraHerramienta(Integer.parseInt(tfPrecioCompraHerramienta.getText()));
-            herramienta.setEstadoHerramienta("test.jpg");
+            herramienta.setEstadoHerramienta("C:/test.jpg");
             herramientaCt.actualizar(herramienta, cbResponsableHerramienta.getSelectedItem().toString());
             inhabilitarCamposHerramienta();
         } else if (eliminarHerramientaFlag) {
@@ -2083,7 +2084,7 @@ public class Principal extends javax.swing.JFrame {
             mantenimientoHerramienta.setLugarMantenimiento(tfLugarMantenimiento.getText());
             mantenimientoHerramienta.setFechaEntradaMantenimiento(tfFechaEntradaMantenimiento.getText());
             mantenimientoHerramienta.setDescripcionMantenimiento(tfDescripcionMantenimiento.getText());
-            mantenimientoHerramienta.setFotoAntesMantenimiento("test.jpg");
+            mantenimientoHerramienta.setFotoAntesMantenimiento("C:/test.jpg");
             mantenimientoCt.registrar(mantenimientoHerramienta);
             inhabilitarCamposMantenimiento();
         } else if (salidaMantenimientoFlag) {
@@ -2091,7 +2092,7 @@ public class Principal extends javax.swing.JFrame {
             ControllerMantenimientoHerramienta mantenimientoCt = new ControllerMantenimientoHerramienta();
             mantenimientoHerramienta.setIdFacturaMantenimiento(Integer.parseInt(tfFacturaMantenimiento.getText()));
             mantenimientoHerramienta.setFechaSalidaMantenimiento(tfFechaSalidaMantenimiento.getText());
-            mantenimientoHerramienta.setFotoDespuesMantenimiento("test.jpg");
+            mantenimientoHerramienta.setFotoDespuesMantenimiento("C:/test.jpg");
             mantenimientoCt.actualizar(mantenimientoHerramienta);
             inhabilitarCamposMantenimiento();
         }

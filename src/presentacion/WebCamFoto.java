@@ -27,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import static presentacion.Principal.fotoMantenimiento;
 
 
@@ -217,13 +218,13 @@ public class WebCamFoto extends JFrame implements ActionListener, Runnable, Webc
 
             try {
                 // save image to PNG file
-                ImageIO.write(image, "PNG", new File("test.jpg"));
+                ImageIO.write(image, "PNG", new File("C:/test.jpg"));
                 if(Principal.fotoEmpleado){
-            rsscalelabel.RSScaleLabel.setScaleLabel(Principal.labelImagenEmpleado, "test.jpg");
+            rsscalelabel.RSScaleLabel.setScaleLabel(Principal.labelImagenEmpleado, "C:/test.jpg");
                 }else if(Principal.fotoHerramienta){
-                                rsscalelabel.RSScaleLabel.setScaleLabel(Principal.labelFotoHerramienta, "test.jpg");
-                }else if(fotoMantenimiento = true){
-                                                rsscalelabel.RSScaleLabel.setScaleLabel(Principal.labelFotoManteniemiento, "test.jpg");
+                                rsscalelabel.RSScaleLabel.setScaleLabel(Principal.labelFotoHerramienta, "C:/test.jpg");
+                }else if(Principal.fotoMantenimiento){
+                                                rsscalelabel.RSScaleLabel.setScaleLabel(Principal.labelFotoManteniemiento, "C:/test.jpg");
                 }
             } catch (IOException ex) {
                 Logger.getLogger(WebCamFoto.class.getName()).log(Level.SEVERE, null, ex);
