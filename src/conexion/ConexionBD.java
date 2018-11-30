@@ -23,13 +23,13 @@ public class ConexionBD {
             String user = "root";
             String pass = "pass123";
             System.out.println("Conectando...");
-            Connection connection = DriverManager.getConnection(url, user,pass);
+            Connection connection = DriverManager.getConnection(url, user, pass);
             System.out.println("Conectado!!");
             
             
             return connection;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Ocurrio un error conectando a la base de datos" + ex);
+            JOptionPane.showMessageDialog(null, "Ocurrio un error conectando a la base de datos " + ex);
         }
         return null;
 

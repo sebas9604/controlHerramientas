@@ -17,21 +17,15 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import modelo.Empleados;
 import interfaces.IEmpleadosDao;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import jdk.internal.org.xml.sax.InputSource;
 import modelo.Cargo;
-import presentacion.Principal;
 
 /**
  *
