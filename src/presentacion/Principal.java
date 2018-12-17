@@ -157,7 +157,7 @@ public class Principal extends javax.swing.JFrame {
         tfFechaSalidaMantenimiento = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         tfDescripcionMantenimiento = new javax.swing.JTextArea();
-        labelFotoMantenimiento = new javax.swing.JLabel();
+        labeltituloFotoMantenimiento = new javax.swing.JLabel();
         labelFotoManteniemiento = new javax.swing.JLabel();
         btTomarFotoMantenimiento = new javax.swing.JButton();
         btEjecutarMantenimiento = new javax.swing.JButton();
@@ -313,7 +313,7 @@ public class Principal extends javax.swing.JFrame {
         tfDescripcionMantenimiento.setRows(5);
         jScrollPane5.setViewportView(tfDescripcionMantenimiento);
 
-        labelFotoMantenimiento.setText("Foto");
+        labeltituloFotoMantenimiento.setText("Foto");
 
         labelFotoManteniemiento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -390,7 +390,7 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(ventanaMantenimientoLayout.createSequentialGroup()
                                 .addGap(208, 208, 208)
                                 .addGroup(ventanaMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelFotoMantenimiento)
+                                    .addComponent(labeltituloFotoMantenimiento)
                                     .addComponent(labelFotoManteniemiento, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(ventanaMantenimientoLayout.createSequentialGroup()
                                 .addGap(300, 300, 300)
@@ -415,7 +415,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(tfFacturaMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(ventanaMantenimientoLayout.createSequentialGroup()
                         .addGap(62, 62, 62)
-                        .addComponent(labelFotoMantenimiento)))
+                        .addComponent(labeltituloFotoMantenimiento)))
                 .addGroup(ventanaMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(ventanaMantenimientoLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
@@ -2296,7 +2296,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelFotoEmpleado;
     public static javax.swing.JLabel labelFotoHerramienta;
     public static javax.swing.JLabel labelFotoManteniemiento;
-    private javax.swing.JLabel labelFotoMantenimiento;
     private javax.swing.JLabel labelIdCargo;
     private javax.swing.JLabel labelIdEmpleado;
     private javax.swing.JLabel labelIdFacturaMentenimiento;
@@ -2326,6 +2325,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelTituloMantenimiento;
     private javax.swing.JLabel labelTituloMovimiento;
     private javax.swing.JLabel labelTituloObra;
+    private javax.swing.JLabel labeltituloFotoMantenimiento;
     private javax.swing.JMenu menuCargo;
     private javax.swing.JMenuBar menuElementos;
     private javax.swing.JMenu menuEmpleado;
