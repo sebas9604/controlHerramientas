@@ -241,6 +241,7 @@ public class Principal extends javax.swing.JFrame {
         tfFechaSalidaMovimiento = new javax.swing.JTextField();
         btEjecutarMovimiento = new javax.swing.JButton();
         btVerMantenimientos = new javax.swing.JButton();
+        btUbicacionHerramienta = new javax.swing.JButton();
         menuOpcionesHerramientas = new javax.swing.JMenuBar();
         opcionConsultarHerramienta = new javax.swing.JMenu();
         consultarherramientas = new javax.swing.JMenuItem();
@@ -942,6 +943,13 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btUbicacionHerramienta.setText("UBICACION");
+        btUbicacionHerramienta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUbicacionHerramientaActionPerformed(evt);
+            }
+        });
+
         opcionConsultarHerramienta.setText("Consultar");
 
         consultarherramientas.setText("Todas las Herramientas");
@@ -1074,7 +1082,9 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(labelReportesHerramienta)
                             .addComponent(btRepoTiempoVida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btVerMantenimientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(242, 242, 242))
+                        .addGap(45, 45, 45)
+                        .addComponent(btUbicacionHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(panelHerramientaMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1091,7 +1101,8 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelEstadoHerramienta)
-                    .addComponent(btRepoTiempoVida))
+                    .addComponent(btRepoTiempoVida)
+                    .addComponent(btUbicacionHerramienta))
                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                         .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2072,7 +2083,7 @@ public class Principal extends javax.swing.JFrame {
         tfFacturaMantenimiento.setBackground(Color.white);
         btTomarFotoMantenimiento.setEnabled(true);
         btEjecutarMantenimiento.setEnabled(true);
-        labelOperacionMantenimiento.setText("Salida");// TODO add your handling code here:
+        labelOperacionMantenimiento.setText("Salida"); 
     }//GEN-LAST:event_opcionSalidaMantenimientoMenuSelected
 
     private void btEjecutarMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEjecutarMantenimientoActionPerformed
@@ -2107,8 +2118,21 @@ public class Principal extends javax.swing.JFrame {
 
         } else {
             JOptionPane.showMessageDialog(null, "Primero debe consultar una herramienta");
-        }        // TODO add your handling code here:
+        }         
     }//GEN-LAST:event_btVerMantenimientosActionPerformed
+
+    private void btUbicacionHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUbicacionHerramientaActionPerformed
+        if (consultarHerramientaFlag) {
+            Herramientas herramienta = new Herramientas();
+            herramienta.setIdHerramienta(tfIdHerramienta.getText());
+            ControllerHerramientas herramientaCt = new ControllerHerramientas();
+            herramientaCt.verUbicacionHerramienta(tablaHerramienta, herramienta);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero debe consultar una herramienta");
+        }         
+               
+    }//GEN-LAST:event_btUbicacionHerramientaActionPerformed
 
     private void inhabilitarCamposMantenimiento() {
         tfFacturaMantenimiento.setEnabled(false);
@@ -2263,6 +2287,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btTomarFotoEmpleado;
     private javax.swing.JButton btTomarFotoHerramienta;
     private javax.swing.JButton btTomarFotoMantenimiento;
+    private javax.swing.JButton btUbicacionHerramienta;
     private javax.swing.JButton btVerMantenimientos;
     private javax.swing.JComboBox<String> cbCargoEmpleado;
     private javax.swing.JComboBox<String> cbCentroCostoMovimiento;

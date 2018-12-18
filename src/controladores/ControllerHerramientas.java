@@ -68,6 +68,12 @@ public class ControllerHerramientas {
         vista.mantenimientosHerramienta(herramientas, tabla);
     }
 
+    public void verUbicacionHerramienta(JTable tabla, Herramientas herramienta) {
+        ResultSet herramientas = null;
+        IHerramientasDao dao = new HerramientasDaoImpl();
+        herramientas = dao.ubicacionHerramienta(herramienta);
+        vista.ubicacionHerramienta(herramientas, tabla);
+    }
     public Herramientas consultarHerramienta(Herramientas herramienta) {
         IHerramientasDao dao = new HerramientasDaoImpl();
         Herramientas h;

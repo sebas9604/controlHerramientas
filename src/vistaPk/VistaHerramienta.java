@@ -83,4 +83,22 @@ public class VistaHerramienta {
         }
 
 }
+        
+        public void ubicacionHerramienta(ResultSet herramientas, JTable tabla) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Referencia", "Nombre_Herramienta", "Centro_Costo", "Nombre_Centro_Costo", "Fecha_Entrada", "Fecha_Salida"});
+
+        try {
+
+            while (herramientas.next()) {
+                modelo.addRow(new Object[]{herramientas.getString("Referencia"), herramientas.getString("Nombre_Herramienta"), herramientas.getString("Centro_Costo"),
+                    herramientas.getString("Nombre_Centro_Costo"), herramientas.getString("Fecha_Entrada"), herramientas.getString("Fecha_Salida")});
+            }
+            tabla.setModel(modelo);
+
+        } catch (Exception ex) {
+            System.out.println("vistaPk.VistaHerramienta.ubicacionHerramienta() " + ex);
+        }
+
+}
 }

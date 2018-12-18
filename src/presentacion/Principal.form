@@ -967,7 +967,9 @@
                               <Component id="btRepoTiempoVida" max="32767" attributes="0"/>
                               <Component id="btVerMantenimientos" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="242" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="btUbicacionHerramienta" min="-2" pref="141" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
@@ -991,6 +993,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labelEstadoHerramienta" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btRepoTiempoVida" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btUbicacionHerramienta" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -1311,6 +1314,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVerMantenimientosActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btUbicacionHerramienta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="UBICACION"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btUbicacionHerramientaActionPerformed"/>
           </Events>
         </Component>
         <Menu class="javax.swing.JMenuBar" name="menuOpcionesHerramientas">

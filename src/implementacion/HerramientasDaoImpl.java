@@ -365,4 +365,33 @@ public class HerramientasDaoImpl implements IHerramientasDao {
         return rs;
     }
 
+    @Override
+    public ResultSet ubicacionHerramienta(Herramientas herramienta) {
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+
+       
+        String sql = "SELECT hxo.idHerramienta AS Referencia, h.nombreHerramienta as Nombre_Herramienta, hxo.idObra AS Centro_Costo, o.nombreObra AS Nombre_Centro_Costo, hxo.fechaEntradaObraHerramienta as Fecha_Entrada, hxo.fechaSalidaObraHerramienta AS Fecha_Salida  " +
+"FROM HerramientasXObra hxo " +
+"INNER JOIN Obra o " +
+"ON hxo.idObra = o.idObra " +
+"INNER JOIN Herramientas h " +
+"ON h.idHerramienta = hxo.idHerramienta " +
+"AND h.idHerramienta = '" + herramienta.getIdHerramienta() + "'" +
+" ORDER BY fechaEntradaObraHerramienta DESC " +
+" LIMIT 1;";
+        System.out.println(sql);
+        try {
+            con = ConexionBD.connect();
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+//            stm.close();
+//            rs.close();
+//            con.close();
+        } catch (Exception e) {
+        }
+
+        return rs;    }
+
 }
