@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +25,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import modelo.Cargo;
 import modelo.Empleados;
 import modelo.Herramientas;
@@ -175,6 +177,7 @@ public class Principal extends javax.swing.JFrame {
         tablaCargos = new javax.swing.JTable();
         labelIdCargo = new javax.swing.JLabel();
         tfIdCargo = new javax.swing.JTextField();
+        btImprimirCargo = new javax.swing.JButton();
         menuOpcionesCargo = new javax.swing.JMenuBar();
         opcionConsultarCargo = new javax.swing.JMenu();
         consultarTodosLosCargos = new javax.swing.JMenuItem();
@@ -201,6 +204,7 @@ public class Principal extends javax.swing.JFrame {
         btEjecutarEmpleado = new javax.swing.JButton();
         btReporteHerramientasACargo = new javax.swing.JButton();
         btTomarFotoEmpleado = new javax.swing.JButton();
+        btImprimirEmpleado = new javax.swing.JButton();
         menuOpcionEmpleado = new javax.swing.JMenuBar();
         opcionConsultarEmpleado = new javax.swing.JMenu();
         consultarEmpleados = new javax.swing.JMenuItem();
@@ -242,6 +246,7 @@ public class Principal extends javax.swing.JFrame {
         btEjecutarMovimiento = new javax.swing.JButton();
         btVerMantenimientos = new javax.swing.JButton();
         btUbicacionHerramienta = new javax.swing.JButton();
+        btImprimirHerramienta = new javax.swing.JButton();
         menuOpcionesHerramientas = new javax.swing.JMenuBar();
         opcionConsultarHerramienta = new javax.swing.JMenu();
         consultarherramientas = new javax.swing.JMenuItem();
@@ -266,6 +271,7 @@ public class Principal extends javax.swing.JFrame {
         labelOperacionObra = new javax.swing.JLabel();
         labelReportesObra = new javax.swing.JLabel();
         btRepHerramientasEnObra = new javax.swing.JButton();
+        btImprimirObra = new javax.swing.JButton();
         menuOpcionesObra = new javax.swing.JMenuBar();
         opcionConsultarObra = new javax.swing.JMenu();
         consultarObras = new javax.swing.JMenuItem();
@@ -479,6 +485,13 @@ public class Principal extends javax.swing.JFrame {
 
         labelIdCargo.setText("Identificacion");
 
+        btImprimirCargo.setText("IMPRIMIR");
+        btImprimirCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btImprimirCargoActionPerformed(evt);
+            }
+        });
+
         opcionConsultarCargo.setText("Consultar");
 
         consultarTodosLosCargos.setText("Todos los cargos");
@@ -546,25 +559,27 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btEjecutarCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(891, 891, 891))
             .addGroup(ventanaCargoLayout.createSequentialGroup()
-                .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ventanaCargoLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ventanaCargoLayout.createSequentialGroup()
-                                .addComponent(labelTituloCargo)
-                                .addGap(137, 137, 137)
-                                .addComponent(labelOperacionCargo))
-                            .addGroup(ventanaCargoLayout.createSequentialGroup()
-                                .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelNombreCargo)
-                                    .addComponent(labelIdCargo))
-                                .addGap(60, 60, 60)
-                                .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfNombreCargo, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                                    .addComponent(tfIdCargo)))))
-                    .addGroup(ventanaCargoLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btImprimirCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(ventanaCargoLayout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(ventanaCargoLayout.createSequentialGroup()
+                                    .addComponent(labelTituloCargo)
+                                    .addGap(137, 137, 137)
+                                    .addComponent(labelOperacionCargo))
+                                .addGroup(ventanaCargoLayout.createSequentialGroup()
+                                    .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(labelNombreCargo)
+                                        .addComponent(labelIdCargo))
+                                    .addGap(60, 60, 60)
+                                    .addGroup(ventanaCargoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfNombreCargo, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                                        .addComponent(tfIdCargo)))))
+                        .addGroup(ventanaCargoLayout.createSequentialGroup()
+                            .addGap(27, 27, 27)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ventanaCargoLayout.setVerticalGroup(
@@ -585,8 +600,10 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addComponent(btEjecutarCargo)
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(btImprimirCargo)
+                .addGap(31, 31, 31))
         );
 
         ventanaEmpleado.setMaximumSize(new java.awt.Dimension(700, 756));
@@ -653,6 +670,13 @@ public class Principal extends javax.swing.JFrame {
         btTomarFotoEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btTomarFotoEmpleadoActionPerformed(evt);
+            }
+        });
+
+        btImprimirEmpleado.setText("IMPRIMIR");
+        btImprimirEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btImprimirEmpleadoActionPerformed(evt);
             }
         });
 
@@ -751,7 +775,11 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btReporteHerramientasACargo, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelReportesEmpleado))))
+                            .addComponent(labelReportesEmpleado))
+                        .addGap(0, 199, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanaEmpleadoLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btImprimirEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         ventanaEmpleadoLayout.setVerticalGroup(
@@ -796,9 +824,11 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(ventanaEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btTomarFotoEmpleado)
                     .addComponent(btEjecutarEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(84, 84, 84)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btImprimirEmpleado)
+                .addGap(21, 21, 21))
         );
 
         ventanaHerramienta.setPreferredSize(new java.awt.Dimension(1256, 752));
@@ -950,6 +980,13 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btImprimirHerramienta.setText("IMPRIMIR");
+        btImprimirHerramienta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btImprimirHerramientaActionPerformed(evt);
+            }
+        });
+
         opcionConsultarHerramienta.setText("Consultar");
 
         consultarherramientas.setText("Todas las Herramientas");
@@ -1033,10 +1070,6 @@ public class Principal extends javax.swing.JFrame {
         ventanaHerramientaLayout.setHorizontalGroup(
             ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ventanaHerramientaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
-            .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                 .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
@@ -1089,6 +1122,14 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(77, 77, 77)
                         .addComponent(panelHerramientaMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(24, Short.MAX_VALUE))))
+            .addGroup(ventanaHerramientaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanaHerramientaLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btImprimirHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         ventanaHerramientaLayout.setVerticalGroup(
             ventanaHerramientaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1137,16 +1178,17 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(cbResponsableHerramienta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btTomarFotoHerramienta))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btEjecutarHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addComponent(btEjecutarHerramienta, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                        .addGap(13, 13, 13))
                     .addGroup(ventanaHerramientaLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(btVerMantenimientos)
                         .addGap(18, 18, 18)
-                        .addComponent(panelHerramientaMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                        .addComponent(panelHerramientaMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btImprimirHerramienta)
+                .addContainerGap())
         );
 
         ventanaObra.setVisible(true);
@@ -1185,6 +1227,13 @@ public class Principal extends javax.swing.JFrame {
         btRepHerramientasEnObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btRepHerramientasEnObraActionPerformed(evt);
+            }
+        });
+
+        btImprimirObra.setText("IMPRIMIR");
+        btImprimirObra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btImprimirObraActionPerformed(evt);
             }
         });
 
@@ -1256,28 +1305,33 @@ public class Principal extends javax.swing.JFrame {
         ventanaObraLayout.setHorizontalGroup(
             ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ventanaObraLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1207, Short.MAX_VALUE)
                     .addGroup(ventanaObraLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelNombreObra)
-                            .addComponent(labelIdObra)
-                            .addComponent(labelDireccionObra)
-                            .addComponent(labelTituloObra))
-                        .addGap(63, 63, 63)
-                        .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelOperacionObra)
-                            .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfNombreObra)
-                                .addComponent(tfUbicacionObra)
-                                .addComponent(tfIdObra)
-                                .addComponent(btEjecutarObra, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
-                        .addGap(257, 257, 257)
-                        .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelReportesObra)
-                            .addComponent(btRepHerramientasEnObra, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1207, Short.MAX_VALUE)
+                            .addGroup(ventanaObraLayout.createSequentialGroup()
+                                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelNombreObra)
+                                    .addComponent(labelIdObra)
+                                    .addComponent(labelDireccionObra)
+                                    .addComponent(labelTituloObra))
+                                .addGap(63, 63, 63)
+                                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelOperacionObra)
+                                    .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfNombreObra)
+                                        .addComponent(tfUbicacionObra)
+                                        .addComponent(tfIdObra)
+                                        .addComponent(btEjecutarObra, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
+                                .addGap(257, 257, 257)
+                                .addGroup(ventanaObraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelReportesObra)
+                                    .addComponent(btRepHerramientasEnObra, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ventanaObraLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btImprimirObra, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         ventanaObraLayout.setVerticalGroup(
@@ -1308,9 +1362,11 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(tfIdObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(btEjecutarObra, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btImprimirObra)
+                .addGap(19, 19, 19))
         );
 
         menuObra.setText("Obra");
@@ -2134,6 +2190,22 @@ public class Principal extends javax.swing.JFrame {
                
     }//GEN-LAST:event_btUbicacionHerramientaActionPerformed
 
+    private void btImprimirCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImprimirCargoActionPerformed
+        imprimirTabla("CARGOS", tablaCargos);        // TODO add your handling code here:
+    }//GEN-LAST:event_btImprimirCargoActionPerformed
+
+    private void btImprimirHerramientaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImprimirHerramientaActionPerformed
+        imprimirTabla("HERRAMIENTA", tablaHerramienta);        // TODO add your handling code here:
+    }//GEN-LAST:event_btImprimirHerramientaActionPerformed
+
+    private void btImprimirObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImprimirObraActionPerformed
+        imprimirTabla("CENTROS DE COSTO", tablaObras);        // TODO add your handling code here:
+    }//GEN-LAST:event_btImprimirObraActionPerformed
+
+    private void btImprimirEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImprimirEmpleadoActionPerformed
+        imprimirTabla("EMPLEADO", tablaEmpleados);        // TODO add your handling code here:
+    }//GEN-LAST:event_btImprimirEmpleadoActionPerformed
+
     private void inhabilitarCamposMantenimiento() {
         tfFacturaMantenimiento.setEnabled(false);
         tfFacturaMantenimiento.setBackground(Color.gray);
@@ -2281,6 +2353,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btEjecutarMantenimiento;
     private javax.swing.JButton btEjecutarMovimiento;
     private javax.swing.JButton btEjecutarObra;
+    private javax.swing.JButton btImprimirCargo;
+    private javax.swing.JButton btImprimirEmpleado;
+    private javax.swing.JButton btImprimirHerramienta;
+    private javax.swing.JButton btImprimirObra;
     private javax.swing.JButton btRepHerramientasEnObra;
     private javax.swing.JButton btRepoTiempoVida;
     private javax.swing.JButton btReporteHerramientasACargo;
@@ -2466,5 +2542,16 @@ public class Principal extends javax.swing.JFrame {
         for (String responsable : list) {
             cbCentroCostoMovimiento.addItem(responsable);
         }
+    }
+    
+    public void imprimirTabla(String header, JTable tabla){
+        try {
+            MessageFormat headerFormat = new MessageFormat(header);
+            MessageFormat footerFormat = new MessageFormat("Firma");
+            tabla.print(JTable.PrintMode.FIT_WIDTH, headerFormat, footerFormat);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    
     }
 }
