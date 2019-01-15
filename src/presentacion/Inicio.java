@@ -42,6 +42,7 @@ public class Inicio extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(403, 32769));
 
+        lb_titulo.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         lb_titulo.setText("CONTROL DE HERRAMIENTAS");
 
         lb_accion.setText("INICIO DE SESIÓN");
@@ -61,35 +62,34 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(601, Short.MAX_VALUE)
-                .addComponent(lb_titulo)
-                .addGap(490, 490, 490))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addGap(493, 493, 493)
+                        .addComponent(lb_titulo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
                         .addComponent(lb_accion))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(250, 250, 250)
+                        .addGap(414, 414, 414)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lb_usuario)
                             .addComponent(lb_contrasena))
                         .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tf_usuario)
-                            .addComponent(bt_Entrar, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                            .addComponent(pf_usuario))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(bt_Entrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pf_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(521, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
+                .addGap(57, 57, 57)
                 .addComponent(lb_titulo)
-                .addGap(18, 18, 18)
+                .addGap(60, 60, 60)
                 .addComponent(lb_accion)
-                .addGap(138, 138, 138)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lb_usuario)
                     .addComponent(tf_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -99,7 +99,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(pf_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addComponent(bt_Entrar)
-                .addContainerGap(384, Short.MAX_VALUE))
+                .addContainerGap(475, Short.MAX_VALUE))
         );
 
         pack();

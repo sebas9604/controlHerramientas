@@ -28,7 +28,7 @@ public class UsuarioDaoImpl implements IUsuarioDao{
         ResultSet rs = null;
         boolean b = false;
 
-        String sql = "SELECT idUsuario, contrasenaUsuario FROM usuario WHERE idUsuario = " + usuario.getIdUsuario() + ";";
+        String sql = "SELECT idUsuario, usuarioContrasena FROM usuario WHERE idUsuario = '" + usuario.getIdUsuario() + "';";
         Usuario u = new Usuario();
 
         try {
@@ -40,7 +40,7 @@ public class UsuarioDaoImpl implements IUsuarioDao{
                 u.setContrasenaUsuario(rs.getString(2));
             }
             if (u.getIdUsuario()== null) {
-                JOptionPane.showMessageDialog(null, "El usuario y/o la contraseña no son erroneos", "Inicio Sesión", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El usuario y/o la contraseña son erroneos", "Inicio Sesión", JOptionPane.ERROR_MESSAGE);
                 b = false;
             } else {
               JOptionPane.showMessageDialog(null, "Validando Datos", "Inicio de sesión", JOptionPane.INFORMATION_MESSAGE);
