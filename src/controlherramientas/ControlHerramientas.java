@@ -1,5 +1,7 @@
 package controlherramientas;
 
+import conexion.ConexionBD;
+import java.sql.Connection;
 import presentacion.Inicio;
 import presentacion.Principal;
 
@@ -11,7 +13,7 @@ public class ControlHerramientas {
 
     public static void main(String[] args) {
         try {
-//                    Connection con = ConexionBD.connect();
+                   // Connection con = ConexionBD.connect();
 Principal framePrincipal = new Principal();
 Inicio frameInicio = new Inicio();
 frameInicio.setVisible(true);
